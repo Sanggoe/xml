@@ -10,7 +10,8 @@
   * 문서 처리의 자동화가 어려움
 * <**태그**> <**/태그**> 로 구성되어있는 것을 XML에서는 **element**라고 한다.
 * XML에서는 태그 안에 해당 정보를 포함한다.
-  * ![image-20200902103349196](./images/image-20200902103349196.png)
+
+![image-20200902103349196](./images/image-20200902103349196.png)
 
 <br/>
 
@@ -29,7 +30,7 @@
 
 ### XML vs SGML vs HTML
 
-![image-20200902104129839](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200902104129839.png)
+![image-20200902104129839](./images/image-20200902104129839.png)
 
 * 문법적인 면에서 더 엄격한 경우, 오히려 심플하다고 볼 수 있다.
 * **XML은 namespace를 지원한다!** ★
@@ -41,9 +42,9 @@
 
 **★ 암기★**
 
-![image-20200902104625041](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200902104625041.png)
+![image-20200902104625041](./images/image-20200902104625041.png)
 
-![image-20200902104957501](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200902104957501.png)
+![image-20200902104957501](./images/image-20200902104957501.png)
 
 * 위에는 HTML, 아래는 XML의 속성값 표현 예시.
 * **XML은 HTML과 다르게 태그 Set을 정의하여 사용 가능! ★**
@@ -52,7 +53,7 @@
 
 ### XML의 장점
 
-![image-20200902105254655](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200902105254655.png)
+![image-20200902105254655](./images/image-20200902105254655.png)
 
 * **문서의 내용과 스타일을 분리하여 기술한다!** ★
   * 스타일은 css 와 같은 보여지는, presentation 부분
@@ -61,7 +62,7 @@
 
 ### XML의 용도
 
-![image-20200902105627551](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200902105627551.png)
+![image-20200902105627551](./images/image-20200902105627551.png)
 
 * **문서로서의 기능과, XML이 국제 표준이기 때문에 OS 등이 달라도 시스템간 자료로서의 기능 또한 수행할 수 있다. ★**
 
@@ -69,13 +70,13 @@
 
 ### XML 관련 도구
 
-![image-20200902105858586](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200902105858586.png)
+![image-20200902105858586](./images/image-20200902105858586.png)
 
 <br/>
 
 ### XML Overview
 
-![image-20200902110133715](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200902110133715.png)
+![image-20200902110133715](./images/image-20200902110133715.png)
 
 * Prolog
   * XML 문서 선언문 ( <?xml ~ ... > ) 필수
@@ -89,14 +90,14 @@
 
 <br/>
 
-![image-20200902110842602](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200902110842602.png)
+![image-20200902110842602](./images/image-20200902110842602.png)
 
 * DTD는 내부/외부 Schema는 외부에만
 * **Body 부분은 최상위 root element 하나만 나온다. ★**
 
 <br/>
 
-![image-20200902110700408](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200902110700408.png)
+![image-20200902110700408](./images/image-20200902110700408.png)
 
 * 첫 줄 외우자! 버전까지는 반드시 나온다. 인코딩은 옵션.
 * Prolog에서 PI는 생략된 코드. PI나 DTD는 생략 가능.
@@ -112,13 +113,13 @@
 
 <br/>
 
-![image-20200902121241115](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200902121241115.png)
+![image-20200902121241115](./images/image-20200902121241115.png)
 
 <br/>
 
 * 브라우저로 열어본 모습
 
-![image-20200902123158938](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200902123158938.png)
+![image-20200902123158938](./images/image-20200902123158938.png)
 
 * HTML과 다르게 XML은 보여지는 것보다 **'정보'를 표시하는 '형식'에 더 관심이 있는 언어**이기 때문에 이쁘게 나오지 않는 것이다!
 
