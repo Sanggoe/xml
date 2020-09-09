@@ -316,12 +316,12 @@
 * Attribute 작성 규칙
   * 속성은 시작 Tag에서 지정해준다.
   * 속성은 속성 이름과 속성 값이 한 쌍으로 이루어져야 한다.
-    * 속성값은 반드시 값을 가져야 한다. <Name nickname> X
+    * 속성값은 반드시 값을 가져야 한다. \<Name nickname> X
   * 속성값은 반드시 단일 따옴표나 이중 따옴표로 둘러싸야 한다.
-    * <People ID=691112-1683141 age=22> X
-    * <Song title="Alice's home"> O
+    * \<People ID=691112-1683141 age=22> X
+    * \<Song title="Alice's home"> O
   * 한 Tag내에 같은 속성을 두 번 이상 지정할 수 없다.
-    * <Name nickname="bear" nickname="tiger"> X
+    * \<Name nickname="bear" nickname="tiger"> X
 
 <br/>
 
@@ -330,7 +330,7 @@
 ![image-20200909113006497](./images/image-20200909113006497.png)
 
 * 주석 형식
-  * <!-- 하이픈을 제외하고 아무거나 적어도 됨 --> 외우자! ★
+  * \<!-- 하이픈을 제외하고 아무거나 적어도 됨 --> 외우자! ★
 
 <br/>
 
@@ -345,7 +345,7 @@
 
 ### XML 문서의 선언
 
-![image-20200909113511692](./images/image-20200909113511692.png)
+`
 
 * 필수사항과 선택사항. version까지는 필수사항이므로 꼭 기억하자
 
