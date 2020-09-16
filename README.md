@@ -1,8 +1,10 @@
+
+
 # 웹정보 프레임워크
 
 <br/>
 
-## 1주차, Introduction
+## Chapter 1, Introduction
 
 ### HTML의 문제점
 
@@ -284,6 +286,8 @@
 
 <br/>
 
+* 웹 브라우저로 본 모습
+
 ![image-20200909111602828](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200909111602828.png)
 
 <br/>
@@ -389,11 +393,344 @@
 <tag><![CDATA[  파싱하지  말아야  될  데이터  ]]><tag>
 ```
 
+<br/>
+
+### 실습 2-3) CDATA 응용 북 카테고리 만들기
+
+* xml 코드
+
+![image-20200915172542369](./images/image-20200915172542369.png)
+
+<br/>
+
+* 웹 브라우저로 본 모습
+
+![image-20200915172604474](./images/image-20200915172604474.png)
+
+<br/>
+
+### namespace ★
+
+![image-20200915170801401](./images/image-20200915170801401.png)
+
+* Java에서 class 이름의 중복을 막기 위해 Package 개념을 도입한 것과 비슷하다.
+* 여러 XML 문서 내용을 합칠 때 발생 가능한, 요소들의 이름 충돌을 막기 위한 기술
+
+<br/>
+
+![image-20200915171029331](./images/image-20200915171029331.png)
+
+* 위 예시의 경우, 상위 ID는 User를 위한 태그고 하위 ID는 Product를 위한 태그지만, 이름이 같아 충돌이 일어난다.
+
+<br/>
+
+![image-20200915171228958](./images/image-20200915171228958.png)
+
+* 임시로 쓰이는 별명을 접두사로 붙인다.
+* 너무 긴 namespace를 매번 붙이기 번거로우니까 도입
+  * Namespace:이름 - 고유성 보장
+  * Prefix:이름 (별명) - 편리성
+* xmlns(xml namespace)
+* 임의의 문자열로 Unique 하기만 하면 되지만, 권장사항으로 URL로 해야 실질적으로 충돌이 발생할 가능성이 낮아 많이 사용한다. 
+* "" 비어있는 URL로 한다면, namespace가 없는 녀석으로 인식한다.
+
+<br/>
+
+![image-20200915171844858](./images/image-20200915171844858.png)
+
+* 처음 사용하기 전에는 선언을 한 번 해주어야 한다.
+* 시작 태그에 써준 별명은 반드시 끝 태그에도 써주어야 한다.
+* prefix가 달라도 namespace URL 주소가 같으면 결국 같은 녀석으로 본다.
+* URL 내용이 비어있으면, namespace가 없는 녀석으로 인식한다.
+
+<br/>
+
+### 실습 2-4) Namespace 정의
+
+* 실습 2-1) 에서 작성한 BookCatalog.xml에서 Namespace를 정의하여 각 요소들 이름에 지정
+
+* xml 코드
+
+![image-20200915173625383](./images/image-20200915173625383.png)
+
+<br/>
+
+* 웹 브라우저로 본 모습
+
+![image-20200915173809460](./images/image-20200915173809460.png)
+
+<br/>
+
+![image-20200915174126072](./images/image-20200915174126072.png)
+
+* xmlns:prefix 가 존재하지 않음 (기본적으로는 반드시 써주어야 함)
+  * default namespace라고 함.
+  * 선언된 시작 태그부터 하위의 모든 태그들은 해당 namespace를 사용
+
+<br/>
+
+![image-20200915174406143](./images/image-20200915174406143.png)
+
+* Namespace는 해당 요소 및 자손 요소들까지 적용.
+* Default Namespace는 가까운 쪽에 선언된 것이 적용된다.
+  * 위의 경우 상위 ID는 User에 선언된 namespace가, 하위 ID는 Product에 선언된 namespace가 적용 된다.
+
+<br/>
+
+![image-20200915174645713](./images/image-20200915174645713.png)
+
+<br/>
+
+## Chapter 3. Valid XML Document
+
+### 복습
+
+* well formed XML DOC : 최소한의 규칙을 지키는 XML 문서
+* Valid XML Document : well formed + user defined Rule 만족하는 XML 문서
+  * Tag set 정의하는 방법
+    * DTD (초기에 나온 방법)
+    * XML Schema
+
+<br/>
+
+### XML 문서의 표준화
+
+![image-20200915180507149](./images/image-20200915180507149.png)
+
+<br/>
+
+![image-20200915180709816](./images/image-20200915180709816.png)
+
+* 위와 같은 그림 모델을 실제 규칙으로, DTD로 어떻게 작성할 것이냐? 를 이제 살펴볼 것!
+
+<br/>
+
+### DTD 필요성
+
+![image-20200915180901675](./images/image-20200915180901675.png)
+
+* DTD : Document Type Definitions
+* Valid 문서의 두 가지 조건 ★
+  * Well-Formed XML 문서여야 함
+  * DTD or XML Schema에 따라 XML 문서가 만들어져야 함
+
+<br/>
+
+### DTD 선언하기 ★ 암기
+
+![image-20200915181359968](./images/image-20200915181359968.png)
+
+* \<!DOCTYPE 공백 없이 붙이기, 대소문자 구분, 반드시 root element 이름 [
+* 내부 <!ELEMENT 부분이 바로 DTD 규칙이며, XML이 아닌 DTD 문법을 따른다.
+* 외워야 합니다! 위 양식 암기부분 ★
+
+<br/>
+
+### 유효성 검증하기
+
+* 웹 브라우저는 well formed만 검사하고, valid는 검사 못함
+  * XML 파서가 필요하다.
+  * 직접 다운로드 해서 설치하기!
+  * 설치 후 웹 빈공간 우클릭 - validate XML
+
+<br/>
+
+### DTD Overview
+
+![image-20200915184018376](./images/image-20200915184018376.png)
+
+* XML 문서 내부 DTD 정의 형식 외우기! ★
+
+  * ```xml
+    <!DOCTYPE RootElementName [
+    	DTD 내용
+    ]>
+    ```
+
+  * 따지고 보면 [ ] 대괄호 사이의 DTD 내용만 DTD syntax 이다.
+
+  * 그 외 위 아래에 기술되어 있는 내용은 DTD가 아니다.
+
+<br/>
+
+### Element 선언
+
+![image-20200915184123716](./images/image-20200915184123716.png)
+
+* 내부 DTD의 경우!
+
+<br/>
+
+#### 5가지 요소 유형 암기사항! ★
+
+* 내용이 없는 Empty Element 선언
+
+  * ```XML
+    <!ELEMENT 요소이름 EMPTY>
+    ```
+
+  * EMPTY에 괄호 없음, 대문자
+
+* 내용에 텍스트를 갖는 Element 선언
+
+  * ```XML
+    <!ELEMENT 요소이름 (#PCDATA)>
+    ```
+
+  * 괄호 열고, 대문자
+
+* 내용에 하위요소를 갖는 Element 선언
+
+  * ```XML
+    <!ELEMENT 요소이름 (자손요소리스트)>
+    ```
+
+  * ( , , ... , , )
+
+* 내용에 혼합 내용 모델을 갖는 Element 선언
+
+  * ```XML
+    <!ELEMENT 요소이름 MIXED모델>
+    ```
+
+* 내용에 모든 것(아무것)을 갖는 Element 선언
+
+  * ```XML
+    <!ELEMENT 요소이름 ANY>
+    ```
+
+  * 괄호 없음, 대문자
+
+<br/>
+
+### 다시 복습 DTD의 ELEMENT 선언하는 다섯가지 유형 ★
+
+1. EMPTY
+2. (#PCDATA)
+3. ANY
+4. (, , , )
+5. MIXED 모델
+
+<br/>
+
+### Element Content - Empty element
+
+![image-20200916121053951](./images/image-20200916121053951.png)
+
+<br/>
+
+### Element Content - 하위 요소 element
+
+![image-20200916121128142](./images/image-20200916121128142.png)
+
+<br/>
+
+![image-20200916121240582](/images/image-20200916121240582.png)
+
+* 아래 내용이 DTD에 Valid 하다!
+
+<br/>
+
+### 실습 3-2) DTD 작성하기
+
+* DTD 작성 코드
+
+![image-20200916124631313](./images/image-20200916124631313.png)
+
+<br/>
+
+* 유효성 검사 Validation successful!
+
+![image-20200916124744509](./images/image-20200916124744509.png)
+
+<br/>
+
+### Element Content - 하위 요소 지정 방식
+
+![image-20200916124839320](./images/image-20200916124839320.png)
+
+<br/>
+
+![image-20200916125254908](./images/image-20200916125254908.png)
+
+* 아래 내용이 DTD에 Valid 하다!
+
+<br/>
+
+![image-20200916125428729](./images/image-20200916125428729.png)
+
+* 아래 내용이 DTD에 Valid 하다!
+
+<br/>
+
+### Element Content - MIXED 모델
+
+![image-20200916125730251](./images/image-20200916125730251.png)
+
+* 문자열과 하위 Element들이 여러 번 나오는 경우
+
+* 양식 암기 ★
+
+  * ```xml
+    <!ELEMENT 요소이름 (#PCDATA | child1 | child2)*>
+    ```
+
+    * () 괄호 안에, #PCDATA가 가장 먼저 나오고 |로 구분, 괄호 밖에 마지막에 * 붙이기
+
+<br/>
+
+![image-20200916130027018](./images/image-20200916130027018.png)
+
+* 아래 내용이 DTD에 Valid 하다!
+
+<br/>
+
+### Element Content - ANY
+
+![image-20200916130143096](./images/image-20200916130143096.png)
+
+<br/>
+
+![image-20200916130300609](./images/image-20200916130300609.png)
+
+* 아래 내용이 DTD에 Valid 하다!
+
+<br/>
+
+### 실습 3-3) DTD 작성하기 - 2
+
+* 작성 코드
+
+![image-20200916152749640](./images/image-20200916152749640.png)
+
+<br/>
+
+* 실행 결과
+
+![image-20200916152852915](./images/image-20200916152852915.png)
+
+<br/>
+
+### 외부 DTD
+
+<br/>
+
+
+
 
 
 <br/>
 
-namespace
+### Attribute 선언
 
 <br/>
 
+
+
+
+
+<br/>
+
+### Entity
+
+<br/>

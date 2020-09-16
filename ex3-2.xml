@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="euc-kr"?>
+<!DOCTYPE BookCatalog [
+	<!ELEMENT BookCatalog (Book*)>
+	<!ELEMENT Book (Title, Author, Year)>
+	<!ELEMENT Title (#PCDATA)>
+	<!ELEMENT Author (#PCDATA)>
+	<!ELEMENT Year (#PCDATA)>
+]>
+
 <BookCatalog>
 	<Book>
 		<Title>XML 프로그래밍</Title>

@@ -1,0 +1,58 @@
+
+<?xml version="1.0" encoding="euc-kr"?>
+<!DOCTYPE BookCatalog [
+	<!ELEMENT BookCatalog (Book*)>
+	<!ELEMENT Book ((BookCode | Title), Author, CoAuthor, Year, Summary)>
+	<!ELEMENT BookCode (#PCDATA)>
+	<!ELEMENT Title (#PCDATA)>
+	<!ELEMENT Author (#PCDATA)>
+	<!ELEMENT CoAuthor (#PCDATA | Author)*>
+	<!ELEMENT Year (#PCDATA)>
+	<!ELEMENT Summary ANY >
+]>
+
+<BookCatalog>
+	<Book>
+		<BookCode>BC200509-250</BookCode>
+		<Author>홍성용</Author>
+		<CoAuthor>
+			공동저자 1 <Author>박상민</Author>
+			공동저자 2 <Author>Mike</Author>
+		</CoAuthor>
+		<Year>2015</Year>
+		<Summary>공동저자 1 <Author>박상민</Author>씨의 출생년도 <Year>1997</Year>년생.</Summary>
+	</Book>
+	<Book>
+		<Title>이것이 자바다</Title>
+		<Author>신용권</Author>
+		<CoAuthor>
+			공동저자 1 <Author>Park sangmin</Author>
+			공동저자 2 <Author>s.m.Park</Author>
+		</CoAuthor>
+		<Year>2015</Year>
+		<Summary><![CDATA[공동저자인 "sangmin Park"의 주거지 : <의정부시>]]></Summary>
+	</Book>
+	<Book>
+		<BookCode>AP150-1330PC</BookCode>
+		<Author>이세우</Author>
+		<CoAuthor>
+			공동저자 없음
+		</CoAuthor>
+		<Year>2019</Year>
+		<Summary><Author>이세우</Author> 단독 저자</Summary>
+	</Book>
+	<Book>
+		<Title>컴퓨터 네트워크 프로그래밍 Unix Version</Title>
+		<Author>김화종</Author>
+		<CoAuthor><Author>김화종</Author>저</CoAuthor>
+		<Year>2004</Year>
+		<Summary>""</Summary>
+	</Book>
+	<Book>
+		<BookCode>GO9R25</BookCode>
+		<Author>김진명</Author>
+		<CoAuthor>공동저자 없음</CoAuthor>
+		<Year>2012</Year>
+		<Summary>재미있는 역사 소설책</Summary>
+	</Book>
+</BookCatalog>
