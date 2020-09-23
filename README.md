@@ -1,5 +1,9 @@
 
 
+
+
+
+
 # 웹정보 프레임워크
 
 <br/>
@@ -129,11 +133,7 @@
 
 <br/>
 
-## 2주차
-
-<br/>
-
-* 암기★
+* **암기★**
 
 ![image-20200909094705236](./images/image-20200909094705236.png)
 
@@ -348,8 +348,6 @@
 <br/>
 
 ### XML 문서의 선언
-
-`
 
 * 필수사항과 선택사항. version까지는 필수사항이므로 꼭 기억하자
 
@@ -711,26 +709,338 @@
 
 <br/>
 
+#### 4주차 수업
+
+* xxl 자동으로 동작..! XML이 아닌 것 처럼 동작함... 그래서 익스플로러에서 xml이 valid 안되는 경우가 있음
+
+* DTD에서 속성이름에 ? 붙이는 것 : 해당 태그 생략가능
+
+<br/>
+
 ### 외부 DTD
 
 <br/>
 
+![image-20200923105652552](./images/image-20200923105652552.png)
 
+* \<!DOCTYPE ... > 문장 제외하고 내부의 \<!ELEMENT ... > 선언 부분만 DTD 이다.
+* 이 부분을 **따로 저장하면 이것이 바로 외부 DTD**. 아래 문장을 통해서 외부 DTD를 사용할 수 있다.
+* **\<!DOCTYPE root요소이름 SYSTEM "파일명.dtd">**  (대소문자 구분)
+* DTD는 내부에도 선언 가능하고, 외부에도 선언 가능 하지만, 뒤에서 배울 Schema는 외부로만 가능하다!
 
+<br/>
 
+### 실습 3-4) 외부 DTD 파일 만들기
+
+* 작성 코드
+
+```xml-dtd
+<!ELEMENT BookCode (#PCDATA)>
+<!ELEMENT Title (#PCDATA)>
+<!ELEMENT Author (#PCDATA)>
+<!ELEMENT CoAuthor (#PCDATA | Author)*>
+<!ELEMENT Year (#PCDATA)>
+<!ELEMENT Summary ANY >
+<!ELEMENT Price ANY >
+```
+
+<br/>
+
+* 외부 DTD를 선언하였으므로, 내부에는 작성하지 않는다.
+
+![image-20200923153427203](./images/image-20200923153427203.png)
+
+<br/>
+
+* 한글을 쓴 경우, "euc-kr" 방식으로 인코딩을 하고 싶을 때만 선언부를 포함한다.
+
+![image-20200923110220699](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200923110220699.png)
 
 <br/>
 
 ### Attribute 선언
 
+![image-20200923110439870](./images/image-20200923110439870.png)
+
+* Attribute의 문법은 **\<!ATTLIST 요소이름 속성이름 속성유형 속성기본값>** 형태를 가진다. **암기 ★**
+* Attribute 유형은 속성이 가질 수 있는 값의 타입을 말한다.
+* Element에서는 **#PCDATA**가 기본이었으나, **Attibute**의 기본 타입은 **CDATA**가 기본이다.
+
 <br/>
 
+#### Built-in
 
+```xml-dtd
+<!ATTLIST 요소이름 속성이름 {속성유형} 속성기본값> 에서 속성 유형에 따른 속성값의 타입
+```
 
+* CDATA 일 때 속성값 : '문자열'
+* ID 일 때 속성값 : '식별자'
+* IDREF 일 때 속성값 : '식별자' reference
+* IDREFS 일 때 속성값 : 여러 개의 '식별자' reference 들
+* NMTOKEN 일 때 속성값 : 문법적 제한이 있는 'Token'
+* NMTOKENS 일 때 속성값 : 여러 개의 'Token' 들
+* ENTITY 일 때 속성값 : 'Entity'
+* ENTITIES 일 때 속성값 : 여러 개의 'Entity' 들
+  * 해당 차이들을 잘 인지하고 있음 된다.
 
+<br/>
+
+![image-20200923110728339](./images/image-20200923110728339.png)
+
+* 속성 기본 값은 넣어주지 않을 때 기본으로 들어가는 Default값을 말함
+* 예시 **암기 ★**
+
+<br/>
+
+### 실습 3-5) Attribute 선언하기
+
+* .dtd 파일에서 Book 요소 속성으로 lang 만들기
+  * 속성유형 : 문자열 (CDATA)
+* .xml 파일의 Book 요소에 lang 속성 넣고 valid 검사하기
+
+```xml-dtd
+<!ATTLIST Book lang CDATA "ko">
+```
+
+```xml
+<Book lang="ko">
+	...
+</Book>
+<!-- valid successful -->
+```
+
+<br/>
+
+* DTD는 **ELEMENT** 선언과 **ATTLIST** 선언, **ENTITY** 선언 세 가지를 알면 다 아는 것이다!
+
+<br/>
+
+![image-20200923112521857](./images/image-20200923112521857.png)
+
+#### 속성값 Option
+
+* 따로 없으면, **입력 안할 시 default**로 줄 속성값 / **생략 가능**
+* **#FIXED** 속성값 : 무조건 해당 속성값 **고정**. 다른 값 입력시 invalid! (**예 : xml version="1.0"**) / **생략 가능**
+  * 의미상으로 속성값을 고정으로 주는것이다.
+* **#IMPLIED** : 무시 가능한 속성. 입력 하지 않으면 생략할 수 있다! / **생략 가능**
+  * 의미상으로 속성값을 주는게 아니다.
+* **#REQUIRED** : 미입력시 invalid! 반드시 값을 지정해 주어야 한다! / **생략 불가**
+  * 의미상으로 속성값을 주는게 아니다.
+
+<br/>
+
+### 실습 3-6) 속성 기본값 Option
+
+* .dtd 파일에서 lang 속성값을 #FIXED, #IMPLIED, #REQUIRED로 넣고 각각 빈칸, 임의의 값 등을 넣어보기
+* .xml 파일의 Book 요소에 lang 속성 넣고 valid 검사하기
+
+![image-20200923113459941](./images/image-20200923113459941.png)
+
+<br/>
+
+* 작성 코드
+
+![image-20200923160959689](./images/image-20200923160959689.png)
+
+* #FIXED의 경우
+  * 값 생략 가능 - 생략 시 FIXED 값으로 들어감
+  * 다른 값 넣으면 Error 발생 (invalid)
+
+![image-20200923115035500](./images/image-20200923115035500.png)
+
+<br/>
+
+* #IMPLIED
+  * 값 생략 및 임의의 값 모두 가능
+
+![image-20200923113655885](./images/image-20200923113655885.png)
+
+<br/>
+
+* REQUIRED
+  * 값 생략시 Error 발생 (invalid)
+
+![image-20200923113729146](./images/image-20200923113729146.png)
+
+<br/>
+
+![image-20200923120604490](./images/image-20200923120604490.png)
+
+* ID의 경우 Unique 해야한다! (= 중복 될 수 없다. 하나만 존재)
+* 따라서 Default 값을 줄 수 없다. 반드시 뒤에 **#IMPLIED**, **#REQUIRED** 가 나와야 한다.
+  * 아예 생략하거나, 반드시 하나만 필요하다.
+* **숫자**나 '/' 등의 문자가 있으면 안된다. 변수 선언과 비슷함
+
+<br/>
+
+### 실습 3-7) Attribute - ID 속성값
+
+* .dtd 파일에서 Book 요소의 속성으로 code를 작성. 속성유형은 ID로.
+* .xml 파일의 Book 요소들 code 속성값을 중복시켜보고, #IMPLIED or #REQUIRED 생략해보기, 공백 넣어보기
+
+<br/>
+
+* 작성 코드
+
+```xml-dtd
+<!ATTLIST Book code ID #IMPLIED>
+<!ATTLIST Book code ID #REQUIRED>
+```
+
+<br/>
+
+* code 속성 값 중복 시 Error (invalid)
+
+![image-20200923121951926](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200923121951926.png)
+
+<br/>
+
+* #IMPLIED or #REQUIRED 생략 시 Error (invalid)
+
+![image-20200923122246782](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200923122246782.png)
+
+<br/>
+
+* 공백 포함 시 Error (invalid)
+
+![image-20200923122359285](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200923122359285.png)
+
+<br/>
+
+![image-20200923122416735](./images/image-20200923122416735.png)
+
+* 다시 말하지만, **ID는 중복이 될 수 없다**.
+* 하지만 IDREF는 중복 가능하다. 앞서 만든 ID를 Refference 하는 것!
+* 따라서 **이미 존재하는 ID를 REF**해야한다. **없는 ID를 넣으면 invalid**!
+* IDREF는 단수 개의 ID를 REF.한다
+
+<br/>
+
+![image-20200923122646447](./images/image-20200923122646447.png)
+
+* 복수 개를 표기한다. 속성값은 공백으로 구분한다.
+* IDREFS는 복수 개의 ID를 REF한다
+
+<br/>
+
+![image-20200923122847443](./images/image-20200923122847443.png)
+
+<br/>
+
+![image-20200923123000749](./images/image-20200923123000749.png)
+
+* 마찬가지로 변수 선언과 비슷하다.
+* 공백을 포함하면 여러 개의 String으로 인지하므로 불가
+* : 은 namespace로 사용하므로 비권장
+* \<cover img="c://book.gif"> 에서 / 가 틀렸다!
+* NMTOKEN은 단수, NMTOKENS는 복수개 가지는 것
+* 이것 자체만은 별 의미가 없지만, 뒤에 Entity와 함께 쓰여 외부 어플에 정보를 전달할 때 사용한다.
+
+<br/>
+
+![image-20200923123251478](./images/image-20200923123251478.png)
+
+* CDATA도 아니고, ID도 아니고.. 열거된 해당 값만 가질 수 있다!
+* (**원**, **달러**, **엔**) 이라는 값만 가능하다는 의미
+* 프랑은 열거형에 나열된 값 중 존재하지 않으므로 가질 수 없다! Error!
+
+<br/>
+
+### 실습 3-8) Attribute 유형 - 열거형
+
+* Book 요소의 하위요소로 Price 요소를 삽입, 속성으로 unit을 작성하고 열거형 (원/달러/엔/프랑)을 지정
+* .xml 문서에서 unit에 속성값을 넣은 후 valid 검사
+
+<br/>
+
+* 작성 코드
+
+```xml-dtd
+<!ATTLIST Price unit (원 | 달러 | 엔 | 프랑) #IMPLIED>
+```
+
+<br/>
+
+* 다른 값 "유로"를 넣었을 때 오류
+
+![image-20200923124058275](./images/image-20200923124058275.png)
+
+<br/>
+
+#### 앞서 공부한거 정리 해보자!
+
+element 선언하는거!
+
+```xml-dtd
+<!ELEMENT element (EMPTY | #PCDATA | (child1, ...) | ANY | (#PCDATA | A | B)* )>
+```
+
+* \<!ELEMENT 태그이름 {유형} >
+  * EMPTY
+  * #PCDATA
+  * (child1, child2, ... , child n) ...
+  * ANY
+  * MIXED : (#PCDATA | A | B)*
+
+```xml-dtd
+<!ATTLIST element att_name (CDATA | ID[REF[S]] | NMTKOEN[S] | 열거형) ("" | #IMPLIED | FIXED | REQUIRED)>
+```
+
+* \<!ATTLIST 태그이름 속성이름 {유형} 기본값 >
+  * CDATA
+  * ID[REF[S]]
+  * NM...[S]
+* \<!ATTLIST 태그이름 속성이름 유형 {기본값} >
+  * "_____"
+  * #IMPLIED
+  * #FIXED
+  * REQUIRED
 
 <br/>
 
 ### Entity
 
+![image-20200923125214049](./images/image-20200923125214049.png)
+
+* 첫 번째 문자열 치환이 가장 많이 사용된다고 한다. - **#define** 하고 똑같은 방식
+* 위 두개는 XML에서 쓰이고, 아래꺼는 DTD에서 쓰이는 것
+
 <br/>
+
+![image-20200923125514238](./images/image-20200923125514238.png)
+
+* DTD에서 정의하는 부분, XML에서 사용되는 부분
+* XML에서 쓰이는 것은, **\&를 붙이고, 끝에 ;을 붙인다**.
+
+<br/>
+
+![image-20200923125541038](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200923125541038.png)
+
+* 위의 경우, 치환될 문자열의 내용이 외부 파일에 매칭되는 것이다.
+* xml 선언문은 UTF-8로 저장하면 굳이 안써줘도 상관 없다.
+
+<br/>
+
+![image-20200923125843491](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200923125843491.png)
+
+<br/>
+
+### 실습 3-9) Entity 선언과 이용
+
+![image-20200923130021361](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200923130021361.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
