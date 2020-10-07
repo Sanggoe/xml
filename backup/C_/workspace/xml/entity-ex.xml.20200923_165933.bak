@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Memo [
+  <!ELEMENT Memo (#PCDATA) >
+]>
+<Memo>
+	내 생일은 입니다.
+</Memo>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<name xmalns="aaa"
+
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="aaa name1.xsd"
+		title="Mr.">
+	<first>Jone</first>
+	<middle>Fitzgerald</middle>
+	<last>Doe</last>
+</name>

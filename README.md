@@ -1,4 +1,4 @@
-
+`
 
 
 
@@ -173,7 +173,7 @@
 
 ### 유니코드
 
-![image-20200909100503765](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200909100503765.png)
+![image-20200909100503765](./images/image-20200909100503765.png)
 
 * 유니코드의 경우, 문자 하나를 2바이트로 저장한다.
   * 따라서 알파벳의경우 앞에 0을 다 붙여줘야 해서, 메모리가 2배가 된다.
@@ -288,7 +288,7 @@
 
 * 웹 브라우저로 본 모습
 
-![image-20200909111602828](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200909111602828.png)
+![image-20200909111602828](./images/image-20200909111602828.png)
 
 <br/>
 
@@ -754,7 +754,7 @@
 
 * 한글을 쓴 경우, "euc-kr" 방식으로 인코딩을 하고 싶을 때만 선언부를 포함한다.
 
-![image-20200923110220699](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200923110220699.png)
+![image-20200923110220699](./images/image-20200923110220699.png)
 
 <br/>
 
@@ -892,19 +892,19 @@
 
 * code 속성 값 중복 시 Error (invalid)
 
-![image-20200923121951926](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200923121951926.png)
+![image-20200923121951926](./images/image-20200923121951926.png)
 
 <br/>
 
 * #IMPLIED or #REQUIRED 생략 시 Error (invalid)
 
-![image-20200923122246782](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200923122246782.png)
+![image-20200923122246782](./images/image-20200923122246782.png)
 
 <br/>
 
 * 공백 포함 시 Error (invalid)
 
-![image-20200923122359285](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200923122359285.png)
+![image-20200923122359285](./images/image-20200923122359285.png)
 
 <br/>
 
@@ -990,7 +990,7 @@ element 선언하는거!
 * \<!ATTLIST 태그이름 속성이름 {유형} 기본값 >
   * CDATA
   * ID[REF[S]]
-  * NM...[S]
+  * NMTOKEN[S]
 * \<!ATTLIST 태그이름 속성이름 유형 {기본값} >
   * "_____"
   * #IMPLIED
@@ -1015,32 +1015,443 @@ element 선언하는거!
 
 <br/>
 
-![image-20200923125541038](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200923125541038.png)
+![image-20200923125541038](./images/image-20200923125541038.png)
 
 * 위의 경우, 치환될 문자열의 내용이 외부 파일에 매칭되는 것이다.
 * xml 선언문은 UTF-8로 저장하면 굳이 안써줘도 상관 없다.
 
 <br/>
 
-![image-20200923125843491](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200923125843491.png)
+#### 활용 예시
+
+```xml-dtd
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Memo [
+  <!ELEMENT Memo (#PCDATA)>
+  <!ENTITY 내생일날 "1997년 5월 9일">
+]>
+<Memo>
+	내 생일은 &내생일날; 입니다.
+</Memo>
+```
 
 <br/>
 
 ### 실습 3-9) Entity 선언과 이용
 
-![image-20200923130021361](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20200923130021361.png)
+* dtd에 이름의 이니셜 entity를 작성하고, 이 entity를 xml 문서에서 이용하기
+* \<author> 박상민 \</author>   =>   \<author> &psm; \</author>
+* 이니셜Entity의 문자열을 외부 파일로 만들어서 이용하시오.
 
+<br/>
 
+![image-20201007103743230](./images/image-20201007103743230.png)
 
+* 파싱되지 않는 Entity는 & ; 없이 이름 그대로 **속성값**으로만 사용한다.
+* 단순 문자열이 아니라, 이미지 파일의 이름과 노테이션이라는 것을 통해서, 처리할 프로그램 이름까지 매칭시켜준다.
 
+<br/>
 
+![image-20201007104155813](./images/image-20201007104155813.png)
 
+* 이전 두 가지와 다르게, 이건 DTD에서만 사용하는 것이다.
+* % 퍼센트 붙는것, 빈칸, 선언 방식 이런식으로 한다~ 기억하면 됩니다.
+* 사용할 때는 빈칸 없이 %붙여서 한다.
 
+<br/>
 
+![image-20201007104504792](./images/image-20201007104504792.png)
 
+* 아래꺼. DTD에서 쓸 것. DTD 선언 내에서 선언하고, DTD 선언 내에서 사용한다.
+* #include랑 비슷한 것 같아.
 
+<br/>
 
+#### 다시 정리. 기억할 부분들!!
 
+* **DTD** 다시 복습하며 정리하자
+  1. \<!ELEMENT
+     1. 다섯가지
+  2. \<!ATTRIBUTE
+     1. 몇가지
+  3. \<!ENTITY
+     1. 치환된 문자열 선언되는 것들
 
+* DTD는 문법은 심플한데, 표현력이 떨어진다. 그래서 나온게 스키마!
+* Schema는 더 파워풀하다! 즉, 기능이 많다. 대신 비교적 복잡하다.
 
+<br/>
 
+![image-20201007104948259](./images/image-20201007104948259.png)
+
+<br/>
+
+## Chapter 4. Schema
+
+<br/>
+
+![image-20201007105015853](./images/image-20201007105015853.png)
+
+* 공부할 꺼 꽤 많아.. 교재도 좀 읽어보자..
+
+<br/>
+
+### Schema vs DTD
+
+![image-20201007105058452](./images/image-20201007105058452.png)
+
+* **★ Schema의 장점! ★**
+  * XML 문법을 따른다!! (DTD는 XML문법이 아니다) 
+  * **Namespace**를 완전히 지원한다!! ★
+* **반드시 구분하자!!**
+  * **simpleType** : 속성 **값**(value)이나 텍스트만 포함하는 요소 ★
+  * **complexType** : **속성**(attribute) 및 **다른 요소**(element)들을 포함하는 요소 ★
+
+<br/>
+
+![image-20201007105435223](./images/image-20201007105435223.png)
+
+* 미리 정의된 자료형들로, 기본 자료형을 사용자가 지정할 수도 있다. Schema가 DTD도 호환하기 위해 DTD 자료형도 지원하도록 만들어 놨다! 후에 다시 볼 페이지.
+
+<br/>
+
+![image-20201007105923320](./images/image-20201007105923320.png)
+
+* 단점
+  * 표현력이 높은 대신 좀 복잡하다. DTD는
+  * 권고안의 일부만 지원한다지만, 우리수준에선.. 다 가능
+* DTD는 안쓰나?
+  * 스키마는 Entity 기능을 제공 못하지만, DTD는 제공함!
+  * DTD는 XML 파일 내부에도 포함 가능.
+  * Schema는 무조건 외부에만 선언. 확장자는 (**.xsd**)
+
+<br/>
+
+![image-20201007110025530](./images/image-20201007110025530.png)
+
+* DOM은 XML을 위한 것. 그래서 DTD는 지원 안됨.
+* DTD는 사실상 Namespace를 지원하지 않는다고 본다.
+* 문서 하나에 하나의 DTD만 쓸 수 있지만, 스키마는 Namespace가 있기 때문에 여러개 가능!
+* 동적 연결. 
+
+<br/>
+
+### XML Schema 맛보기
+
+![image-20201007111121044](./images/image-20201007111121044.png)
+
+* 사각형 : **element** / 타원 : **attribute**
+* 모든 XML Schema xsd 문서의 **root element**는 **schema** 여야 한다!
+* name이라는 element를 선언해주고, 이것은 하위 **element**들을 가지는 **complexType**이다.
+* sequence는 차례대로 한 번씩 element를 가진다는 의미이다.
+* 하위 element 들은 string 이라는 built-in 타입을 가진다.
+
+<br/>
+
+![image-20201007110653155](./images/image-20201007110653155.png)
+
+* name이라는 root element에 하위 요소로 first, middle, last가 있는 것!
+* name xmlns 부분은 일단 넘어가자.
+* 아래 써놓은거는 이전 페이지 구조를 DTD로 선언 연습해본것.
+
+<br/>
+
+![image-20201007111211193](./images/image-20201007111211193.png)
+
+* **namespace**
+
+  * **prefix가 없으면 해당 태그 하위 요소들에는 모두 default로 적용된다는 의미** ★
+
+  * **스프링으로 타임리프 템플릿 사용할 때 써봤잖아 th:___ 이런식으로**
+
+* **★ 중요 암기 ★**
+
+  * **표준안에 대한 namespace** : **xmlns="http://www.w3.org/2001/XMLSchema"** ★
+    * 반드시 위 주소 "그대로" 들어가야 한다. 철자 하나 틀림 없이
+    * 기존에 미리 정의된 tag 이름인 element complexType ... 등은 w3c 표준안 그룹에서 만든 것들이다!
+  * **targetNamespace** : **내가 정의**할 **tag set**들에 대해 어떤 그룹으로 지정할 것이냐를 정하는 것 ★
+    * 새로 정의한 name, first, middle, last, title 등이 **http://www.wrox.com** 에 들어간다는 의미
+    * 내 맘대로 뭘로 바꾸든 상관 없다. 개인 블로그든..
+  * **xmlns:target** : 앞서 정의한 새로운 태그들을 스키마 안에서 다시 '사용하는' 경우가 있다.
+    * 다시 사용하는 경우에는, prefix를 앞에 붙여주어야 한다. **target:first** 이런식으로!
+
+* 다시 정리하는 **중요한 내용**은,
+  * 첫 번째 표준안은, 스키마 xsd에 쓰이는 기본 tag set들이 소속된 namespace를 지정! 바꾸면 안됨.
+  * 두 번째 targetNamespace는 내가 새로 정의하는 tag set 들에 대한 namespace!
+
+<br/>
+
+![image-20201007112423222](./images/image-20201007112423222.png)
+
+* 첫 번째 줄은 **targetNamespace**를 default namespace 지정해주는 코드  ★ **여기도 잘 이해하자** ★
+  * **해당 tag가 어디에 소속되어있는지 적어준다.**
+  * 그럼 하위 모든 요소들에 기본적으로 해당 namespace가 적용된다
+* 두 번째 줄은 schema 파일을 지정하는 방법 (외부)
+  * 먼저 xsi 라는 prefix를 지정하여 **xmlns="http://www.w3.org/2001/XMLSchema-instance"**를 줬고, 그 **표준안에 포함되는 속성**인 schemaLocation을 표현하기 위해 **xsi:schemaLocation** 으로 썼다.
+  * 우리가 정의한 속성이 아닌 표준안에 속하는 schemaLocation이라는 속성을 사용하는 방법은
+    * **targetNamespace 빈칸 filename** 형식으로, 쌍으로 지정해준다.
+* 다시 보면, 위에서 schemaLocation은 표준안에 관련된 속성이고, title은 우리가 만든 속성이다.
+  * 따라서 prefix로 xsi xsi 라는 이름으로 를 주었고, 그것의 스키마 로케이션
+
+<br/>
+
+![image-20201007112740073](./images/image-20201007112740073.png)
+
+* 위 작은 코드에서 **namespace 3가지 쓰임.** 중요합니다. 외웁시다. ★
+  1. **Schema Tag namespace**
+     * **표준안 (xmlns="http://www.w3.org/2001/XMLSchema")**
+  2. **Target namespace**
+     * **사용자 정의 element (내 주소)**
+  3. **xml 외부 xsd 지정**
+     * **외부 스키마 파일 지정 (targetNamespace xsd_filename)**
+
+<br/>
+
+### Schema Validation
+
+![image-20201007112845375](./images/image-20201007112845375.png)
+
+* xml도 validation 이 필요합니다!
+  * 경로 C:\Program Files (x86)\XSV> 에 설치해놨음.
+  * 해당 파일들을 위 디렉토리에 복사해서 확인해야한다.
+  * 실행 명령어 : xsv filename.xml
+  * 실행 결과도 xml로 보여준다. 아무 문제 없으면 짧게.. 마지막 라인에 outcome="success" 로 뜨면 정상
+
+<br/>
+
+### 실습 4-1) XML Schema 맛보기
+
+![image-20201007113814533](./images/image-20201007113814533.png)
+
+* 임의의 문자열로 바꿔도 상관 없다.
+  * 다만, Unique한 특성을 가져야 하기 때문에, aaa 같은 건 권장하지 않을 것 같다.
+* targetNamespace 없이 Schema를 이용하려면?
+  * 스키마 파일 자체는 문제 없으나, XML 문서에서 스키마 파일 지정 시 문제가 발생한다.
+    * schemaLocation = "targetNamespace xsd파일경로" : 문제 발생!!!!
+    * **해결책 : noNamespaceSchemaLocation="xsd파일경로"**
+    * 그러나 namespace를 쓰는 것을 강하게 권장한다.
+
+<br/>
+
+* xml 코드
+
+```xml
+<?xml version="1.0"?>
+<name xmlns="http://www.wrox.com/name"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.wrox.com/name name1.xsd"
+		title="Mr.">
+	<first>Jone</first>
+	<middle>Fitzgerald</middle>
+	<last>Doe</last>
+</name>
+
+<!-- xmlns는 스키마에서 적용한 targetNamespace의 주소 -->
+<!-- xmlns:xsi는 해당 prefix 이름으로 기본 xml 스키마 인스턴스를 적용 -->
+<!-- xsi:schemaLocation은 외부 스키마를 참조하는 코드로, url과 파일 이름을 한 쌍으로 적용 -->
+```
+
+<br/>
+
+* xsd 스키마 코드
+
+```xml
+<?xml version="1.0"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+		targetNamespace="http://www.wrox.com/name"
+		xmlns:target="http://www.wrox.com/name"
+		elementFormDefault="qualified">
+
+	<element name="name">
+		<complexType>
+			<sequence>
+				<element name="first" type="string"/>
+				<element name="middle" type="string"/>
+				<element name="last" type="string"/>
+			</sequence>
+			<attribute name="title" type="string"/>
+		</complexType>
+	</element>
+
+</schema>
+
+<!-- xmlns="http://www.w3.org/2001/XMLSchema" 까지는 토씨하나 안틀리고 외워야 함 -->
+<!-- targetNamespace는, Unique 하기만 하면 된다. aaa로 바꿔도 상관 없다. -->
+```
+
+<br/>
+
+### XML Schema 선언
+
+![image-20201007120634354](./images/image-20201007120634354.png)
+
+* 다시 강조합니다. xmlns 첫 줄 외웁시다!
+  * xmlns="http://www.w3.org/2001/XMLSchema"
+* xmlns:target = "targetNamespace URL" 넣는것이 관례!
+* schema 시작태그에 더 들어갈 수 있는 속성
+  * attributeFormDefault
+  * elementFormDefault
+    * qualified : namespace가 지정된
+    * unqualified : namespace가 지정 안 된
+
+<br/>
+
+![image-20201007120926660](./images/image-20201007120926660.png)
+
+* targetNamespace는, **사용자에 의해 정의되는 요소들이 속하는 namespace**를 지정하는 것!!
+* 만약 **targetNamespace**가 없으면, **schemaLocation**을 못쓴다.
+* 이럴 땐 **noNamespaceSchemaLocation** 으로 대신 사용한다.
+* ★ **But Schema에 namespace를 쓰는게 강한 권장사항!** ★
+
+<br/>
+
+![image-20201007184830161](./images/image-20201007184830161.png)
+
+* elementFormDefault, attributeFormDefault
+  * qualified : namespace가 지정되어 있다는 의미 - 이게 **관례**!
+  * unqualified : 어떤 namespace와도 결합되어 있지 않음
+* 위의 경우에는 **default namespace가 아니고**, **prefix**로 **정의만** 되어있다.
+* 근데, qualified로 지정하면 기본적으로 namespace를 가지고 있는 것으로 간주된다.
+
+<br/>
+
+#### 전역(Global) vs 지역(local) - **외우세요! 중요합니다.** ★
+
+![image-20201007121257411](./images/image-20201007121257411.png)
+
+* 전역 : Schema(root) element 의 바로 밑에 선언된 것. ''한 단계'' 아래 직계로 선언된 것.
+* 지역 : Schema(root) element 의 바로 아래가 아닌 것들.
+* 전역 선언들은 XML Schema 내에서 **재사용** 가능하다! 지역은 불가.
+
+<br/>
+
+![image-20201007121848893](./images/image-20201007121848893.png)
+
+* Schema 파일(.xsd) 내에 여러 개의 전역 요소가 올 수 있다.
+* 이 전역 요소들 중 하나가 해당 Schema를 이용하는 XML 인스턴스 문서의 root 요소가 될 수 있다.
+  * 아래 예시를 보면, xml 에서 root element로는 A, B 둘 중 아무거나 쓸 수 있다. 근데 B2는 불가!
+
+<br/>
+
+### Element 선언
+
+![image-20201007122113353](./images/image-20201007122113353.png)
+
+* complex type의 경우에는 type 생략 가능. 아니, 생략 해야함. build-in type은 가질 수 없다.
+  * Data를 가지는 타입일 때만 build-in type을 지정!
+* 여러 속성들
+  * ref="전역요소참조" : global로 element를 정의한 것을 다시 쓰고 싶을 때 사용
+  * form="qualified" or "uniqualified" : elementFormDefault를 처리하면 신경쓰지 않아도 됨
+* **외워야 하는 것들 중 하나!** ★
+  * **minOccurs**="음이 아닌 정수" : **반복**되는 최소 **횟수**
+  * **maxOccurs**="음이 아닌 정수" or "unbounded" : **반복**되는 최대 **횟수** , **unbounded**는 무한 반복
+    * **위 두 개는 로컬에서만 사용 가능하다! global element에서는 사용할 수 없다.** ★
+    * 당연하지만, **전역 element**는 **하나**를 정의하는 것이기 때문에.. 반복시키지 않는다.
+    * **default**값은 **1**, 한 번 수행이 기본값이다.
+  * default="기본값"
+  * fixed="고정값"
+
+<br/>
+
+![image-20201007122550611](./images/image-20201007122550611.png)
+
+* schema 문서 첫 줄
+  * title이라는 element는 string이라는 build-it type을 가진다.
+  * 이렇게 선언 된 xsd 문서를 읽어서 title이라는 element를 xml 문서에서 사용하는 것
+* 아래 블록
+  *  name이라는 element는 사용자가 complexType이라고 local 복합 자료형으로 선언함
+  * 이어서 차례대로 나오는 것이 sequence고,
+    *  그 안에 first, middle, last라는 local element를 선언한 것이다.
+
+<br/>
+
+![image-20201007122719213](./images/image-20201007122719213.png)
+
+* 이전 페이지를 전역으로 바꾸는 것!
+* 전역으로 넣은 것들은 재사용을 위한 것이니까 이름을 붙인다. nameType!
+  * 내가 정한 이름은 targetNamespace에 자동으로 들어간다.
+  * complexType의 경우 element가 아닌 type이긴 하지만, 마찬가지로 targetNamesapce에 들어간다.
+  * **complexType 다음에는 sqeuence가 당연히 나온다고 생각하자!** ★
+* 사용할 때는 namespace에 대한 prefix를 붙여서 사용해줘야 한다.
+  * target:nameType (내 플젝 할 때 th:text 해줘야 했듯이!)
+  * 다시 정리하면, 내가 정의한 name의 경우 아래서 바로 쓰면 될 것 같지만, 그렇지 않다.  name="__" 으로 선언한 동시에 **targetNamespace**로 들어간다. 따라서 사용할 때는 반드시 **target:nameType**로 해야 선언된 해당 속성을 찾을 수 있다.
+
+<br/>
+
+* **이렇게, 스키마에서는 선언할 때 로컬을 전역으로 올려서 다른데서 재사용할 수 있고, 재사용 할 경우에 targetNamespace에 대한 prefix인 target을 붙여서 재사용할 수 있다!**
+
+<br/>
+
+### 실습 4-2) BookCatalog Schema
+
+![image-20201007123448516](./images/image-20201007123448516.png)
+
+* BookCatalog.xml / BookCatalog.xsd
+
+<br/>
+
+* BookCatalog.xml 코드
+
+```xml
+<?xml version="1.0"?>
+<BookCatalog xmlns="http://sanggoe.tistory.com"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://sanggoe.tistory.com test1.xsd">
+	<Book>
+		<Title>XML 프로그래밍</Title>
+		<Author>홍성용</Author>
+		<Year>2015</Year>
+	</Book>
+	<Book>
+		<Title>재미있는 XML</Title>
+		<Author>Mr.Steve</Author>
+		<Year>2020</Year>
+	</Book>
+	<Book>
+		<Title>재미있는 Java</Title>
+		<Author>Mr.Mike</Author>
+		<Year>2020</Year>
+	</Book>
+</BookCatalog>
+```
+
+<br/>
+
+* BookCatalog.xsd 코드
+
+```xml
+<?xml version="1.0"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+		targetNamespace="http://sanggoe.tistory.com"
+		xmlns:target="http://sanggoe.tistory.com"
+		elementFormDefault="qualified">
+
+	<element name="BookCatalog">
+		<complexType>
+			<sequence>
+				<element name="Book" maxOccurs="unbounded">
+					<complexType>
+						<sequence>
+							<element name="Title" type="string"/>
+							<element name="Author" type="string"/>
+							<element name="Year" type="string"/>
+						</sequence>
+					</complexType>
+				</element>
+			</sequence>
+		</complexType>
+	</element>
+
+</schema>
+
+<!-- maxOccurs를 선언하지 않으면 에러난다! Book은 여러개니까 반복해야 함 -->
+<!-- complexType 뒤에는 항상 sequence가 따라 나온다고 생각하자 -->
+```
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>

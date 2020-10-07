@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+		targetNamespace="http://www.wrox.com/name"
+		xmlns:target="http://www.wrox.com/name"
+		elementFormDefault="qualified">
+
+	<complexType name="BookType">
+		<sequence>
+			<element name="Title" type="string"/>
+			<element name="Author" type="string"/>
+			<element name="Year" type="string"/>
+		</sequence>
+	</complexType>
+	
+	<element name="Book" target:type="BookType" />
+	
+	</element>
+
+</schema>

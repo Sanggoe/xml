@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<name xmalns="http://www.wrox.com/name"
+
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.wrox.com/name name1.xsd"
+		title="Mr.">
+	<first>Jone</first>
+				<element name="middle" type="string"/>
+				<element name="last" type="string"/>
+			</sequence>
+			<attribute name="title" type="string"/>
+		</complexType>
+	</element>
+</schema>

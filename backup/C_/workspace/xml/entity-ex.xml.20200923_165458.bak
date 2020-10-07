@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Memo [
+  <!ELEMENT 내생일날 SYSTEM "birth.txt">
+  <!ENTITY 내생일날 "1997년 5월 9일>
+]>
+<memo> 내 생일은 &내생일날; 입니다. </memo>

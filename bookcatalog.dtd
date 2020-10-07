@@ -1,13 +1,12 @@
 <!ELEMENT BookCatalog (Book*)>
-<!ELEMENT Book ((BookCode | Title), Author, CoAuthor, Year, Summary)>
+<!ELEMENT Book ((BookCode | Title), Author, CoAuthor, Year, Summary, Price)>
+
 <!--<!ATTLIST Book lang CDATA "ko">-->
 <!--<!ATTLIST Book lang CDATA #FIXED "ko">-->
 <!ATTLIST Book lang CDATA #IMPLIED>
 <!--<!ATTLIST Book lang CDATA #REQUIRED>-->
+
 <!ATTLIST Book code ID #REQUIRED>
-<!ATTLIST Price unit (원 | 달러 | 엔 | 프랑) #IMPLIED>
-<!--<!ENTITY psm "박상민">-->
-<!ENTITY psm SYSTEM "name.txt">
 
 <!ELEMENT BookCode (#PCDATA)>
 <!ELEMENT Title (#PCDATA)>
@@ -16,3 +15,8 @@
 <!ELEMENT Year (#PCDATA)>
 <!ELEMENT Summary ANY >
 <!ELEMENT Price ANY >
+
+<!ATTLIST Price unit (원 | 달러 | 엔 | 프랑) #IMPLIED>
+
+<!ENTITY psm SYSTEM "psm.txt">
+<!ENTITY psm "박상민">
