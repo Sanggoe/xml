@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+		targetNamespace="http://cs.skuniv.ac.kr/sanggoe"
+		xmlns:target="http://cs.skuniv.ac.kr/sanggoe"
+		elementFormDefault="qualified">
+	
+	<simpleType name="hourScope">
+		<restriction base="int">
+			<minInclusive value="0"/>
+			<maxInclusive value="9"/>
+		</restriction>
+	</simpleType>
+
+	<simpleType name="minScope">
+		<restriction base="int">
+			<minInclusive value="0"/>
+			<maxInclusive value="59"/>
+		</restriction>
+	</simpleType>
+
+	<simpleType name="secondScope">
+		<restriction base="int">
+			<minInclusive value="0"/>
+			<maxInclusive value="59"/>
+		</restriction>
+	</simpleType>
+
+	<group name="AlbumGroup">
+		<sequence>
+			<element name="Artist" type="string"/>
+			<element name="Title" type="string"/>
+			<element name="Genre" type="string"/>
+			<element name="Released-date" type="string"/>
+			<element name="Song" maxOccurs="unbounded">
+				<complexType mixed="true">
+					<sequence>
+						<element name="playTime">
+							<complexType>
+								<sequence>
+									<element name="hours" type="target:hourScope"/>
+									<element name="minutes" type="target:minScope"/>
+									<element name="seconds" type="target:secondScope"/>
+								</sequence>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</group>
+
+	<complexType name="AudioCatalogType">
+		<group ref="target:AlbumGroup"/>
+	</complexType>
+
+	<element name="AudioCatalog">
+		<complexType>
+			<choice maxOccurs="unbounded">
+				<element name="Cd" type="target:AudioCatalogType"/>
+				<element name="Mp3" type="target:AudioCatalogType"/>
+				<element name="Record" type="target:AudioCatalogType"/>
+			</choice>
+		</complexType>
+	</element>
+
+</schema>

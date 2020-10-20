@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+		targetNamespace="http://skuniv.ac.kr"
+		xmlns:target="http://skuniv.ac.kr"
+		elementFormDefault="qualified">
+	
+	<!-- book, title, author, year 등 요소 전역으로 선언하기 -->
+	<element name="Title" type="string"/>
+	<element name="Author" type="string"/>
+	<element name="Year" type="string"/>
+
+	<complexType name="BookType">
+		<sequence>
+			<element ref="target:Title"/>
+			<element ref="target:Author"/>
+			<element ref="target:Year"/>
+		</sequence>
+	</complexType>
+
+	<!-- 요소들 정의할 때 앞에서 전역으로 선언된 요소들 참조하기 -->
+	<element name="Book" type="target:BookType" />
+
+	<complexType name="BookCatalogType">
+		<sequence>
+			<element ref="target:Book" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+
+	<element name="BookCatalog" type="target:BookCatalogType"/>
+
+</schema>

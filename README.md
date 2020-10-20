@@ -1,9 +1,3 @@
-`
-
-
-
-
-
 # 웹정보 프레임워크
 
 <br/>
@@ -995,7 +989,7 @@ element 선언하는거!
   * "_____"
   * #IMPLIED
   * #FIXED
-  * REQUIRED
+  * #REQUIRED
 
 <br/>
 
@@ -1447,6 +1441,290 @@ element 선언하는거!
 <!-- maxOccurs를 선언하지 않으면 에러난다! Book은 여러개니까 반복해야 함 -->
 <!-- complexType 뒤에는 항상 sequence가 따라 나온다고 생각하자 -->
 ```
+
+<br/>
+
+★ 복잡하더라도 천천히 Error code를 잘 읽어보자! xml 에 문제가 있는지, xsd 파일에 문제가 있는지, 또 몇 번째 줄에 문제가 있는지, Syntax 오류인지 아니면 써줘야 할 걸 잘못 써준 것인지 찬찬히 보면 해결할 수 있다!!
+
+<br/>
+
+<br/>
+
+### 지난주 수업 복습
+
+XML 맛보기 구성도 화면에서 분석하며 보기.
+
+element로 선언하고 하위 요소들이 있으니까 complextype. Type을 Attribute로 써주지 않는다!
+
+* 외울 첫 줄 : 국제 표준 스키마를 나타내는 namespace다!
+* targetnamespace : 내가 지금 만드는 녀석들이 자동적으로 들어가는 namespace영역
+* target prefix : 재사용 할 때를 대비해 prefix를 붙여놓았다.
+* xsi 
+
+Schema는 무조건 외부에 선언해야 함
+
+<br/>
+
+global, local 개념 꼭 기억을 하세요!
+
+전역 재사용 가능하다!
+
+<br/>
+
+![image-20201014104728414](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014104728414.png)
+
+*  전역 요소는 재사용을 위한 것이라서, name attribute를 붙여준다!
+*  해당 이름이 선언됨과 동시에 targetNamespace로 들어간다.
+*  따라서 쓸 때는 반드시 targetNamespace의 prefix를 붙여서 사용해야한다.
+
+<br/>
+
+### 실습 4-3) BookCatalog Schema - 2
+
+![image-20201014110224440](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014110224440.png)
+
+
+
+<br/>
+
+![image-20201014110813614](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014110813614.png)
+
+* minOccurs만 적고 maxOccurs를 안적으면 에러난다. 안 적은건 default가 1이다!
+* element에 적용이 된다. Attribute에는 적을 수 없다.
+
+sequence로 choice와 call 이 있다. contentType 안에 들어가는게 content Model이라고 한다.
+
+뒤에서 나올거긴 해.. 다시 와서 정리하자. 왜 이야기를 하냐면, squence의 choice, call에. 즉, content model에 위 두 속성을 쓸 수 있다!!
+
+<br/>
+
+![image-20201014111509918](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014111509918.png)
+
+* Default value : 말 그대로 default 값.
+* Fixed value : #FIXED 와 같은것! 고정시키면, 비어있거나 고정값을 입력해야 한다.
+  * DTD에서 배운 것과 같다.
+
+<br/>
+
+![image-20201014150437039](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014150437039.png)
+
+* mixed : DTD의 MIXED 모델 (\<!ELEMENT (#PCDATA|e1|e2)*>
+* mixed가 true면 MIXED model이다. (일반적으로 잘 안쓴다)
+* mixed는 false가 default.
+
+
+
+사진 다시 캡쳐하자
+
+<br/>
+
+![image-20201014112022302](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014112022302.png)
+
+* DTD에서의 Element 표현 방식이 Schema에서도 호환되게 하기 위해 만들었다.
+* 하나하나 비교해보며 정리해보자.
+* sequence, mixed model, 요소들, choice...
+
+<br/>
+
+![image-20201014112358445](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014112358445.png)
+
+* Empty element는, 기본적으로 complexType이다. (하위 element또는 attribute를 가지는거.)
+* content가 비어있는 complexType으로 간주한다. **기억!! ★**
+
+<br/>
+
+![image-20201014112800751](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014112800751.png)
+
+* group : **Content Model 재사용**을 위한 것!
+* Content Model : element 구조로 기술한, contentType 안에 들어있는 것.
+* Content Model에 들어갈 수 있는 것 : sequence, choice, call - 전역으로 못뽑는다.
+* 따라서 squence model (content modle)을 전역으로 뽑아 재사용하기 위해 쓰이는 것이 바로 **group**.
+
+<br/>
+
+![image-20201014112822888](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014112822888.png)
+
+<br/>
+
+![image-20201014114012847](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014114012847.png)
+
+<br/>
+
+![image-20201014114155436](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014114155436.png)
+
+* sequence는, **차례대로** 한 번씩 되는 것이다.
+* **minOccurs**를 해주면 **전체 요소**들을 몇 번 반복할건지!
+* DTD에서, (child1, child2, ...) 와 같다.
+
+<br/>
+
+![image-20201014114400204](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014114400204.png)
+
+* **choice**는 **여러 개들 중 하나**를 선택하는 것.
+* minOccurs, maxOccurs 이용 가능
+* DTD에서 (child1|child2|...)+* 와 같음
+
+<br/>
+
+![image-20201014114436322](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014114436322.png)
+
+* group을 통해 sequence를 뽑아 이름을 주어 참조할 수 있다.
+* 사용하는 부분에서 min, max occurs 넣을 수 있다.
+
+<br/>
+
+![image-20201014120736163](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014120736163.png)
+
+* all은 요소들을 **순서에 상관없이** 나타날 수 있도록!!
+* complexType 정의 내에서만 가능!!
+* all 아래는 **element 선언만** 포함할 수 있다.
+  * sequence, choice, group 등은 선언 불가!
+  * all은 **순서에 상관 없기** 때문에 모호성 발생 가능성이 있어 불가능하다!
+  * **반면** sequence 태그나 choice 안에는 **다른 model들을 포함** 할 수 있다.
+* minOccurs, maxOccurs는 0이나 1로 제한. 생략하거나 한 번만 된다. (DTD에서 ?와 같은 역할)
+* DTD에는 없다!
+
+<br/>
+
+![image-20201014120846812](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014120846812.png)
+
+* **순서 상관 없다**!
+* sequence나 choice 등 사용할 수 없다!!! 기억하자 ★
+
+<br/>
+
+### 실습 4-5) AudioCatalog 작성하기
+
+![image-20201014121536932](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014121536932.png)
+
+* 해보고 다시 해야할듯
+
+<br/>
+
+![image-20201014125031821](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014125031821.png)
+
+<br/>
+
+![image-20201014124456975](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014124456975.png)
+
+* content 모델 밖에, complexType 안에 선언이 된다.
+* name이 complexType이면 상관 없다. 쉽다.
+* 근데 element가 simpleType 일 때는 좀 복잡하고 어렵다.
+
+<br/>
+
+![image-20201014125148932](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014125148932.png)
+
+* **simpleType인 element의 attribute 선언은 Schema에서 어떻게 하는가?**
+* **Self Study 합시다.**
+* ref : 전역 속성 참조
+* form : qualified or unqualified
+* use : optional (써도되고 안써도 되고), prohibited (금지), required (필수)
+* default : 기본값
+* fixed : 고정값
+
+<br/>
+
+![image-20201014125249582](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014125249582.png)
+
+* 개별적으로 해보세요~!! 반드시 해봐 ㅋㅋ
+
+<br/>
+
+![image-20201014125506689](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014125506689.png)
+
+* Attribute도 전역으로 올려서 사용할 수 있다.
+* 말 그대로 Attribute의 집합. Group을 말한다.
+
+<br/>
+
+#### Element와 Attribute 선언하는걸 했음! 스키마는 Entity는 없다!
+
+![image-20201014125542097](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014125542097.png)
+
+<br/>
+
+![image-20201014125749804](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014125749804.png)
+
+* complexType은 기본적으로 우리가 정의하는 것. 우리가 나열하는 것.
+* simpleType은, 앞에 Built-in type. simple type들을 이용해서 내가 재정의할 수 있다.
+* restriction, list, union 세 가지 방법이 있다.
+
+<br/>
+
+![image-20201014125812496](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014125812496.png)
+
+* restriction은 특성 값을 주어서 값을 제한하는 것!
+
+<br/>
+
+![image-20201014130152392](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014130152392.png)
+
+* 회사에서 쓴다고 할 때, 지정된 직급체계만 쓰고싶다! 할 때 이걸 쓴다. enumeration.
+* 문자열을 기반으로 하는데, 가지고 싶은 값을 나열하는 것.
+* **없는 값은 안된다**. simpleType의 값을 **열거된 것으로 한정시키고 싶을 때**.
+* simpleType의 restriction, base는 string, enumeration facet을 통해 값을 나열.
+
+```
+만약 예를 들어 시/분/초를 한다고 하면. min 0~59까지 가능할 것이다. 
+
+<simpleType>
+	<restriction base="int"
+		<minInclusive value="0">
+		<maxInclusive value="59">
+	</restriction>
+</simpleType>
+```
+
+<br/>
+
+![image-20201014130620184](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014130620184.png)
+
+* 값이 복수개 나올 수 있는 것!
+* 각 항목의 타입은 positiveInteger 이다!
+* user_defined 자료형을 만든 것입니다.
+
+<br/>
+
+![image-20201014173502210](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014173502210.png)
+
+* 가질 수 있는 값을 합친다!
+
+<br/>
+
+![image-20201014130659496](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014130659496.png)
+
+* 가질 수 있는 값은 하나이지만, 값의 범위가 합쳐진 것이다?
+* 두 개의 타입 중 하나를 가질 수 있는 것이다
+* 가질 수 있는 값의 범위를 합친거지, 복수개의 값을 가질 수 있는 것이 아니다.
+
+<br/>
+
+![image-20201014131011816](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014131011816.png)
+
+* 
+
+<br/>
+
+![image-20201014131109292](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014131109292.png)
+
+* 문서의 내용, 링크 등의 내용을 넣어주면 스키마 툴에서 자동적으로 뽑아서 도움말을 만든다.
+
+<br/>
+
+![image-20201014131217576](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014131217576.png)
+
+* 스키마를 여러 개 사용할 수 있다!
+* import : 포함이 아니라, 참조할 수 있게 해주는 것이다.
+* include : #include 하는거랑 거의 비슷하다 생각하면 된다.
+  * 전역 선언들이 포함되는 것처럼 간주
+* redefine : user_defined type에 대해서 complexType과 simpleType에서 사용자가 정의하는 타입을 보았다. 이걸 import 시켜서 재정의! 뭐 오버라이딩 하는것과 비슷한 개념
+
+<br/>
+
+![image-20201014131516914](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014131516914.png)
+
+<br/>
 
 <br/>
 

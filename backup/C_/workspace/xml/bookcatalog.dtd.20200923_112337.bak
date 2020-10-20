@@ -1,9 +1,0 @@
-<!ELEMENT BookCatalog (Book*)>
-<!ELEMENT Book ((BookCode | Title), Author, CoAuthor, Year, Summary)>
-<!ATTLIST Book  lang  CDATA  "ko" >
-<!ELEMENT BookCode (#PCDATA)>
-<!ELEMENT Title (#PCDATA)>
-<!ELEMENT Author (#PCDATA)>
-<!ELEMENT CoAuthor (#PCDATA | Author)*>
-<!ELEMENT Year (#PCDATA)>
-<!ELEMENT Summary ANY >

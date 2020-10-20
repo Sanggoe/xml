@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+		targetNamespace="http://cs.skuniv.ac.kr/sanggoe"
+		xmlns:target="http://cs.skuniv.ac.kr/sanggoe"
+		elementFormDefault="qualified">
+	
+	<group name="AlbumGroup">
+		<sequence>
+			<element name="Artist" type="string"/>
+			<element name="Title" type="string"/>
+			<element name="Genre" type="string"/>
+			<element name="Released-date" type="string"/>
+			<element name="Song" maxOccurs="unbounded" type="string"/>
+
+		</sequence>
+	</group>
+
+	<element name="AudioCatalog">
+		<complexType>
+			<choice maxOccurs="unbounded">
+				<element name="Cd">
+					<complexType>
+						<group ref="target:AlbumGroup"/>
+					</complexType>
+				</element>
+
+				<element name="Mp3">
+					<complexType>
+						<group ref="target:AlbumGroup"/>
+					</complexType>
+				</element>
+
+				<element name="Record">
+					<complexType>
+						<group ref="target:AlbumGroup"/>
+					</complexType>
+				</element>
+
+			</choice>
+		</complexType>
+	</element>
+
+</schema>

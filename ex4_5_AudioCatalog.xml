@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<AudioCatalog xmlns="http://cs.skuniv.ac.kr/sanggoe"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://cs.skuniv.ac.kr/sanggoe AudioCatalog.xsd">
+	<Cd>
+		<Artist>스텔라 장</Artist>
+		<Title>villain</Title>
+		<Genre>dance</Genre>
+		<Released-date>2020</Released-date>
+		<Song>villain</Song>
+		<Song>월요병가</Song>
+		<Song>color</Song>
+	</Cd>
+
+	<Cd>
+		<Artist>장기하</Artist>
+		<Title>별일없이산다</Title>
+		<Genre>rap</Genre>
+		<Released-date>2008</Released-date>
+		<Song>싸구려커피</Song>
+		<Song>별일없이산다</Song>
+	</Cd>
+
+	<Mp3>
+		<Artist>아이유</Artist>
+		<Title>금요일에 만나요</Title>
+		<Genre>dance</Genre>
+		<Released-date>2015</Released-date>
+		<Song>금요일에 만나요</Song>
+		<Song>좋은날</Song>
+	</Mp3>
+
+	<Mp3>
+		<Artist>IU</Artist>
+		<Title>25</Title>
+		<Genre>dance</Genre>
+		<Released-date>2017</Released-date>
+		<Song>25</Song>
+		<Song>팔레트</Song>
+	</Mp3>
+
+	<Record>
+		<Artist>Anonymous</Artist>
+		<Title>none</Title>
+		<Genre>none</Genre>
+		<Released-date>none</Released-date>
+		<Song>secreat</Song>
+	</Record>
+
+	<Record>
+		<Artist>합창단</Artist>
+		<Title>중앙성가</Title>
+		<Genre>choir</Genre>
+		<Released-date>2019</Released-date>
+		<Song>track1</Song>
+		<Song>track2</Song>
+		<Song>track3</Song>
+		<Song>track4</Song>
+	</Record>
+
+</AudioCatalog>
