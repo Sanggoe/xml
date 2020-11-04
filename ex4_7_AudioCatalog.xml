@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <AudioCatalog xmlns="http://cs.skuniv.ac.kr/sanggoe"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xsi:schemaLocation="http://cs.skuniv.ac.kr/sanggoe AudioCatalog.xsd">
+		xsi:schemaLocation="http://cs.skuniv.ac.kr/sanggoe ex4_7_AudioCatalog.xsd">
 	<Cd>
 		<Artist>스텔라 장</Artist>
 		<Title>villain</Title>
