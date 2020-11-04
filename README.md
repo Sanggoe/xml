@@ -1,3 +1,5 @@
+
+
 # 웹정보 프레임워크
 
 <br/>
@@ -1471,7 +1473,7 @@ global, local 개념 꼭 기억을 하세요!
 
 <br/>
 
-![image-20201014104728414](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014104728414.png)
+![image-20201014104728414](./images/image-20201014104728414.png)
 
 *  전역 요소는 재사용을 위한 것이라서, name attribute를 붙여준다!
 *  해당 이름이 선언됨과 동시에 targetNamespace로 들어간다.
@@ -1481,24 +1483,64 @@ global, local 개념 꼭 기억을 하세요!
 
 ### 실습 4-3) BookCatalog Schema - 2
 
-![image-20201014110224440](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014110224440.png)
+![image-20201014110224440](./images/image-20201014110224440.png)
 
-
+* ex4_3_BookCatalog.xsd
 
 <br/>
 
-![image-20201014110813614](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014110813614.png)
+* ex4_3_BookCatalog.xsd 코드
+
+```xml
+<?xml version="1.0"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+		targetNamespace="http://skuniv.ac.kr"
+		xmlns:target="http://skuniv.ac.kr"
+		elementFormDefault="qualified">
+	
+	<!-- book, title, author, year 등 요소 전역으로 선언하기 -->
+	<element name="Title" type="string"/>
+	<element name="Author" type="string"/>
+	<element name="Year" type="string"/>
+
+	<complexType name="BookType">
+		<sequence>
+			<element ref="target:Title"/>
+			<element ref="target:Author"/>
+			<element ref="target:Year"/>
+		</sequence>
+	</complexType>
+
+	<!-- 요소들 정의할 때 앞에서 전역으로 선언된 요소들 참조하기 -->
+	<element name="Book" type="target:BookType" />
+
+	<complexType name="BookCatalogType">
+		<sequence>
+			<element ref="target:Book" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+
+	<element name="BookCatalog" type="target:BookCatalogType"/>
+
+</schema>
+```
+
+* 전역으로 선언된 요소들을 사용할 때는 ref 속성을 사용하여 target: prefix를 붙여서 참조해야 한다.
+
+<br/>
+
+![image-20201014110813614](./images/image-20201014110813614.png)
 
 * minOccurs만 적고 maxOccurs를 안적으면 에러난다. 안 적은건 default가 1이다!
 * element에 적용이 된다. Attribute에는 적을 수 없다.
 
-sequence로 choice와 call 이 있다. contentType 안에 들어가는게 content Model이라고 한다.
+* sequence로 choice와 all 이 있다. contentType 안에 들어가는게 content Model이라고 한다.
 
-뒤에서 나올거긴 해.. 다시 와서 정리하자. 왜 이야기를 하냐면, squence의 choice, call에. 즉, content model에 위 두 속성을 쓸 수 있다!!
+* 뒤에서 나올거긴 해.. 다시 와서 정리하자. 왜 이야기를 하냐면, squence의 choice, all에. 즉, content model에 위 두 속성을 쓸 수 있다!!
 
 <br/>
 
-![image-20201014111509918](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014111509918.png)
+![image-20201014111509918](./images/image-20201014111509918.png)
 
 * Default value : 말 그대로 default 값.
 * Fixed value : #FIXED 와 같은것! 고정시키면, 비어있거나 고정값을 입력해야 한다.
@@ -1506,7 +1548,7 @@ sequence로 choice와 call 이 있다. contentType 안에 들어가는게 conten
 
 <br/>
 
-![image-20201014150437039](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014150437039.png)
+![image-20201014150437039](./images/image-20201014150437039.png)
 
 * mixed : DTD의 MIXED 모델 (\<!ELEMENT (#PCDATA|e1|e2)*>
 * mixed가 true면 MIXED model이다. (일반적으로 잘 안쓴다)
@@ -1518,7 +1560,7 @@ sequence로 choice와 call 이 있다. contentType 안에 들어가는게 conten
 
 <br/>
 
-![image-20201014112022302](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014112022302.png)
+![image-20201014112022302](./images/image-20201014112022302.png)
 
 * DTD에서의 Element 표현 방식이 Schema에서도 호환되게 하기 위해 만들었다.
 * 하나하나 비교해보며 정리해보자.
@@ -1526,31 +1568,35 @@ sequence로 choice와 call 이 있다. contentType 안에 들어가는게 conten
 
 <br/>
 
-![image-20201014112358445](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014112358445.png)
+![image-20201014112358445](./images/image-20201014112358445.png)
 
 * Empty element는, 기본적으로 complexType이다. (하위 element또는 attribute를 가지는거.)
 * content가 비어있는 complexType으로 간주한다. **기억!! ★**
 
 <br/>
 
-![image-20201014112800751](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014112800751.png)
+![image-20201014112800751](./images/image-20201014112800751.png)
 
 * group : **Content Model 재사용**을 위한 것!
 * Content Model : element 구조로 기술한, contentType 안에 들어있는 것.
-* Content Model에 들어갈 수 있는 것 : sequence, choice, call - 전역으로 못뽑는다.
+* Content Model에 들어갈 수 있는 것 : sequence, choice, all - 전역으로 못뽑는다.
 * 따라서 squence model (content modle)을 전역으로 뽑아 재사용하기 위해 쓰이는 것이 바로 **group**.
 
 <br/>
 
-![image-20201014112822888](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014112822888.png)
+![image-20201014112822888](./images/image-20201014112822888.png)
 
 <br/>
 
-![image-20201014114012847](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014114012847.png)
+### Content model 내용 모델
+
+![image-20201014114012847](./images/image-20201014114012847.png)
+
+
 
 <br/>
 
-![image-20201014114155436](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014114155436.png)
+![image-20201014114155436](./images/image-20201014114155436.png)
 
 * sequence는, **차례대로** 한 번씩 되는 것이다.
 * **minOccurs**를 해주면 **전체 요소**들을 몇 번 반복할건지!
@@ -1558,7 +1604,7 @@ sequence로 choice와 call 이 있다. contentType 안에 들어가는게 conten
 
 <br/>
 
-![image-20201014114400204](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014114400204.png)
+![image-20201014114400204](./images/image-20201014114400204.png)
 
 * **choice**는 **여러 개들 중 하나**를 선택하는 것.
 * minOccurs, maxOccurs 이용 가능
@@ -1566,14 +1612,14 @@ sequence로 choice와 call 이 있다. contentType 안에 들어가는게 conten
 
 <br/>
 
-![image-20201014114436322](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014114436322.png)
+![image-20201014114436322](./images/image-20201014114436322.png)
 
 * group을 통해 sequence를 뽑아 이름을 주어 참조할 수 있다.
 * 사용하는 부분에서 min, max occurs 넣을 수 있다.
 
 <br/>
 
-![image-20201014120736163](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014120736163.png)
+![image-20201014120736163](./images/image-20201014120736163.png)
 
 * all은 요소들을 **순서에 상관없이** 나타날 수 있도록!!
 * complexType 정의 내에서만 가능!!
@@ -1586,7 +1632,7 @@ sequence로 choice와 call 이 있다. contentType 안에 들어가는게 conten
 
 <br/>
 
-![image-20201014120846812](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014120846812.png)
+![image-20201014120846812](./images/image-20201014120846812.png)
 
 * **순서 상관 없다**!
 * sequence나 choice 등 사용할 수 없다!!! 기억하자 ★
@@ -1595,17 +1641,125 @@ sequence로 choice와 call 이 있다. contentType 안에 들어가는게 conten
 
 ### 실습 4-5) AudioCatalog 작성하기
 
-![image-20201014121536932](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014121536932.png)
+![image-20201014121536932](./images/image-20201014121536932.png)
 
-* 해보고 다시 해야할듯
-
-<br/>
-
-![image-20201014125031821](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014125031821.png)
+* ex4_5_AudioCatalog.xml / ex4_5_AudioCatalog.xsd
 
 <br/>
 
-![image-20201014124456975](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014124456975.png)
+* ex4_5_AudioCatalog.xml 코드
+
+```xml
+<?xml version="1.0"?>
+<AudioCatalog xmlns="http://cs.skuniv.ac.kr/sanggoe"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://cs.skuniv.ac.kr/sanggoe ex4_5_AudioCatalog.xsd">
+	<Cd>
+		<Artist>스텔라 장</Artist>
+		<Title>villain</Title>
+		<Genre>dance</Genre>
+		<Released-date>2020</Released-date>
+		<Song>villain</Song>
+		<Song>월요병가</Song>
+		<Song>color</Song>
+	</Cd>
+
+	<Cd>
+		<Artist>장기하</Artist>
+		<Title>별일없이산다</Title>
+		<Genre>rap</Genre>
+		<Released-date>2008</Released-date>
+		<Song>싸구려커피</Song>
+		<Song>별일없이산다</Song>
+	</Cd>
+
+	<Mp3>
+		<Artist>아이유</Artist>
+		<Title>금요일에 만나요</Title>
+		<Genre>dance</Genre>
+		<Released-date>2015</Released-date>
+		<Song>금요일에 만나요</Song>
+		<Song>좋은날</Song>
+	</Mp3>
+
+	<Mp3>
+		<Artist>IU</Artist>
+		<Title>25</Title>
+		<Genre>dance</Genre>
+		<Released-date>2017</Released-date>
+		<Song>25</Song>
+		<Song>팔레트</Song>
+	</Mp3>
+
+	<Record>
+		<Artist>Anonymous</Artist>
+		<Title>none</Title>
+		<Genre>none</Genre>
+		<Released-date>none</Released-date>
+		<Song>secreat</Song>
+	</Record>
+
+	<Record>
+		<Artist>합창단</Artist>
+		<Title>중앙성가</Title>
+		<Genre>choir</Genre>
+		<Released-date>2019</Released-date>
+		<Song>track1</Song>
+		<Song>track2</Song>
+		<Song>track3</Song>
+		<Song>track4</Song>
+	</Record>
+
+</AudioCatalog>
+```
+
+<br/>
+
+* ex4_5_AudioCatalog.xsd 코드
+
+```xml
+<?xml version="1.0"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+		targetNamespace="http://cs.skuniv.ac.kr/sanggoe"
+		xmlns:target="http://cs.skuniv.ac.kr/sanggoe"
+		elementFormDefault="qualified">
+	
+	<group name="AlbumGroup">
+		<sequence>
+			<element name="Artist" type="string"/>
+			<element name="Title" type="string"/>
+			<element name="Genre" type="string"/>
+			<element name="Released-date" type="string"/>
+			<element name="Song" maxOccurs="unbounded" type="string"/>
+		</sequence>
+	</group>
+
+	<complexType name="AudioCatalogType">
+		<group ref="target:AlbumGroup"/>
+	</complexType>
+
+	<element name="AudioCatalog">
+		<complexType>
+			<choice maxOccurs="unbounded">
+				<element name="Cd" type="target:AudioCatalogType"/>
+				<element name="Mp3" type="target:AudioCatalogType"/>
+				<element name="Record" type="target:AudioCatalogType"/>
+			</choice>
+		</complexType>
+	</element>
+
+</schema>
+```
+
+<br/>
+
+### Attribute 선언
+
+![image-20201014125031821](./images/image-20201014125031821.png)
+
+<br/>
+
+![image-20201014124456975](./images/image-20201014124456975.png)
 
 * content 모델 밖에, complexType 안에 선언이 된다.
 * name이 complexType이면 상관 없다. 쉽다.
@@ -1613,10 +1767,8 @@ sequence로 choice와 call 이 있다. contentType 안에 들어가는게 conten
 
 <br/>
 
-![image-20201014125148932](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014125148932.png)
+![image-20201014125148932](./images/image-20201014125148932.png)
 
-* **simpleType인 element의 attribute 선언은 Schema에서 어떻게 하는가?**
-* **Self Study 합시다.**
 * ref : 전역 속성 참조
 * form : qualified or unqualified
 * use : optional (써도되고 안써도 되고), prohibited (금지), required (필수)
@@ -1625,13 +1777,162 @@ sequence로 choice와 call 이 있다. contentType 안에 들어가는게 conten
 
 <br/>
 
-![image-20201014125249582](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014125249582.png)
+#### simpleType인 element의 attribute 선언은 Schema에서 어떻게 하는가?
 
-* 개별적으로 해보세요~!! 반드시 해봐 ㅋㅋ
+```xml
+<tagname description="simple string type attribute">
+string value <!-- simple string type -->
+</tagname>
+```
+
+* 위와 같이 attribute를 사용하고 싶다고 할 때
 
 <br/>
 
-![image-20201014125506689](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014125506689.png)
+```xml
+<element name="tagname">
+    <complexType>
+        <simpleContent>
+            <extension base="string">
+                <attribute name="description" type="string" use="required"/>
+            </extension>
+        </simpleContent>
+    </complexType>
+</element>
+```
+
+* 이렇게 선언하면 된다. 복잡하다.
+
+<br/>
+
+### 실습 4-6) AudioCatalog 작성하기 -2
+
+![image-20201014125249582](./images/image-20201014125249582.png)
+
+* ex4_6_AudioCatalog.xml / ex4_6_AudioCatalog.xsd
+
+<br/>
+
+* ex4_6_AudioCatalog.xml 코드
+
+```xml
+<?xml version="1.0"?>
+<AudioCatalog xmlns="http://cs.skuniv.ac.kr/sanggoe"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://cs.skuniv.ac.kr/sanggoe ex4_6_AudioCatalog.xsd">
+	<Cd>
+		<Artist>Anonymous</Artist>
+		<Title>none</Title>
+		<Genre>none</Genre>
+		<Released-date>none</Released-date>
+		<Song>secreat</Song>
+	</Cd>
+
+	<Cd>
+		<Artist>장기하</Artist>
+		<Title>별일없이산다</Title>
+		<Genre>rap</Genre>
+		<Released-date>2008</Released-date>
+		<Song>싸구려커피</Song>
+		<Song>별일없이산다</Song>
+	</Cd>
+
+	<Mp3 madeIn="Korea">
+		<Artist>아이유</Artist>
+		<Title>금요일에 만나요</Title>
+		<Genre>dance</Genre>
+		<Released-date>2015</Released-date>
+		<Song>금요일에 만나요</Song>
+		<Song>좋은날</Song>
+	</Mp3>
+
+	<Mp3 madeIn="">
+		<Artist>IU</Artist>
+		<Title>25</Title>
+		<Genre>dance</Genre>
+		<Released-date>2017</Released-date>
+		<Song>25</Song>
+		<Song>팔레트</Song>
+	</Mp3>
+
+	<Record madeIn="Korea">
+		<Artist>스텔라 장</Artist>
+		<Title>villain</Title>
+		<Genre>dance</Genre>
+		<Released-date>2020</Released-date>
+		<Song>villain</Song>
+		<Song>월요병가</Song>
+		<Song>color</Song>
+	</Record>
+
+	<Record madeIn="Korea">
+		<Artist>합창단</Artist>
+		<Title>중앙성가</Title>
+		<Genre>choir</Genre>
+		<Released-date>2019</Released-date>
+		<Song>track1</Song>
+		<Song>track2</Song>
+		<Song>track3</Song>
+		<Song>track4</Song>
+	</Record>
+
+</AudioCatalog>
+```
+
+<br/>
+
+* ex4_6_AudioCatalog.xsd 코드
+
+```xml
+<?xml version="1.0"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+		targetNamespace="http://cs.skuniv.ac.kr/sanggoe"
+		xmlns:target="http://cs.skuniv.ac.kr/sanggoe"
+		elementFormDefault="qualified">
+	
+	<group name="AlbumGroup">
+		<sequence>
+			<element name="Artist" type="string"/>
+			<element name="Title" type="string"/>
+			<element name="Genre" type="string"/>
+			<element name="Released-date" type="string"/>
+			<element name="Song" maxOccurs="unbounded" type="string"/>
+		</sequence>
+	</group>
+
+	<element name="AudioCatalog">
+		<complexType>
+			<choice maxOccurs="unbounded">
+				<element name="Cd">
+					<complexType>
+						<group ref="target:AlbumGroup"/>
+						<attribute name="madeIn" use="prohibited" type="string"/>
+					</complexType>
+				</element>
+
+				<element name="Mp3">
+					<complexType>
+						<group ref="target:AlbumGroup"/>
+						<attribute name="madeIn" use="optional" type="string" default="Korea"/>
+					</complexType>
+				</element>
+
+				<element name="Record">
+					<complexType>
+						<group ref="target:AlbumGroup"/>
+						<attribute name="madeIn" use="required" type="string" fixed="Korea"/>
+					</complexType>
+				</element>
+			</choice>
+		</complexType>
+	</element>
+
+</schema>
+```
+
+<br/>
+
+![image-20201014125506689](./images/image-20201014125506689.png)
 
 * Attribute도 전역으로 올려서 사용할 수 있다.
 * 말 그대로 Attribute의 집합. Group을 말한다.
@@ -1640,11 +1941,11 @@ sequence로 choice와 call 이 있다. contentType 안에 들어가는게 conten
 
 #### Element와 Attribute 선언하는걸 했음! 스키마는 Entity는 없다!
 
-![image-20201014125542097](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014125542097.png)
+![image-20201014125542097](./images/image-20201014125542097.png)
 
 <br/>
 
-![image-20201014125749804](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014125749804.png)
+![image-20201014125749804](./images/image-20201014125749804.png)
 
 * complexType은 기본적으로 우리가 정의하는 것. 우리가 나열하는 것.
 * simpleType은, 앞에 Built-in type. simple type들을 이용해서 내가 재정의할 수 있다.
@@ -1652,13 +1953,13 @@ sequence로 choice와 call 이 있다. contentType 안에 들어가는게 conten
 
 <br/>
 
-![image-20201014125812496](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014125812496.png)
+![image-20201014125812496](./images/image-20201014125812496.png)
 
 * restriction은 특성 값을 주어서 값을 제한하는 것!
 
 <br/>
 
-![image-20201014130152392](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014130152392.png)
+![image-20201014130152392](./images/image-20201014130152392.png)
 
 * 회사에서 쓴다고 할 때, 지정된 직급체계만 쓰고싶다! 할 때 이걸 쓴다. enumeration.
 * 문자열을 기반으로 하는데, 가지고 싶은 값을 나열하는 것.
@@ -1678,7 +1979,7 @@ sequence로 choice와 call 이 있다. contentType 안에 들어가는게 conten
 
 <br/>
 
-![image-20201014130620184](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014130620184.png)
+![image-20201014130620184](./images/image-20201014130620184.png)
 
 * 값이 복수개 나올 수 있는 것!
 * 각 항목의 타입은 positiveInteger 이다!
@@ -1686,13 +1987,13 @@ sequence로 choice와 call 이 있다. contentType 안에 들어가는게 conten
 
 <br/>
 
-![image-20201014173502210](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014173502210.png)
+![image-20201014173502210](./images/image-20201014173502210.png)
 
 * 가질 수 있는 값을 합친다!
 
 <br/>
 
-![image-20201014130659496](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014130659496.png)
+![image-20201014130659496](./images/image-20201014130659496.png)
 
 * 가질 수 있는 값은 하나이지만, 값의 범위가 합쳐진 것이다?
 * 두 개의 타입 중 하나를 가질 수 있는 것이다
@@ -1700,36 +2001,260 @@ sequence로 choice와 call 이 있다. contentType 안에 들어가는게 conten
 
 <br/>
 
-![image-20201014131011816](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014131011816.png)
+### 실습 4-7) User-defined 자료형 만들기
 
-* 
+![image-20201014131011816](./images/image-20201014131011816.png)
+
+* ex4_7_AudioCatalog.xml / ex4_7_AudioCatalog.xsd
 
 <br/>
 
-![image-20201014131109292](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014131109292.png)
+* ex4_7_AudioCatalog.xml 코드
+
+```xml
+<?xml version="1.0"?>
+<AudioCatalog xmlns="http://cs.skuniv.ac.kr/sanggoe"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://cs.skuniv.ac.kr/sanggoe ex4_7_AudioCatalog.xsd">
+	<Cd>
+		<Artist>스텔라 장</Artist>
+		<Title>villain</Title>
+		<Genre>dance</Genre>
+		<Released-date>2020</Released-date>
+		<Song>villain
+			<playTime>
+				<hours>0</hours>
+				<minutes>3</minutes>
+				<seconds>13</seconds>
+			</playTime>
+		</Song>
+		<Song>월요병가
+			<playTime>
+				<hours>0</hours>
+				<minutes>3</minutes>
+				<seconds>43</seconds>
+			</playTime>
+		</Song>
+		<Song>color
+			<playTime>
+				<hours>0</hours>
+				<minutes>1</minutes>
+				<seconds>58</seconds>
+			</playTime>
+		</Song>
+	</Cd>
+
+	<Cd>
+		<Artist>장기하</Artist>
+		<Title>별일없이산다</Title>
+		<Genre>rap</Genre>
+		<Released-date>2008</Released-date>
+		<Song>싸구려커피
+			<playTime>
+				<hours>0</hours>
+				<minutes>4</minutes>
+				<seconds>33</seconds>
+			</playTime>
+		</Song>
+		<Song>별일없이산다
+			<playTime>
+				<hours>0</hours>
+				<minutes>3</minutes>
+				<seconds>32</seconds>
+			</playTime>
+		</Song>
+	</Cd>
+
+	<Mp3>
+		<Artist>아이유</Artist>
+		<Title>금요일에 만나요</Title>
+		<Genre>dance</Genre>
+		<Released-date>2015</Released-date>
+		<Song>금요일에 만나요
+			<playTime>
+				<hours>0</hours>
+				<minutes>3</minutes>
+				<seconds>38</seconds>
+			</playTime>
+		</Song>
+	</Mp3>
+
+	<Mp3>
+		<Artist>IU</Artist>
+		<Title>25</Title>
+		<Genre>dance</Genre>
+		<Released-date>2017</Released-date>
+		<Song>25
+			<playTime>
+				<hours>0</hours>
+				<minutes>3</minutes>
+				<seconds>39</seconds>
+			</playTime>		
+		</Song>
+		<Song>팔레트
+			<playTime>
+				<hours>0</hours>
+				<minutes>3</minutes>
+				<seconds>39</seconds>
+			</playTime>
+		</Song>
+	</Mp3>
+
+	<Record>
+		<Artist>Anonymous</Artist>
+		<Title>none</Title>
+		<Genre>none</Genre>
+		<Released-date>none</Released-date>
+		<Song>secreat
+			<playTime>
+				<hours>0</hours>
+				<minutes>0</minutes>
+				<seconds>0</seconds>
+			</playTime>
+		</Song>
+	</Record>
+
+	<Record>
+		<Artist>합창단</Artist>
+		<Title>중앙성가</Title>
+		<Genre>choir</Genre>
+		<Released-date>2019</Released-date>
+		<Song>track1
+			<playTime>
+				<hours>0</hours>
+				<minutes>5</minutes>
+				<seconds>22</seconds>
+			</playTime>
+		</Song>
+		<Song>track2
+			<playTime>
+				<hours>0</hours>
+				<minutes>4</minutes>
+				<seconds>35</seconds>
+			</playTime>
+		</Song>
+		<Song>track3
+			<playTime>
+				<hours>0</hours>
+				<minutes>3</minutes>
+				<seconds>55</seconds>
+			</playTime>
+		</Song>
+		<Song>track4
+			<playTime>
+				<hours>0</hours>
+				<minutes>2</minutes>
+				<seconds>11</seconds>
+			</playTime>
+		</Song>
+	</Record>
+
+</AudioCatalog>
+```
+
+<br/>
+
+* ex4_7_AudioCatalog.xsd 코드
+
+```xml
+<?xml version="1.0"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+		targetNamespace="http://cs.skuniv.ac.kr/sanggoe"
+		xmlns:target="http://cs.skuniv.ac.kr/sanggoe"
+		elementFormDefault="qualified">
+	
+	<simpleType name="hourScope">
+		<restriction base="int">
+			<minInclusive value="0"/>
+			<maxInclusive value="9"/>
+		</restriction>
+	</simpleType>
+
+	<simpleType name="minScope">
+		<restriction base="int">
+			<minInclusive value="0"/>
+			<maxInclusive value="59"/>
+		</restriction>
+	</simpleType>
+
+	<simpleType name="secondScope">
+		<restriction base="int">
+			<minInclusive value="0"/>
+			<maxInclusive value="59"/>
+		</restriction>
+	</simpleType>
+
+	<group name="AlbumGroup">
+		<sequence>
+			<element name="Artist" type="string"/>
+			<element name="Title" type="string"/>
+			<element name="Genre" type="string"/>
+			<element name="Released-date" type="string"/>
+			<element name="Song" maxOccurs="unbounded">
+				<complexType mixed="true">
+					<sequence>
+						<element name="playTime">
+							<complexType>
+								<sequence>
+									<element name="hours" type="target:hourScope"/>
+									<element name="minutes" type="target:minScope"/>
+									<element name="seconds" type="target:secondScope"/>
+								</sequence>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</group>
+
+	<complexType name="AudioCatalogType">
+		<group ref="target:AlbumGroup"/>
+	</complexType>
+
+	<element name="AudioCatalog">
+		<complexType>
+			<choice maxOccurs="unbounded">
+				<element name="Cd" type="target:AudioCatalogType"/>
+				<element name="Mp3" type="target:AudioCatalogType"/>
+				<element name="Record" type="target:AudioCatalogType"/>
+			</choice>
+		</complexType>
+	</element>
+
+</schema>
+```
+
+<br/>
+
+### XML Schema 문서화
+
+![image-20201014131109292](./images/image-20201014131109292.png)
 
 * 문서의 내용, 링크 등의 내용을 넣어주면 스키마 툴에서 자동적으로 뽑아서 도움말을 만든다.
 
 <br/>
 
-![image-20201014131217576](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014131217576.png)
+![image-20201014131217576](./images/image-20201014131217576.png)
 
-* 스키마를 여러 개 사용할 수 있다!
+* name space 덕분에 스키마를 여러 개 사용할 수 있다!
 * import : 포함이 아니라, 참조할 수 있게 해주는 것이다.
 * include : #include 하는거랑 거의 비슷하다 생각하면 된다.
-  * 전역 선언들이 포함되는 것처럼 간주
+  * 전역 선언들이 포함되는 것처럼 간주ㅊ
 * redefine : user_defined type에 대해서 complexType과 simpleType에서 사용자가 정의하는 타입을 보았다. 이걸 import 시켜서 재정의! 뭐 오버라이딩 하는것과 비슷한 개념
 
 <br/>
 
-![image-20201014131516914](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201014131516914.png)
+![image-20201014131516914](./images/image-20201014131516914.png)
 
 <br/>
 
 <br/>
 
-<br/>
+### 중간고사 대체 과제
 
-<br/>
+![image-20201021103100974](./images/image-20201021103100974.png)
+
+![image-20201021104218593](./images/image-20201021104218593.png)
 
 <br/>
