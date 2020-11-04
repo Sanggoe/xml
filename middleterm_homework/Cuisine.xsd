@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+		targetNamespace="https://sanggoe.tistory.com"
+		xmlns:target="https://sanggoe.tistory.com"
+		elementFormDefault="qualified">
+
+	<!-- Attribute Area -->
+
+	<!-- [countries]Cuisine attribute -->
+	<attributeGroup name="countriesCuisineAttributeGroup">
+		<attribute name="culture" use="required">
+			<simpleType>
+				<restriction base="string">
+					<enumeration value="Asia"/>
+					<enumeration value="Europ"/>
+					<enumeration value="America"/>
+				</restriction>
+			</simpleType>
+		</attribute>
+	</attributeGroup>
+
+
+	<!-- Cuisine attribute -->
+	<attributeGroup name="cuisineAttributeGroup">
+		<attribute name="cookingMethod" use="optional">
+			<simpleType>
+				<restriction base="string">
+					<enumeration value="grilled"/>
+					<enumeration value="smoked"/>
+					<enumeration value="stir-fried"/>
+					<enumeration value="boiled"/>
+					<enumeration value="small-water-boiled"/>
+					<enumeration value="fried"/>
+					<enumeration value="steamed"/>
+					<enumeration value="rawed"/>
+				</restriction>
+			</simpleType>
+		</attribute>
+	</attributeGroup>
+	
+
+	<!-- Ingredients attribute -->
+	<attributeGroup name="ingredientsAttributeGroup">
+		<attributeGroup ref="target:cuisineAttributeGroup"/>
+	</attributeGroup>
+
+
+	<!-- kinds's attribute -->
+	<attributeGroup name="kindsAttributeGroup">
+		<attribute name="classification" use="optional">
+			<simpleType>
+				<restriction base="string">
+					<!-- vegetables -->
+					<enumeration value="leaf"/>
+					<enumeration value="stem"/>
+					<enumeration value="root"/>
+					<enumeration value="lychee"/>
+					
+					<!-- fruits -->
+
+					<!-- meats -->
+					<enumeration value="pork"/>
+					<enumeration value="beef"/>
+					<enumeration value="chicken"/>
+					<enumeration value="egg"/>
+
+					<!-- microbes -->
+					<enumeration value="mushroom"/>
+
+					<!-- grain -->
+					<enumeration value="wheat"/>
+					<enumeration value="rice"/>
+
+					<!-- condiment -->
+					<enumeration value="sweety"/>
+					<enumeration value="salty"/>
+					<enumeration value="sour"/>
+					<enumeration value="savory"/>
+					<enumeration value="spicy"/>
+					<enumeration value="curry"/>
+				</restriction>
+			</simpleType>
+		</attribute>
+	</attributeGroup>
+
+	<!-- Attribute Area -->
+
+
+
+	<!-- Element Area -->
+
+	<!-- Cuisine element -->
+	<element name="Cuisine"> <!-- element -->
+		<complexType mixed="true">
+			<choice>
+				<element name="Ingredients" maxOccurs="unbounded"> <!-- element -->
+					<complexType>
+						<choice minOccurs="1" maxOccurs="unbounded">
+							<element name="vegetables" type="target:KindsType"/>
+							<element name="fruits" type="target:KindsType"/>
+							<element name="meats" type="target:KindsType"/>
+							<element name="microbes" type="target:KindsType"/>
+							<element name="seafood" type="target:KindsType"/>
+							<element name="fermentedFood" type="target:KindsType"/>
+							<element name="oilsAndFats" type="target:KindsType"/>
+							<element name="grain" type="target:KindsType"/>
+							<element name="condiment" type="target:KindsType"/>
+							<element name="water" type="target:KindsType"/>
+						</choice>
+						<attributeGroup ref="target:ingredientsAttributeGroup"/>
+					</complexType>
+				</element>
+			</choice>
+			<attributeGroup ref="target:cuisineAttributeGroup"/>
+		</complexType>
+	</element>
+
+	<!-- Element Area -->
+
+
+
+	<!-- Type Area -->
+
+	<!-- Kinds type -->
+	<complexType name="KindsType" mixed="true">
+		<choice minOccurs="1" maxOccurs="2">
+			<element name="cup" minOccurs="0" type="string"/> <!-- element -->
+			<element name="spoon" minOccurs="0" type="string"/> <!-- element -->
+			<element name="count" minOccurs="0" type="string"/> <!-- element -->
+			<element name="gram" minOccurs="0" type="string"/> <!-- element -->
+			<element name="milliliter" minOccurs="0" type="string"/> <!-- element -->
+		</choice>
+		<attributeGroup ref="target:kindsAttributeGroup"/>				
+	</complexType>
+
+
+	<!-- countries type -->
+	<complexType name="countriesType">
+		<choice>
+			<element ref="target:Cuisine" maxOccurs="unbounded"/>
+		</choice>
+		<attributeGroup ref="target:countriesCuisineAttributeGroup"/>
+	</complexType>
+	
+	<!-- Type Area -->
+
+	
+	
+	<!-- Root Element Area -->
+
+	<!-- root element -->
+	<element name="CuisineCatalog"> <!-- element -->
+		<complexType>
+			<sequence>
+				<element name="KoreanCuisine" type="target:countriesType"/> <!-- element -->
+				<element name="IndianCuisine" type="target:countriesType"/> <!-- element -->
+				<element name="ItalianCuisine" type="target:countriesType"/> <!-- element -->
+				<element name="AmericanCuisine" type="target:countriesType"/> <!-- element -->
+			</sequence>
+		</complexType>
+	</element>
+
+	<!-- Root Element Area -->
+</schema>

@@ -1,0 +1,655 @@
+<?xml version="1.0"?>
+<CuisineCatalog xmlns="https://sanggoe.tistory.com"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="https://sanggoe.tistory.com Cuisine.xsd">
+	
+	<KoreanCuisine culture="Asia">
+
+		<!-- Korean Cuisine 1 -->
+		<Cuisine cookingMethod="boiled">김치찌개
+			<Ingredients cookingMethod="stir-fried">
+				<meats classification="pork">앞다리살
+					<cup>1</cup>
+					<gram>200</gram>
+				</meats>
+			</Ingredients>
+			<Ingredients cookingMethod="boiled">
+				<water>물
+					<cup>3</cup>
+					<milliliter>600</milliliter>
+				</water>
+			</Ingredients>
+			<Ingredients>
+				<fermentedFood>새우젓
+					<spoon>1</spoon>
+					<gram>20</gram>
+				</fermentedFood>
+			</Ingredients>
+			<Ingredients>
+				<fermentedFood>신김치
+					<cup>2</cup>
+					<gram>400</gram>
+				</fermentedFood>
+			</Ingredients>
+			<Ingredients>
+				<condiment classification="salty">간장
+					<spoon>1</spoon>
+					<gram>10</gram>
+				</condiment>
+			</Ingredients>
+			<Ingredients>
+				<condiment classification="spicy">고춧가루
+					<spoon>1</spoon>
+					<gram>20</gram>
+				</condiment>
+			</Ingredients>
+			<Ingredients>
+				<vegetables classification="root">마늘
+					<spoon>1</spoon>
+					<gram>20</gram>
+				</vegetables>
+			</Ingredients>
+			<Ingredients>
+				<vegetables classification="lychee">청양고추
+					<count>2</count>
+					<gram>20</gram>
+				</vegetables>
+			</Ingredients>
+			<Ingredients>
+				<vegetables classification="stem">대파
+					<count>2/3</count>
+					<gram>20</gram>
+				</vegetables>
+			</Ingredients>
+		</Cuisine>
+
+		<!-- Korean Cuisine 2 -->
+		<Cuisine cookingMethod="boiled">소고기뭇국
+			<Ingredients>
+				<oilsAndFats>식용유
+					<spoon>1</spoon>
+					<gram>10</gram>
+				</oilsAndFats>
+			</Ingredients>
+			<Ingredients>
+				<oilsAndFats>참기름
+					<spoon>1</spoon>
+					<gram>10</gram>
+				</oilsAndFats>
+			</Ingredients>
+			<Ingredients cookingMethod="stir-fried">
+				<meats classification="beef">양지살
+					<cup>1</cup>
+					<gram>200</gram>
+				</meats>
+			</Ingredients>
+			<Ingredients cookingMethod="stir-fried">
+				<vegetables classification="root">무
+					<cup>1.5</cup>
+					<gram>300</gram>
+				</vegetables>
+			</Ingredients>
+			<Ingredients cookingMethod="boiled">
+				<water>물
+					<cup>7.5</cup>
+					<milliliter>1500</milliliter>
+				</water>
+			</Ingredients>			
+			<Ingredients>
+				<vegetables classification="root">마늘
+					<spoon>1</spoon>
+					<gram>20</gram>
+				</vegetables>
+			</Ingredients>
+			<Ingredients>
+				<condiment classification="salty">국간장
+					<spoon>2</spoon>
+					<gram>20</gram>
+				</condiment>
+			</Ingredients>
+			<Ingredients>
+				<condiment classification="salty">소금
+					<spoon>1</spoon>
+					<gram>10</gram>
+				</condiment>
+			</Ingredients>
+			<Ingredients>
+				<condiment classification="salty">액젓
+					<spoon>2</spoon>
+					<gram>20</gram>
+				</condiment>
+			</Ingredients>
+			<Ingredients>
+				<vegetables classification="stem">대파
+					<cup>1</cup>
+					<gram>80</gram>
+				</vegetables>
+			</Ingredients>
+			<Ingredients>
+				<vegetables classification="spicy">후추
+					<spoon>1</spoon>
+					<gram>10</gram>
+				</vegetables>
+			</Ingredients>
+		</Cuisine>
+
+		<!-- Korean Cuisine 3 -->
+		<Cuisine cookingMethod="boiled">닭볶음탕
+			<Ingredients cookingMethod="boiled">
+				<water>물
+					<cup>3</cup>
+					<milliliter>600</milliliter>
+				</water>
+			</Ingredients>
+			<Ingredients>
+				<meats classification="chicken">닭
+					<count>1</count>
+					<gram>1000</gram>
+				</meats>
+			</Ingredients>
+			<Ingredients>
+				<condiment classification="sweety">설탕
+					<cup>1/2</cup>
+					<gram>70</gram>
+				</condiment>
+			</Ingredients>
+			<Ingredients>
+				<vegetables classification="root">감자
+					<count>2</count>
+					<gram>270</gram>
+				</vegetables>
+			</Ingredients>
+			<Ingredients>
+				<vegetables classification="root">당근
+					<count>1/2</count>
+					<gram>160</gram>
+				</vegetables>
+			</Ingredients>
+			<Ingredients>
+				<vegetables classification="root">양파
+					<count>1/2</count>
+					<gram>240</gram>
+				</vegetables>
+			</Ingredients>
+			<Ingredients>
+				<vegetables classification="root">마늘
+					<cup>1/3</cup>
+					<gram>45</gram>
+				</vegetables>
+			</Ingredients>
+			<Ingredients>
+				<condiment classification="salty">진간장
+					<cup>1</cup>
+					<gram>190</gram>
+				</condiment>
+			</Ingredients>
+			<Ingredients>
+				<microbes classification="mushroom">표고버섯
+					<count>3</count>
+					<gram>70</gram>
+				</microbes>
+			</Ingredients>
+			<Ingredients>
+				<microbes classification="mushroom">새송이버섯
+					<count>2</count>
+					<gram>50</gram>
+				</microbes>
+			</Ingredients>
+			<Ingredients>
+				<condiment classification="spicy">고운 고춧가루
+					<cup>1/3</cup>
+					<gram>30</gram>
+				</condiment>
+			</Ingredients>
+			<Ingredients>
+				<condiment classification="spicy">굵은 고춧가루
+					<cup>1/2</cup>
+					<gram>45</gram>
+				</condiment>
+			</Ingredients>
+			<Ingredients>
+				<vegetables classification="lychee">청양고추
+					<count>4</count>
+					<gram>40</gram>
+				</vegetables>
+			</Ingredients>
+			<Ingredients>
+				<vegetables classification="stem">대파
+					<count>3</count>
+					<gram>160</gram>
+				</vegetables>
+			</Ingredients>
+			<Ingredients>
+				<vegetables classification="spicy">후추
+					<spoon>1/2</spoon>
+					<gram>5</gram>
+				</vegetables>
+			</Ingredients>
+		</Cuisine>
+
+		<!-- Korean Cuisine 4 -->
+		<Cuisine cookingMethod="steamed">계란찜
+			<Ingredients>
+				<meats classification="egg">계란
+					<count>6</count>
+					<gram>324</gram>
+				</meats>
+			</Ingredients>
+			<Ingredients>
+				<fermentedFood>새우젓
+					<spoon>1</spoon>
+					<gram>15</gram>
+				</fermentedFood>
+			</Ingredients>
+			<Ingredients>
+				<condiment classification="sweety">설탕
+					<spoon>1/2</spoon>
+					<gram>5</gram>
+				</condiment>
+			</Ingredients>
+			<Ingredients cookingMethod="boiled">
+				<water>물
+					<cup>1/3</cup>
+					<milliliter>60</milliliter>
+				</water>
+			</Ingredients>
+			<Ingredients>
+				<vegetables classification="stem">대파
+					<count>1/3</count>
+					<gram>40</gram>
+				</vegetables>
+			</Ingredients>
+			<Ingredients>
+				<oilsAndFats>참기름
+					<spoon>1</spoon>
+					<milliliter>15</milliliter>
+				</oilsAndFats>
+			</Ingredients>
+			<Ingredients>
+				<grain>깨
+					<spoon>1/2</spoon>
+					<gram>5</gram>
+				</grain>
+			</Ingredients>			
+			<Ingredients>
+				<vegetables classification="lychee">청양고추
+					<count>1</count>
+					<gram>10</gram>
+				</vegetables>
+			</Ingredients>	
+			<Ingredients>
+				<vegetables classification="spicy">후추
+					<spoon>1/2</spoon>
+					<gram>5</gram>
+				</vegetables>
+			</Ingredients>
+		</Cuisine>
+
+		
+		<!-- Korean Cuisine 5 -->
+		<Cuisine cookingMethod="steamed">김치전
+			<Ingredients>
+				<fermentedFood>신김치
+					<cup>2</cup>
+					<gram>260</gram>
+				</fermentedFood>
+			</Ingredients>
+			<Ingredients>
+				<condiment classification="sour">식초
+					<spoon>1</spoon>
+					<gram>5</gram>
+				</condiment>
+			</Ingredients>
+			<Ingredients>
+				<vegetables classification="lychee">청양고추
+					<count>2</count>
+					<gram>20</gram>
+				</vegetables>
+			</Ingredients>
+			<Ingredients>
+				<vegetables classification="stem">대파
+					<count>2/5</count>
+					<gram>40</gram>
+				</vegetables>
+			</Ingredients>
+			<Ingredients>
+				<condiment classification="spicy">고운 고춧가루
+					<spoon>1</spoon>
+					<gram>6</gram>
+				</condiment>
+			</Ingredients>
+			<Ingredients>
+				<condiment classification="sweety">설탕
+					<spoon>1/2</spoon>
+					<gram>6</gram>
+				</condiment>
+			</Ingredients>
+			<Ingredients>
+				<condiment classification="savory">다시다
+					<spoon>1/2</spoon>
+					<gram>5</gram>
+				</condiment>
+			</Ingredients>
+			<Ingredients>
+				<grain classification="wheat">부침가루
+					<spoon>2</spoon>
+					<gram>220</gram>
+				</grain>
+			</Ingredients>
+			<Ingredients cookingMethod="boiled">
+				<water>물
+					<cup>1.7</cup>
+					<milliliter>300</milliliter>
+				</water>
+			</Ingredients>
+			<Ingredients>
+				<oilsAndFats>식용유
+					<cup>1</cup>
+				</oilsAndFats>
+			</Ingredients>
+		</Cuisine>
+	</KoreanCuisine>
+
+
+	<IndianCuisine culture="Asia">
+
+		<!-- Indian Cuisine 1 -->
+		<Cuisine cookingMethod="boiled">목살 스테이크 카레
+			<Ingredients>
+				<oilsAndFats>식용유
+					<spoon>1</spoon>
+					<gram>10</gram>
+				</oilsAndFats>
+			</Ingredients>
+			<Ingredients cookingMethod="grilled">
+				<meats classification="pork">목살
+					<cup>1</cup>
+					<gram>200</gram>
+				</meats>
+			</Ingredients>
+			<Ingredients cookingMethod="stir-fried">
+				<vegetables classification="root">양파
+					<count>1</count>
+					<gram>200</gram>
+				</vegetables>
+			</Ingredients>
+			<Ingredients>
+				<vegetables classification="root">감자
+					<count>1</count>
+					<gram>150</gram>
+				</vegetables>
+			</Ingredients>
+			<Ingredients>
+				<vegetables classification="root">당근
+					<count>1/4</count>
+					<gram>70</gram>
+				</vegetables>
+			</Ingredients>
+			<Ingredients cookingMethod="boiled">
+				<water>물
+					<cup>3.5</cup>
+					<milliliter>665</milliliter>
+				</water>
+			</Ingredients>
+			<Ingredients>
+				<condiment classification="curry">카레
+					<cup>1</cup>
+					<gram>150</gram>
+				</condiment>
+			</Ingredients>			
+			<Ingredients>
+				<vegetables classification="lychee">피망
+					<count>1/3</count>
+					<gram>50</gram>
+				</vegetables>
+			</Ingredients>
+		</Cuisine>
+	</IndianCuisine>
+
+
+	<ItalianCuisine culture="Europ">
+
+		<!-- Italian Cuisine 1 -->
+		<Cuisine cookingMethod="stir-fried">알리오올리오파스타
+			<Ingredients>
+				<water>물
+					<cup>5</cup>
+					<milliliter>1000</milliliter>
+				</water>
+			</Ingredients>
+			<Ingredients>
+				<condiment classification="salty">소금
+					<spoon>1</spoon>
+					<gram>10</gram>
+				</condiment>
+			</Ingredients>
+			<Ingredients cookingMethod="boiled">
+				<grain classification="wheat">파스타면
+					<gram>100</gram>
+				</grain>
+			</Ingredients>
+			<Ingredients>
+				<oilsAndFats>올리브유
+					<cup>1</cup>
+					<milliliter>100</milliliter>
+				</oilsAndFats>
+			</Ingredients>
+			<Ingredients cookingMethod="stir-fried">
+				<vegetables classification="root">마늘
+					<spoon>3</spoon>
+					<gram>60</gram>
+				</vegetables>
+			</Ingredients>
+			<Ingredients>
+				<vegetables classification="lychee">청양고추
+					<count>2</count>
+					<gram>20</gram>
+				</vegetables>
+			</Ingredients>
+			<Ingredients>
+				<vegetables classification="spicy">후추
+					<spoon>1</spoon>
+					<gram>10</gram>
+				</vegetables>
+			</Ingredients>
+			<Ingredients>
+				<condiment classification="salty">소금
+					<spoon>1</spoon>
+					<gram>20</gram>
+				</condiment>
+			</Ingredients>
+		</Cuisine>
+
+		<!-- Italian Cuisine 2 -->
+		<Cuisine cookingMethod="small-water-boiled">크림파스타
+			<Ingredients>
+				<water>물
+					<cup>5</cup>
+					<milliliter>1000</milliliter>
+				</water>
+			</Ingredients>
+			<Ingredients>
+				<condiment classification="salty">소금
+					<spoon>1</spoon>
+					<gram>10</gram>
+				</condiment>
+			</Ingredients>
+			<Ingredients cookingMethod="boiled">
+				<grain classification="wheat">파스타면
+					<gram>100</gram>
+				</grain>
+			</Ingredients>
+			<Ingredients cookingMethod="smoked">
+				<meats classification="pork">베이컨
+					<count>2</count>
+					<gram>40</gram>
+				</meats>
+			</Ingredients>
+			<Ingredients cookingMethod="stir-fried">
+				<vegetables classification="root">양파
+					<count>1/2</count>
+					<gram>125</gram>
+				</vegetables>
+			</Ingredients>
+			<Ingredients cookingMethod="stir-fried">
+				<microbes classification="mushroom">양송이버섯
+					<count>1.5</count>
+					<gram>30</gram>
+				</microbes>
+			</Ingredients>
+			<Ingredients>
+				<oilsAndFats>올리브유
+					<spoon>2</spoon>
+					<gram>15</gram>
+				</oilsAndFats>
+			</Ingredients>
+			<Ingredients>
+				<oilsAndFats>버터
+					<spoon>1</spoon>
+					<gram>15</gram>
+				</oilsAndFats>
+			</Ingredients>
+			<Ingredients>
+				<oilsAndFats>우유
+					<cup>1</cup>
+					<gram>200</gram>
+				</oilsAndFats>
+			</Ingredients>
+			<Ingredients>
+				<grain classification="wheat">밀가루
+					<spoon>1/2</spoon>
+					<gram>5</gram>
+				</grain>
+			</Ingredients>
+			<Ingredients>
+				<condiment classification="salty">소금
+					<spoon>1/5</spoon>
+					<gram>2</gram>
+				</condiment>
+			</Ingredients>
+			<Ingredients>
+				<water>면수
+					<cup>1/2</cup>
+					<milliliter>100</milliliter>
+				</water>
+			</Ingredients>
+			<Ingredients>
+				<fermentedFood>치즈가루
+					<spoon>2</spoon>
+					<gram>20</gram>
+				</fermentedFood>
+			</Ingredients>
+			<Ingredients>
+				<vegetables classification="spicy">후추
+					<spoon>1/2</spoon>
+					<gram>5</gram>
+				</vegetables>
+			</Ingredients>
+		</Cuisine>
+	</ItalianCuisine>
+
+	<AmericanCuisine culture="America">
+		<!-- American Cuisine 1 -->
+		<Cuisine cookingMethod="stir-fried">달걀샌드위치
+			<Ingredients>
+				<oilsAndFats>마요네즈
+					<cup>1/3</cup>
+					<gram>60</gram>
+				</oilsAndFats>
+			</Ingredients>
+			<Ingredients>
+				<condiment classification="sweety">설탕
+					<spoon>1</spoon>
+					<gram>12</gram>
+				</condiment>
+			</Ingredients>
+			<Ingredients>
+				<condiment classification="spicy">고운고춧가루
+					<spoon>1/2</spoon>
+					<gram>5</gram>
+				</condiment>
+			</Ingredients>
+			<Ingredients>
+				<condiment classification="sour">식초
+					<spoon>2.5</spoon>
+					<gram>24</gram>
+				</condiment>
+			</Ingredients>
+			<Ingredients>
+				<oilsAndFats>버터
+					<spoon>1</spoon>
+					<gram>10</gram>
+				</oilsAndFats>
+			</Ingredients>
+			<Ingredients cookingMethod="grilled">
+				<grain classification="wheat">빵
+					<count>4</count>
+					<gram>100</gram>
+				</grain>
+			</Ingredients>
+			<Ingredients cookingMethod="smoked">
+				<meats classification="pork">베이컨
+					<count>3</count>
+					<gram>48</gram>
+				</meats>
+			</Ingredients>
+			<Ingredients cookingMethod="fried">
+				<meats classification="egg">계란
+					<count>3</count>
+					<gram>160</gram>
+				</meats>
+			</Ingredients>
+			<Ingredients>
+				<fermentedFood>슬라이스치즈
+					<count>2</count>
+				</fermentedFood>
+			</Ingredients>
+		</Cuisine>
+
+		<!-- American Cuisine 2 -->
+		<Cuisine cookingMethod="stir-fried">찹 스테이크
+			<Ingredients>
+				<oilsAndFats>올리브유
+					<spoon>2</spoon>
+					<milliliter>20</milliliter>
+				</oilsAndFats>
+			</Ingredients>
+			<Ingredients>
+				<condiment classification="salty">소금
+					<spoon>1</spoon>
+					<gram>15</gram>
+				</condiment>
+			</Ingredients>
+			<Ingredients>
+				<vegetables classification="spicy">후추
+					<spoon>1</spoon>
+					<gram>10</gram>
+				</vegetables>
+			</Ingredients>
+			<Ingredients cookingMethod="stir-fried">
+				<meats classification="beef">등심
+					<gram>300</gram>
+				</meats>
+			</Ingredients>
+			<Ingredients>
+				<oilsAndFats>버터
+					<spoon>1.5</spoon>
+					<gram>15</gram>
+				</oilsAndFats>
+			</Ingredients>
+			<Ingredients cookingMethod="stir-fried">
+				<vegetables classification="root">양파
+					<count>1/2</count>
+					<gram>240</gram>
+				</vegetables>
+			</Ingredients>
+			<Ingredients>
+				<condiment classification="spicy">핫소스
+					<spoon>1</spoon>
+					<gram>20</gram>
+				</condiment>
+			</Ingredients>
+		</Cuisine>
+	</AmericanCuisine>
+
+</CuisineCatalog>
