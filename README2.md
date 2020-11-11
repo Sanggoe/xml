@@ -1,5 +1,3 @@
-
-
 ### 여러 개의 Schema 사용하기
 
 ![image-20201028104013821](./images/image-20201028104013821.png)
@@ -129,7 +127,7 @@
 
 #### XSLT 돌려보는 사이트
 
-* **xslttest.appspot.com**
+* **[xslttest.appspot.com](http://xslttest.appspot.com/)**
 * 브라우저 보기가 안되거나 오류가 있을 경우, 번거롭지만 위 사이트에서 하자.
 * 하지만 실행 해 본 경험상 아래처럼 하면 되더라.
   * xml 파일에서는 xsl-stylesheet, xsl 파일에서는 xsl:stylesheet로 한다.
@@ -561,8 +559,948 @@
 
 <br/>
 
+### 변환설정 \<xsl:output>
+
+![image-20201104103910917](./images/image-20201104103910917.png)
+
+* 출력되는 output 결과물에 대해 여러가지 정보를 추가해서 선택할 수 있다!
+
+<br/>
+
+### Numbering \<xsl:number>
+
+![image-20201104104133720](./images/image-20201104104133720.png)
+
+* select 될 때 복수개일 가능성이 높다. 위에서 설명한 듯.
+
+* 선택된 것들이 각각 템플릿이 적용되는데, 이 때 select된 것들이 넘어갈 때 인덱스를 표시해준다.
+
+* 사용 형태
+
+  * ```xml
+    <!-- 출력되는 자리에 아래와 같은 형식으로 써준다. -->
+    <xsl:number format="1"/>
+    <xsl:number value="position()" format="I"/>
+    <xsl:value-of select="position()" />
+    ```
+
+<br/>
+
+### Sorting \<xsl:sort>
+
+![image-20201104104536403](./images/image-20201104104536403.png)
+
+* 복수개를 찾았는데, 특정 기준으로 정렬하고 싶을 때
+
+  * order : 순서!
+    * ascending : 오름차순
+    * discending : 내림차순
+  * target : 기준!
+    * 여러 개의 정렬 기준을 두려면 \<xsl:sort>를 여러 번 기술
+  * dtype : 자료형 지정!
+    * data-type="number" : 숫자로서 비교
+    * test : 문자로서 비교 (default)
+
+* 외부 템플릿(apply-templates), for-each(내부 템플릿) 안에서 사용
+
+* 사용 형태
+
+  * ```xml
+    <xsl:apply-templates select = "/제품/핸드폰">
+    	<xsl:sort order="ascending" select="//가격" data-type="number"/>
+    <xsl:apply-templates select>
+    ```
+
+<br/>
+
+### 실습 6-5) Numbering & Sorting
+
+![image-20201104105054248](./images/image-20201104105054248.png)
+
+* 통신사로 오름차순, 
+* 단, 위 경우 number로 하면 select 된 순서로 넘버링 된다. 이 경우 select="position()" 을 써주어야 한다.
+
+<br/>
+
+* ex6_5.xml 코드
+
+```xml
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="ex6_5.xsl"?>
+<제품>
+	<핸드폰>
+		<모델명>SCH-X147</모델명>
+		<통신사>SKT</통신사>
+		<구입형태>기기변경</구입형태>
+		<제조사>삼성전자</제조사>
+		<색상>화이트</색상>
+		<판매량 단위="개">30</판매량>
+		<가격 화폐="원">253000</가격>
+	</핸드폰>
+
+	<핸드폰>
+		<모델명>iphone 12</모델명>
+		<통신사>KT</통신사>
+		<구입형태>기기변경</구입형태>
+		<제조사>Apple</제조사>
+		<색상>화이트</색상>
+		<판매량 단위="개">30</판매량>
+		<가격 화폐="원">1253000</가격>
+	</핸드폰>
+
+	<핸드폰>
+		<모델명>Galaxy Note 11</모델명>
+		<통신사>SKT</통신사>
+		<구입형태>기기변경</구입형태>
+		<제조사>삼성전자</제조사>
+		<색상>화이트</색상>
+		<판매량 단위="개">30</판매량>
+		<가격 화폐="원">1353000</가격>
+	</핸드폰>
+
+	<핸드폰>
+		<모델명>Galaxy S12</모델명>
+		<통신사>KT</통신사>
+		<구입형태>기기변경</구입형태>
+		<제조사>삼성전자</제조사>
+		<색상>화이트</색상>
+		<판매량 단위="개">30</판매량>
+		<가격 화폐="원">1053000</가격>
+	</핸드폰>
+
+	<핸드폰>
+		<모델명>CX-300L</모델명>
+		<통신사>SKT</통신사>
+		<구입형태>신규가입</구입형태>
+		<제조사>LG전자</제조사>
+		<색상>화이트</색상>
+		<판매량 단위="개">30</판매량>
+		<가격 화폐="원">200000</가격>
+	</핸드폰>
+</제품>
+```
+
+<br/>
+
+* ex6_5.xsl 코드
+
+```xml
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+
+<xsl:template match="/">
+	<HTML>
+	<HEAD>
+		<TITLE>XML 문서의 내용을 테이블 형태로 보여주기</TITLE>
+	</HEAD>
+	<BODY>
+		<BR/>
+		<P align="center"><font color="#FA4C79" size="6">핸드폰 리스트</font></P>
+		<BR/>
+		<TABLE align="center" BORDER="0" cellpadding="5" cellspacing="2">
+		<THEAD>
+		<TR>
+				<TH bgcolor="#0365B1"><font color="white">순번</font></TH>
+				<TH bgcolor="#0365B1"><font color="white">모델명</font></TH>
+				<TH bgcolor="#0365B1"><font color="white">통신사</font></TH>
+				<TH bgcolor="#0365B1"><font color="white">구입형태</font></TH>
+				<TH bgcolor="#0365B1"><font color="white">제조사</font></TH>
+				<TH bgcolor="#0365B1"><font color="white">색상</font></TH>
+				<TH bgcolor="#0365B1"><font color="white">판매량</font></TH>
+				<TH bgcolor="#0365B1"><font color="white">가격</font></TH>
+		</TR>
+		</THEAD>
+		<TBODY>
+				<xsl:apply-templates select = "/제품/핸드폰">
+					<xsl:sort order="ascending" select="통신사"/>
+					<xsl:sort order="descending" select="가격" data-type="number"/>
+				</xsl:apply-templates>
+		</TBODY>
+		</TABLE>
+	</BODY>
+	</HTML>
+</xsl:template>
+
+<xsl:template match = "/제품/핸드폰">
+	<TR>
+	<!--<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:number format="1"/></p></TD>-->
+	<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:value-of select="position()"/></p></TD>
+	<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:value-of select="모델명"/></p></TD>
+	<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:value-of select="통신사"/></p></TD>
+	<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:value-of select="구입형태"/></p></TD>
+	<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:value-of select="제조사"/></p></TD>
+	<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:value-of select="색상"/></p></TD>
+	<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:value-of select="판매량"/></p></TD>
+	<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:value-of select="가격"/></p></TD>
+	</TR>
+</xsl:template>
+
+</xsl:stylesheet>
+```
+
+<br/>
+
+* 실행 결과!
+
+![image-20201104132235444](C:\workspace\xml\images\image-20201104132235444.png)
+
+<br/>
+
+### XPath 함수들
+
+![image-20201104111006808](./images/image-20201104111006808.png)
+
+* 유용한 함수들
+  * count : 매칭되는 개수
+    * \<xsl:value-of select="count(xpath)">
+  * sum : 노드들의 합
+    * \<xsl:value-of select="sum(xpath)">
+  * number : 숫자로 변환해주는 것
+    * \<xsl:value-of select="number(xpath)">
+  * format-number : 패턴에 따라서 출력 해주는 것
+    * \<xsl:value-of select="format-number(xpath)">
+  * name : 현재 노드 이름, namespace 포함
+    * \<xsl:value-of select="name()">
+  * local-name : namespace 비포함
+    * \<xsl:value-of select="local-name()">
+  * text : 현재 노드 텍스트만 출력
+    * \<xsl:value-of select="text()">
+
+<br/>
+
+### 실습 6-6) XPath 함수 이용하기
+
+![image-20201104111514097](./images/image-20201104111514097.png)
+
+<br/>
+
+* ex6_6.xml 코드
+
+```xml
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="ex6_6.xsl"?>
+<제품>
+	<핸드폰>
+		<모델명>SCH-X147</모델명>
+		<통신사>SKT</통신사>
+		<구입형태>기기변경</구입형태>
+		<제조사>삼성전자</제조사>
+		<색상>화이트</색상>
+		<판매량 단위="개">30</판매량>
+		<가격 화폐="원">253000</가격>
+	</핸드폰>
+
+	<핸드폰>
+		<모델명>iphone 12</모델명>
+		<통신사>KT</통신사>
+		<구입형태>기기변경</구입형태>
+		<제조사>Apple</제조사>
+		<색상>화이트</색상>
+		<판매량 단위="개">30</판매량>
+		<가격 화폐="원">1253000</가격>
+	</핸드폰>
+
+	<핸드폰>
+		<모델명>Galaxy Note 11</모델명>
+		<통신사>SKT</통신사>
+		<구입형태>기기변경</구입형태>
+		<제조사>삼성전자</제조사>
+		<색상>화이트</색상>
+		<판매량 단위="개">30</판매량>
+		<가격 화폐="원">1353000</가격>
+	</핸드폰>
+
+	<핸드폰>
+		<모델명>Galaxy S12</모델명>
+		<통신사>KT</통신사>
+		<구입형태>기기변경</구입형태>
+		<제조사>삼성전자</제조사>
+		<색상>화이트</색상>
+		<판매량 단위="개">30</판매량>
+		<가격 화폐="원">1053000</가격>
+	</핸드폰>
+
+	<핸드폰>
+		<모델명>CX-300L</모델명>
+		<통신사>SKT</통신사>
+		<구입형태>신규가입</구입형태>
+		<제조사>LG전자</제조사>
+		<색상>화이트</색상>
+		<판매량 단위="개">30</판매량>
+		<가격 화폐="원">200000</가격>
+	</핸드폰>
+</제품>
+```
+
+<br/>
+
+* ex6_6.xsl 코드
+
+```xml
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+
+<xsl:template match="/">
+	<HTML>
+	<HEAD>
+		<TITLE>XML 문서의 내용을 테이블 형태로 보여주기</TITLE>
+	</HEAD>
+	<BODY>
+		<BR/>
+		<P align="center"><font color="#FA4C79" size="6">핸드폰 리스트</font></P>
+		<BR/>
+		<TABLE align="center" BORDER="0" cellpadding="5" cellspacing="2">
+		<THEAD>
+		<TR>
+				<TH bgcolor="#0365B1"><font color="white">순번</font></TH>
+				<TH bgcolor="#0365B1"><font color="white">모델명</font></TH>
+				<TH bgcolor="#0365B1"><font color="white">통신사</font></TH>
+				<TH bgcolor="#0365B1"><font color="white">구입형태</font></TH>
+				<TH bgcolor="#0365B1"><font color="white">제조사</font></TH>
+				<TH bgcolor="#0365B1"><font color="white">색상</font></TH>
+				<TH bgcolor="#0365B1"><font color="white">판매량</font></TH>
+				<TH bgcolor="#0365B1"><font color="white">가격</font></TH>
+		</TR>
+		</THEAD>
+		<TBODY>
+				<xsl:apply-templates select = "/제품/핸드폰">
+					<xsl:sort order="ascending" select="통신사"/>
+					<xsl:sort order="descending" select="가격" data-type="number"/>
+				</xsl:apply-templates>
+		</TBODY>
+		</TABLE>
+
+		<br/>
+		<p align="center" style="margin-top:3px;">전체 <xsl:value-of select="count(/제품/핸드폰)"/>개의 상품이 검색되었습니다.</p>
+		<p align="center" style="margin-top:3px;">현재 보유하고 있는 제품의 총 판매량은 <xsl:value-of select="sum(//판매량)"/>개 입니다.</p>
+
+	</BODY>
+	</HTML>
+</xsl:template>
+
+<xsl:template match = "/제품/핸드폰">
+	<TR>
+	<!--<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:number format="1"/></p></TD>-->
+	<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:value-of select="position()"/></p></TD>
+	<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:value-of select="모델명"/></p></TD>
+	<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:value-of select="통신사"/></p></TD>
+	<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:value-of select="구입형태"/></p></TD>
+	<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:value-of select="제조사"/></p></TD>
+	<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:value-of select="색상"/></p></TD>
+	<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:value-of select="판매량"/></p></TD>
+	<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:value-of select="format-number(가격,'###,##0')"/></p></TD>
+	</TR>
+</xsl:template>
+
+</xsl:stylesheet>
+```
+
+<br/>
+
+* 실행 결과
+
+![image-20201104132415465](C:\workspace\xml\images\image-20201104132415465.png)
+
+<br/>
+
+### 앞서 배운...
+
+* template match
+* apply-template -> loop
+* 뒤에 배울 for-each -> loop
+
+<br/>
+
+### 조건문 \<xsl:if>, \<xsl:choose>
+
+![image-20201104112825195](./images/image-20201104112825195.png)
+
+* if 문
+* test 속성을 써서 Boolean 식을 넣어서 조건문을 작성한다.
+* 조건이 딱히 없이 이름만 쓰면, 현재 노드 기준으로 아래에 name이 존재하면 True, 없으면 False 이다.
+
+<br/>
+
+![image-20201104113119572](./images/image-20201104113119572.png)
+
+* switch 문과 비슷하다.
+* 마찬가지 test 속성 = "조건"이 true면, 태그 안의 내용을 출력한다.
+* 아래 코드는
+  * salary의 내용을 숫자로 바꾸었을때의 내용이 2000보다 &gt(크면)  -> A big number 출력
+* 
+
+<br/>
+
+### 실습 6-7) 조건문 사용하기
+
+![image-20201104113356481](./images/image-20201104113356481.png)
+
+<br/>
+
+* ex6_7.xml 코드
+
+```xml
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="ex6_7.xsl"?>
+<제품>
+	<핸드폰>
+		<모델명>SCH-X147</모델명>
+		<통신사>SKT</통신사>
+		<구입형태>기기변경</구입형태>
+		<제조사>삼성전자</제조사>
+		<판매량 단위="개">30</판매량>
+		<가격 화폐="원">253000</가격>
+	</핸드폰>
+
+	<핸드폰>
+		<모델명>iphone 12</모델명>
+		<통신사>KT</통신사>
+		<구입형태>기기변경</구입형태>
+		<제조사>Apple</제조사>
+		<색상>화이트</색상>
+		<판매량 단위="개">30</판매량>
+		<가격 화폐="원">1253000</가격>
+	</핸드폰>
+
+	<핸드폰>
+		<모델명>Galaxy Note 11</모델명>
+		<통신사>SKT</통신사>
+		<구입형태>기기변경</구입형태>
+		<제조사>삼성전자</제조사>
+		<색상>화이트</색상>
+		<판매량 단위="개">30</판매량>
+		<가격 화폐="원">1353000</가격>
+	</핸드폰>
+
+	<핸드폰>
+		<모델명>Galaxy S12</모델명>
+		<통신사>KT</통신사>
+		<구입형태>기기변경</구입형태>
+		<제조사>삼성전자</제조사>
+		<판매량 단위="개">30</판매량>
+		<가격 화폐="원">1053000</가격>
+	</핸드폰>
+	
+	<핸드폰>
+		<모델명>Galaxy S11</모델명>
+		<통신사>KT</통신사>
+		<구입형태>기기변경</구입형태>
+		<제조사>삼성전자</제조사>
+		<판매량 단위="개">20</판매량>
+		<가격 화폐="원">953000</가격>
+	</핸드폰>
+
+	<핸드폰>
+		<모델명>CX-300L</모델명>
+		<통신사>SKT</통신사>
+		<구입형태>신규가입</구입형태>
+		<제조사>LG전자</제조사>
+		<색상>화이트</색상>
+		<판매량 단위="개">30</판매량>
+		<가격 화폐="원">200000</가격>
+	</핸드폰>
+</제품>
+```
+
+<br/>
+
+* ex6_7.xsl 코드
+
+```xml
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+
+<xsl:template match="/">
+	<HTML>
+	<HEAD>
+		<TITLE>XML 문서의 내용을 테이블 형태로 보여주기</TITLE>
+	</HEAD>
+	<BODY>
+		<BR/>
+		<P align="center"><font color="#FA4C79" size="6">핸드폰 리스트</font></P>
+		<BR/>
+		<TABLE align="center" BORDER="0" cellpadding="5" cellspacing="2">
+		<THEAD>
+		<TR>
+				<TH bgcolor="#0365B1"><font color="white">순번</font></TH>
+				<TH bgcolor="#0365B1"><font color="white">모델명</font></TH>
+				<TH bgcolor="#0365B1"><font color="white">통신사</font></TH>
+				<TH bgcolor="#0365B1"><font color="white">구입형태</font></TH>
+				<TH bgcolor="#0365B1"><font color="white">제조사</font></TH>
+				<TH bgcolor="#0365B1"><font color="white">색상</font></TH>
+				<TH bgcolor="#0365B1"><font color="white">판매량</font></TH>
+				<TH bgcolor="#0365B1"><font color="white">가격</font></TH>
+		</TR>
+		</THEAD>
+		<TBODY>
+				<xsl:apply-templates select = "/제품/핸드폰"/>
+		</TBODY>
+		</TABLE>
+
+	</BODY>
+	</HTML>
+</xsl:template>
+
+<xsl:template match = "/제품/핸드폰">
+	<TR>
+	<!-- select 된 순서대로 넘버링 -->
+	<!-- <TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:number format="1"/></p></TD>	-->
+	
+	<!-- 출력되는 순서대로 넘버링, format을 로마자로 -->
+	<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:number value="position()" format="I"/></p></TD>
+
+	<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:value-of select="모델명"/></p></TD>
+	<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:value-of select="통신사"/></p></TD>
+	<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:value-of select="구입형태"/></p></TD>
+	<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:value-of select="제조사"/></p></TD>
+	<TD bgcolor="#DEE3EF">
+		<xsl:if test="색상"><p align="center" style="margin-top:3px;"><xsl:value-of select="색상"/></p></xsl:if>
+		<xsl:if test="not (색상)"><p align="center" style="margin-top:3px;">-</p></xsl:if>
+	</TD>
+<!--<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;">
+		<xsl:choose>
+			<xsl:when test="색상"><xsl:value-of select="색상"/></xsl:when>
+			<xsl:otherwise>-</xsl:otherwise>
+		</xsl:choose>
+	</p></TD>
+-->
+	<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:value-of select="판매량"/></p></TD>
+	<TD bgcolor="#DEE3EF"><p align="center" style="margin-top:3px;"><xsl:value-of select="format-number(가격,'###,##0')"/></p></TD>
+	</TR>
+</xsl:template>
+
+</xsl:stylesheet>
+```
+
+<br/>
+
+* 실행 결과
+
+![image-20201104132512828](C:\workspace\xml\images\image-20201104132512828.png)
+
+<br/>
+
+### 반복문 \<xsl:for-each>
+
+![image-20201104120942661](./images/image-20201104120942661.png)
+
+* apply-templates 을 사용하면 매번 반복하는 것 마다 외부에 또 선언을 해주어야 한다.
+* for-each의 경우 내부 템플릿을 반복할 수 있다.
+* names가 매치 되어 첫 번째 name에 대해서 first값이 출력되고, 이어서 두 번째 name의 firts가 출력된다.
+
+<br/>
+
+### Element 생성 \<xsl:element>
+
+![image-20201104121136684](./images/image-20201104121136684.png)
+
+* 동적으로 tagset을 값으로 만들어서 사용하고 싶을 때
+
+<br/>
+
+![image-20201104121234616](./images/image-20201104121234616.png)
+
+* content를 element로 만들고 싶을 때
+* 앞서 봤지만, {.} 는 현재 노드의 value를 의미한다.
+* 즉, 매치가 일어난 name의 value를 이름으로 하는 element를 만드는 것이다.
+
+<br/>
+
+### 실습 6-8) Element 생성하기
+
+![image-20201104121622778](./images/image-20201104121622778.png)
+
+<br/>
+
+* ex6_8.xml 코드
+
+```xml
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="ex6_8.xsl"?>
+<people>
+	<name first="길동" last="홍"/>
+	<name first="춘향" last="성"/>
+	<name first="몽룡" last="이"/>
+	<name first="향단" last="이"/>
+</people>
+```
+
+<br/>
+
+* ex6_8.xsl 코드
+
+```xml
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+
+<xsl:template match="/">
+	<people>
+		<xsl:apply-templates select="//name"/>
+	</people>
+</xsl:template>
+
+<xsl:template match="name">
+	<name>
+		<xsl:apply-templates select="@*"/>
+	</name>
+</xsl:template>
+
+<xsl:template match="@*">
+	<xsl:element name="{local-name()}"> <xsl:value-of select="."/> </xsl:element>
+</xsl:template>
+
+</xsl:stylesheet>
+```
+
+<br/>
+
+* 실행 결과
+
+![image-20201104132553049](C:\workspace\xml\images\image-20201104132553049.png)
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<people>
+    <name>
+        <first>길동</first>
+        <last>홍</last>
+    </name>
+    <name>
+        <first>춘향</first>
+        <last>성</last>
+    </name>
+    <name>
+        <first>몽룡</first>
+        <last>이</last>
+    </name>
+    <name>
+        <first>향단</first>
+        <last>이</last>
+    </name>
+</people>
+```
+
+<br/>
+
+### Attribute 생성 \<xsl:attribute>
+
+![image-20201104123115964](./images/image-20201104123115964.png)
+
+* 동적으로 attribute를 만드는 것!
+
+<br/>
+
+![image-20201104123305737](./images/image-20201104123305737.png)
+
+* XSLT에서 기존의 element, attribute 뿐 아니라 동적으로 element attribute도 생성할 수 있다는 의미!
+
+<br/>
+
+### 복사하기 
+
+![image-20201104123409698](./images/image-20201104123409698.png)
+
+* XPath에 있는걸 copy 해서 그대로 복사해야 한다.
+* But child나, attribute는 복사 되지 않는다.
+* 현재 노드의 값만 복사 된다.
+* copy-of 하고 value-of 하고는 조금 다르다~
+
+<br/>
+
+### XSLT & XPath 자료
+
+![image-20201104123540886](./images/image-20201104123540886.png)
+
+<br/>
+
+<br/>
+
+## Chapter 7. XML Programming API 1 - DOM
+
+앞서 XML을 HTML, XML, ML 등 다른 문서로 변환하는 것을 살펴보았다!
+
+![image-20201104123643887](./images/image-20201104123643887.png)
+
+* SAX는 Java, DOM은 Javascript 로 할거야!
+
+<br/>
+
+### DOM?
+
+![image-20201104124036287](./images/image-20201104124036287.png)
+
+* a set of Method signeture!
+* DOM이라는 것 자체는 플랫폼과 랭귀지의 중립적인 인터페이스다!
+* 문서의 내용과 구조, 스타일을 동적으로 접근하고, 수정할 수 있도록 도와주는 인터페이스다.
+* 인터페이스 라고 하는 것은, 구현이 빠져있다는 것.
+* 표준안에서는 함수에 대해 어떤 일을 한다는 선언만 있고, 구현 자체는 라이브러리를 만드는 회사에서..
+
+<br/>
+
+### DOM 실습환경
+
+![image-20201104124443472](./images/image-20201104124443472.png)
+
+* 우리 수업에서는 윈도우 기본 제공 내에서!
+
+<br/>
+
+### DOM Tree 구조
+
+![image-20201104124738055](./images/image-20201104124738055.png)
+
+* XML 파일이 파서에 의해서 읽혀진다.
+* 그럼 파서가 메인 메모리에 Dom Tree를 만든다. (Document root)
+  * 그 아래 Root Element가
+    * Child Element가
+      * Text가.. 달린다.
+  * Dom Tree로 변환된다, **Dom Tree를 생성한다**. 라고 표현한다. ★
+* 이 Dom Tree를 통해서 앱에서 읽고 쓰고 할 수 있는 것이다.
+* 웹 보안 정책상, save는 지원이 안된다고 한다.
+
+<br/>
+
+![image-20201104125039835](./images/image-20201104125039835.png)
+
+* 구조를 알아야 한다! XML이 DOM Tree로 변환되고, 이걸로 원하는 정보를 읽고 쓰고 할거니까.
+* root는 "/", Document root 이다.
+  * 그 아래 **documentElement** 즉, root element가 존재한다.
+    * 하위 요소들 Element 들이 존재할 수 있다.
+      * Element가 문자열을 가질 때, **직접 바로 Value로 가지지 않고** 하위에 **Text 노드**라는게 있다. ★
+      * 이 **Text 노드가 문자열을 가진다.** ★
+      * **Attribute**도 마찬가지 하위에 **Text**를 가진다.
+* Document 객체는 다른 개체들을 생성할 수 있다.
+* **documentElement** root element. ★ 외우세요. root document가 가지는 property 중 하나!
+
+<br/>
+
+![image-20201104125258861](./images/image-20201104125258861.png)
+
+* 각 노드는 여러가지 역할을 가질 수 있다.
+* Node 이자 Element이다.. 등등
+
+<br/>
+![image-20201104125325708](./images/image-20201104125325708.png)
+
+* Document
+  * Document Element ("제품") - root element
+    * Element ("핸드폰")
+      * Element ("모델명")
+        * Text ("SCH-X147")
+
+<br/>
+
+### 실습 7-1) DOM Tree 구조 작성
+
+![image-20201104125523184](./images/image-20201104125523184.png)
+
+<br/>
+
+* DOM Tree 구조로 표현한 코드
+
+```
+0. document
+	1. Element ("order")
+		2. Attribute ("number")
+			3. Text ("3123")
+		2. Element ("date")
+			3. Text("2002/1/1")
+		2. Element ("customer")
+			3. Attribute ("id")
+				4. Text("216A")
+			3. Text("Company A")
+		2. Element ("item")
+			3. Element ("part-number")
+				4. Attribute ("warehouse")
+					5. Text ("Warehouse 11")
+				4. Text ("E16-25A")
+			3. Element ("quantity")
+				4. Text ("16")
+```
+
+<br/>
+
+### DOM의 핵심 인터페이스 ★ 암기
+
+#### 핵심 object / interface
+
+* **DOMDocument ★**
+  * **XML 문서 전체를 대표하는 DOM tree 최상의 node 객체**
+* IXMLDOMNode
+  * tree 내의 독립적인 node를 나타냄. 가장 기본적인 Interface
+* IXMLDOMNodeList
+  * Node들의 collection.
+* IXMLDOMElement
+  * element node 대표
+* IXMLDOMAttribute
+  * attribute node 대표
+* IXMLDOMCharacterData, IXMLDOMText, IXMLDOMComment
+  * 기본적으로 Text Data를 가지는 node 대표
+
+<br/>
+
+#### DOM interface 상속관계
+
+* Node	-	Node List
+  * Document
+  * Element
+  * Attribute
+  * CharacterData
+    * Comment
+    * Text
+      * CDATASection
+
+<br/>
+
+#### IXMLDOMNode
+
+**+: 읽고쓰기가능**
+
+**\*: microsoft의 확장**
+
+
+
+* Properties (속성)
+  * attributes: 현재 node의 attribute 목록을 NameNodeMap 형식으로 반환
+  * **childNodes: 모든 자식 node들을 NodeList 형식으로 반환**
+  * firstChild: 첫번째 자식 node
+  * lastChild: 마지막 자식 node
+  * nextSibling: 현재 node의 다음 번에 위치한 형제 node반환
+  * nodeName: 현재 node의 이름 (예: 요소의 경우 tag 이름)
+  * nodeType: 현재 node의 type을 번호로 반환 (NODE_xxxx)
+    * 1~5: ELEMENT, ATTRIBUTE, TEXT, CDATA_SECTION, ENTITY_REFERENCE
+    * 6~10: ENTITY, PROCESSING_INSTRUCTION, COMMENT, DOCUMENT
+    * 10~12: DOCUMENT_TYPE, DOCUMENT_FRAGMENT, NOTATION
+  * nodeTypeString*****: node type을 문자열로 변환
+  * nodeValue**+**: 현재 node의 값 (text node일 때 의미가 있음)
+  * ownerDocument : 현재 node를 포함하는 document 객체를 반환
+  * parentNode: 현재 node의 부모 node를 반환
+  * previousSibling: 현재 node의 이전 번에 위치한 형제 node 반환
+  * text***+**: 현재 node와 그 하위 node들이 가지고 있는 모든 텍스트내용 반환
+  * xml*****: 현재 node와 그 하위 Node들의 XML 표현을 반환
+
+<br/>
+
+* methods (함수)
+  * appendChild: 현재 node의 자식 node 목록에 새 node를 끝에 추가
+  * cloneNode: 현재 node를 복사하여 반환
+  * hasChildNodes: 현재 node에 자식 node들이 있는지 여부 반환
+  * insertBefore: 새 node를 지정된 하위 node 앞에 자식 node로 삽입
+  * removeChild: 특정 자식 node를 자식 Node 목록에서 삭제하고 이 삭제된 node를 반환
+  * replaceChild: 특정 자식 node를 새로운 node로 대체하고 교체된 node를 반환
+  * **selectSingleNode\*, selectNodes\*: 현재 Node와 그 자식 node들에 있어서 지정된 Xpath를 만족시키는 노드(들)을 반환**
+
+<br/>
+
+#### IXMLDOMNodeList
+
+* properties (속성)
+  * item: index를 인자로 받아서 해당 위치의 node 반환 (zero-based)
+  * length: node 개수 반환
+
+<br/>
+
+* methods (함수)
+  * reset: Iterator 위치를 reset
+  * nextNode: iterator에서 다음 위치의 node 반환
+
+<br/>
+
+#### DOMDocument (IXMLDOMNode interface 상속)
+
+* properties
+  * doctype: 현재 문서에 대한 DTD를 정의하는 doctype node 반환
+  * **documentElement+: DOM Tree의 root element 반환**
+  * Implementation: 현재 문서에 대한 IXMLDOMImplementation 반환
+  * async***+**: 지정된 URL로부터 비동기적으로 다운로드 할지 여부 결정
+  * readyState*****: XML 문서의 현재 상태를 반환
+
+<br/>
+
+* Methods
+  * create???: 해당 문서에 특정 node를 생성하는 Factory 함수들
+    * ??? : Element, Attribute, CDATASection, Comment, EntityReference, ProcessingInstruction, TextNode
+  * getElementsByTagName: 지정된 이름의 element 집합들의 반환
+  * load*****: 지정된 문자열을 XML 문서 내용으로 하여 DOM Tree 생성
+  * save*****: DOM Tree를 외부 파일로 저장
+
+<br/>
+
+#### IXMLDOMElement (IXMLDOMNode interface 상속)
+
+* properties
+  * tagName: 현재 element의 태그 이름을 반환
+* methods
+  * getAttribute: 주어진 이름의 attribute값 반환
+  * setAttribute: attribute의 값을 지정
+  * getAttributeNode: 주어진 이름의 attribute node 반환
+  * setAttributeNode: 현재 요소에 새로운 attribute를 추가하거나 변경
+  * getElementsByTagName: 지정된 이름의 element 집합들을 반환
+  * normalize: 인접한 여러 개의 text 노드들을 하나로 합침
+  * removeAttribute: 주어진 이름의 attribute를 제거하거나 대체
+  * removeAttributeNode: 주어진 attribute node를 제거
+
+<br/>
+
+#### IXMLDOMAttribute (IXMLDOMNode interface 상속)
+
+* properties
+  * name: attribute 이름을 반환
+  * value**+**: attribute 값을 반환
+
+<br/>
+
+#### IXMLDOMCharacterData
+
+* properrties
+  * data**+**: 현재 node의 type에 따른 데이터(문자열)를 반환
+  * length: 현재 데이터의 character 개수를 반환
+* methods
+  * appendData: nText.appendData(".") → "welcome" 에서 "welcome." 으로
+  * deleteData: nText.deleteData(2, 4) → "welcome" 에서 "wee" 으로
+  * insertData: nText.insertData(2, "!!") → "welcome" 에서 "we!!lcome" 으로
+  * replaceData: nText.replaceData(2, 4, ".") → "welcome" 에서 "we.e" 으로..
+  * substringData: nText.substringData(2, 4)  → "welcome" 중 "lcom" 반환
+    * 위의 매개변수들은 (start, length) 형식이라고 한다.
+
+<br/>
+
+###  실습 7-2) DOM interface 이용하기
+
+
+
+* element와 attribute node들의 이름과 text값을 얻기 위한 코드를 작성하시오.
+
+<br/>
+
+* 코드
+
+```javascript
+xmldoc.documentElement // root element
+xmldoc.documentElement.
+```
+
+<br/>
+
 <br/>
 
 <br/>
 
 <br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<order number=“3123”>
+	<date> 2002/1/1</date>
+	<customer id=“216A”> Company A </customer>
+	<item>
+		<part-number warehouse=“Warehouse 11”> E16-25A </part-number>
+		<quantity> 16 </quantity>
+	</item>
+</order>
+
+
+0. document
+	1. Element ("order")
+		2. Attribute ("number")
+			3. Text ("3123")
+		2. Element ("date")
+			3. Text("2002/1/1")
+		2. Element ("customer")
+			3. Attribute ("id")
+				4. Text("216A")
+			3. Text("Company A")
+		2. Element ("item")
+			3. Element ("part-number")
+				4. Attribute ("warehouse")
+					5. Text ("Warehouse 11")
+				4. Text ("E16-25A")
+			3. Element ("quantity")
+				4. Text ("16")

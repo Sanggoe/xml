@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+
+<xsl:template match="/">
+	<HTML>
+	<HEAD>
+		<TITLE>XML 문서의 내용을 테이블 형태로 보여주기</TITLE>
+	</HEAD>
+	<BODY>
+		<people>
+			<xsl:apply-templates select="@*"/>
+		</people>
+	</BODY>
+	</HTML>
+</xsl:template>
+
+<xsl:template match = "/제품/핸드폰">
+</xsl:template>
+
+</xsl:stylesheet>
