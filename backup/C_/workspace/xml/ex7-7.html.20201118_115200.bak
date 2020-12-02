@@ -1,0 +1,68 @@
+<html>
+<head>
+	<title></title>
+
+<!--
+<?xml version="1.0" encoding="euc-kr"?>
+<simple>
+	<name>김기수</name>
+	<name>홍길동</name>
+	<name>신현아</name>
+	<name>장나라</name>
+</simple>
+-->
+
+	<script language="JavaScript">
+		var xmldoc = new ActiveXObject("MSXML.DOMDocument");
+
+		var simple = xmldoc.createElement("simple");
+	
+		var name1 = xmldoc.createElement("name");
+		var name2 = xmldoc.createElement("name");
+		var name3 = xmldoc.createElement("name");
+		var name4 = xmldoc.createElement("name");
+
+		var text1 = xmldoc.createTextNode("김기수");
+		var text2 = xmldoc.createTextNode("홍길동");
+		var text3 = xmldoc.createTextNode("신현아");
+		var text4 = xmldoc.createTextNode("장나라");
+
+		name1.appendChild(text1);
+		name2.appendChild(text2);
+		name3.appendChild(text3);
+		name4.appendChild(text4);
+		
+		simple.appendChild(name1);
+		simple.appendChild(name2);
+		simple.appendChild(name3);
+		simple.appendChild(name4);
+
+		xmldoc.documentElement = simple;
+		alert(xmldoc.xml);
+
+		
+		var simple = xmldoc.createElement("simple")
+				
+		var name1 = xmldoc.createElement("name");
+		var first1 = xmldoc.createElement("first");
+		var textf1 = xmldoc.createTextNode("기수");
+		first1.appendChild(textf1);
+		name1.appendChild(first1);
+		var last1 = xmldoc.createElement("last");
+		var textl1 = xmldoc.createTextNode("김");
+		last1.appendChild(textl1);
+		name1.appendChild(first1);
+
+
+		var text = xmldoc.createTextNode("김기수");
+		name.appendChild(text);
+		simple.appendChild(name);
+		
+		xmldoc.documentElement = simple;
+		alert(xmldoc.xml);
+
+	</script>
+</head>
+<body>
+</body>
+</html>

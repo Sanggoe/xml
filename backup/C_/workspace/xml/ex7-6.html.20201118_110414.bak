@@ -1,0 +1,23 @@
+<html>
+<head>
+</head>
+<body>
+<p> 실습 #3 특정 Attribute 접근하기 </p>
+
+<script language="JavaScript">
+	var xmldoc = new ActiveXObject("MSXML.DOMDocument");
+	xmldoc.async = false;
+	xmldoc.load("ex7-6_names4.xml");
+	
+	// 먼저 노드들을 찾는다.
+	var nameNodes = xmldoc.getElementsByTagName("name");
+	for (var i=0; i<nameNodes.length; i++) {
+		// 찾은 녀석들 중에서 attributes 를 찾는다.
+		var attr = nameNodes[i].attributes.getNamedItem("first");
+		alert(attr.nodeValue);
+	}
+
+	
+</script>
+</body>
+</html>

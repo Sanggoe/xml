@@ -12,7 +12,7 @@
 ![image-20201028104111145](./images/image-20201028104111145.png)
 
 * 자바 패키지 import 하는 것과 같다고 생각하면 된다~
-* 해당 패키기의 클래스를 '쓰는' 거지 바뀌지 않잖아.
+* 해당 패키지의 클래스를 '쓰는' 거지 바뀌지 않잖아.
 * 그대로 **가져와서 사용하는 것**
 
 <br/>
@@ -1156,7 +1156,7 @@
 
 * 실행 결과
 
-![image-20201104132553049](C:\workspace\xml\images\image-20201104132553049.png)
+![image-20201104132553049](./images/image-20201104132553049.png)
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1235,6 +1235,10 @@
 * 인터페이스 라고 하는 것은, 구현이 빠져있다는 것.
 * 표준안에서는 함수에 대해 어떤 일을 한다는 선언만 있고, 구현 자체는 라이브러리를 만드는 회사에서..
 
+
+
+* DOM은 인터페이스!! 자바에서 인터페이스를 생각하자.
+
 <br/>
 
 ### DOM 실습환경
@@ -1287,6 +1291,7 @@
     * Element ("핸드폰")
       * Element ("모델명")
         * Text ("SCH-X147")
+* 각 노드들은 IXMLDOMNode를 지원하면서, 동시에 각자 속한.. Element는 IXMLDOMElement도 지원한다.
 
 <br/>
 
@@ -1322,20 +1327,53 @@
 
 ### DOM의 핵심 인터페이스 ★ 암기
 
-#### 핵심 object / interface
+* IXMLDOM___~ 형태로 만들어진다.
 
-* **DOMDocument ★**
-  * **XML 문서 전체를 대표하는 DOM tree 최상의 node 객체**
-* IXMLDOMNode
+![image-20201111103842290](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111103842290.png)
+
+#### 핵심 object / interface ★ 다 외워야해
+
+* **DOMDocument **★★★
+  * **XML 문서 전체를 대표하는 DOM tree 최상위 node 객체**
+  * 다른건 다 인터페이슨데, 얘만 인터페이스가 아닌 객체이다. object.
+  * 인터페이스는 구현을 해야하는건데, 얘는 하나를 만들어야 한다.
+  * 따라서 얘는 클래스이자 객체이다. 얘를 가지고 다른것들을 만들거나 할 수 있다.
+* **XMLDOMNode**
   * tree 내의 독립적인 node를 나타냄. 가장 기본적인 Interface
-* IXMLDOMNodeList
+  * 가장 **property**(마치 **member value처럼 '보인다'**)가 많고,  method가 많다.
+    * setter, getter로 접근 가능하면 **property**라고 한다. (일종의 가상의 멤버변수)
+    * 대신, 멤버 변수가 있는지 없는지는 중요하지 않다.
+* **IXMLDOMNodeList**
   * Node들의 collection.
-* IXMLDOMElement
+  * array라고 생각하면 된다. DOM Tree에 있는 복수개의 Node들
+* **IXMLDOMElement**
   * element node 대표
-* IXMLDOMAttribute
+* **IXMLDOMAttribute**
   * attribute node 대표
-* IXMLDOMCharacterData, IXMLDOMText, IXMLDOMComment
+* **IXMLDOMText**, IXMLDOMCharacterData, IXMLDOMComment
   * 기본적으로 Text Data를 가지는 node 대표
+
+<br/>
+
+#### **외울 것들. 다시.**
+
+- **DOMDocument** : 최상위 노드, 객체
+- **IXMLDOMNode** : 각 노드
+- **IXMLDOMNodeList** : 복수개 노드
+- **IXMLDOMElement** : 요소 노드
+- **IXMLDOMAttribute** : 속성 노드
+- **IXMLDOMText** : 텍스트 데이터 노드
+
+
+
+<br/>
+
+![image-20201111105103681](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111105103681.png)
+
+* 앞에 DOM이나 IXMLDOM 은 생략되어있다.
+* 각자 상속받는다는 것은, 하위 노드가 상위 노드를 지원한다는 의미이다.
+* NodeList의 경우는 상속관계랑은 상관 없다.
+* IXMLNode가 가장 중요하다. 다 외워야해
 
 <br/>
 
@@ -1352,51 +1390,143 @@
 
 <br/>
 
-#### IXMLDOMNode
+![image-20201111105138963](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111105138963.png)
+
+* 위의 것들은 다 외워야 해..
+
+
+
+![image-20201111105534696](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111105534696.png)
+
+
+
+![image-20201111105800256](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111105800256.png)
+
+
+
+```
+IXMLDOMNode obj
+- 자기 자신 표현 property (멤버 변수처럼 쓰는걸로 보인다)
+obj.nodeType : 숫자 형태 0,1,2,3 ...
+obj.nodeName : 
+obj.nodeValue : Text일 때 의미가 있다.
+	
+	- .xml
+	- .text
+	
+	
+- 관계 (Tree)
+attributes는 attrubutes라는 복수형으로 접근한다.
+chlidNodes (보통 element나 text를 자식으로 가진다)
+firstChild 첫 번째 자식 노드
+Lastchild 마지막 자식 노드
+
+형제관계
+previousSibling 이전 형제
+nextSibling 다음 형제
+
+그리면서 다 써보자!!
+```
+
+
+
+<br/>
+
+#### IXMLDOMNode ★★★ 핵심. 꼭 외우자.
 
 **+: 읽고쓰기가능**
+
+​	얘가 없는 것은 전부 읽기만 가능! Read Only
 
 **\*: microsoft의 확장**
 
 
 
-* Properties (속성)
-  * attributes: 현재 node의 attribute 목록을 NameNodeMap 형식으로 반환
+* **Properties**
+  * **attributes**: 현재 node의 attribute 목록을 NameNodeMap 형식으로 반환
+    * 복수형태
   * **childNodes: 모든 자식 node들을 NodeList 형식으로 반환**
-  * firstChild: 첫번째 자식 node
-  * lastChild: 마지막 자식 node
-  * nextSibling: 현재 node의 다음 번에 위치한 형제 node반환
-  * nodeName: 현재 node의 이름 (예: 요소의 경우 tag 이름)
-  * nodeType: 현재 node의 type을 번호로 반환 (NODE_xxxx)
+    * 보통 element, text를 가진다.
+  * **firstChild**: 첫번째 자식 node
+  * **lastChild**: 마지막 자식 node
+  * **nextSibling**: 현재 node의 다음 번에 위치한 형제 node반환
+  * **nodeName**: 현재 node의 이름 (예: 요소의 경우 tag 이름)
+  * **nodeType**: 현재 node의 type을 번호로 반환 (NODE_xxxx)
     * 1~5: ELEMENT, ATTRIBUTE, TEXT, CDATA_SECTION, ENTITY_REFERENCE
     * 6~10: ENTITY, PROCESSING_INSTRUCTION, COMMENT, DOCUMENT
     * 10~12: DOCUMENT_TYPE, DOCUMENT_FRAGMENT, NOTATION
-  * nodeTypeString*****: node type을 문자열로 변환
-  * nodeValue**+**: 현재 node의 값 (text node일 때 의미가 있음)
-  * ownerDocument : 현재 node를 포함하는 document 객체를 반환
-  * parentNode: 현재 node의 부모 node를 반환
-  * previousSibling: 현재 node의 이전 번에 위치한 형제 node 반환
-  * text***+**: 현재 node와 그 하위 node들이 가지고 있는 모든 텍스트내용 반환
-  * xml*****: 현재 node와 그 하위 Node들의 XML 표현을 반환
+  * **nodeTypeString***: node type을 문자열로 변환
+    * microsoft의 확장? 표준은 아니래.
+  * **nodeValue+**: 현재 node의 값 (text node일 때 의미가 있음)
+    * Write 가능!!
+  * **ownerDocument** : 현재 node를 포함하는 document 객체를 반환
+    * DOM Tree의 root인, 최고 조상. DOMDocument를 반환하는 것이다.
+  * **parentNode**: 현재 node의 부모 node를 반환
+  * **previousSibling**: 현재 node의 이전 번에 위치한 형제 node 반환
+  * **text*+**: 현재 node와 그 하위 node들이 가지고 있는 모든 텍스트내용 반환
+    * 현재 노드를 Text 표현으로 반환
+    * Write 가능!!
+    * microsoft의 확장? 표준은 아니래.
+  * **xml***: 현재 node와 그 하위 Node들의 XML 표현을 반환
+    * 현재 노드를 XML 표현으로 반환
+    * microsoft의 확장? 표준은 아니래.
 
 <br/>
 
-* methods (함수)
-  * appendChild: 현재 node의 자식 node 목록에 새 node를 끝에 추가
-  * cloneNode: 현재 node를 복사하여 반환
-  * hasChildNodes: 현재 node에 자식 node들이 있는지 여부 반환
-  * insertBefore: 새 node를 지정된 하위 node 앞에 자식 node로 삽입
-  * removeChild: 특정 자식 node를 자식 Node 목록에서 삭제하고 이 삭제된 node를 반환
-  * replaceChild: 특정 자식 node를 새로운 node로 대체하고 교체된 node를 반환
-  * **selectSingleNode\*, selectNodes\*: 현재 Node와 그 자식 node들에 있어서 지정된 Xpath를 만족시키는 노드(들)을 반환**
+#### 외울 시간!!!
+
+```
+IXMLDOMNode
+
+.ownerDocument : DOMDocument
+
+자기 자신을 표현하는 property
+.nodeType
+.nodeName
+.nodeValue
+
+관계
+.attributes 복수형
+.chlidNodes 복수형
+.firstChild
+.lastChild
+
+.previousSibling
+.nextSibling
+
+.text
+.xml
+```
 
 <br/>
+
+* 앞서 property는 정보를 읽는것에 집중해 있다면, Method는 구조를 바꾸고 내용을 바꾸는데 집중되어 있다.
+
+![image-20201111111131546](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111111131546.png)
+
+* **methods** (함수)
+  * **appendChild**: 현재 node의 자식 node 목록에 새 node를 끝에 추가
+  * **cloneNode**: 현재 node를 복사하여 반환
+  * **hasChildNodes**: 현재 node에 자식 node들이 있는지 여부 반환
+  * **insertBefore**: 새 node를 지정된 하위 node 앞에 자식 node로 삽입
+  * **removeChild**: 특정 자식 node를 자식 Node 목록에서 삭제하고 이 삭제된 node를 반환
+  * **replaceChild**: 특정 자식 node를 새로운 node로 대체하고 교체된 node를 반환
+  * **selectSingleNode\*, selectNodes\*: 현재 Node와 그 자식 node들에 있어서 지정된 Xpath를 만족시키는 노드(들)을 반환** ★★★
+    * 얘는 정보를 읽는것!
+    * **IXMLDOMNodeList**를 반환한다.
+    * **굉장히 편리한 함수**입니다~
+    * microsoft의 확장? 표준은 아니래.
+
+<br/>
+
+![image-20201111111740854](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111111740854.png)
 
 #### IXMLDOMNodeList
 
 * properties (속성)
-  * item: index를 인자로 받아서 해당 위치의 node 반환 (zero-based)
-  * length: node 개수 반환
+  * **item**: index를 인자로 받아서 해당 위치의 node 반환 (zero-based)
+  * **length**: node 개수 반환
+    * javascript에선 nodes[length-1] 배열처럼 접근해도 된당!
 
 <br/>
 
@@ -1406,68 +1536,101 @@
 
 <br/>
 
-#### DOMDocument (IXMLDOMNode interface 상속)
-
-* properties
-  * doctype: 현재 문서에 대한 DTD를 정의하는 doctype node 반환
-  * **documentElement+: DOM Tree의 root element 반환**
-  * Implementation: 현재 문서에 대한 IXMLDOMImplementation 반환
-  * async***+**: 지정된 URL로부터 비동기적으로 다운로드 할지 여부 결정
-  * readyState*****: XML 문서의 현재 상태를 반환
+#### IXMLDOMNode에서 대부분 처리할 수 있으니까, 처리 못하는 것만 보면 된다.
 
 <br/>
 
-* Methods
-  * create???: 해당 문서에 특정 node를 생성하는 Factory 함수들
+![image-20201111112108499](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111112108499.png)
+
+#### DOMDocument (IXMLDOMNode interface 상속)
+
+* DOMDocument는 DOM Tree의 유일한 객체다.
+  * 얘를 통해서 노드들을 생성할 수 있다.
+
+* properties
+  * doctype: 현재 문서에 대한 DTD를 정의하는 doctype node 반환
+  * **documentElement+: DOM Tree의 root element 반환** ★
+    * DOMDocument 객체가 파서 역할을 해준다!
+    * Write 가능!
+  * Implementation: 현재 문서에 대한 IXMLDOMImplementation 반환
+  * **async*+**: 지정된 URL로부터 비동기적으로 다운로드 할지 여부 결정
+    * Sync. 동기적으로 읽는다는 것은 load 했을 때, .xml 파일을 다 parsing 읽어서 DOMTree를 완성한 다음 Return 한다.
+  * **readyState***: XML 문서의 현재 상태를 반환
+    * DOM Tree가 완성되었는지 상태를 알 수 있는 것
+
+<br/>
+
+* **Methods**
+  * **create???**: 해당 문서에 특정 node를 생성하는 Factory 함수들
     * ??? : Element, Attribute, CDATASection, Comment, EntityReference, ProcessingInstruction, TextNode
-  * getElementsByTagName: 지정된 이름의 element 집합들의 반환
-  * load*****: 지정된 문자열을 XML 문서 내용으로 하여 DOM Tree 생성
-  * save*****: DOM Tree를 외부 파일로 저장
+  * **getElementsByTagName**: 지정된 이름의 element 집합들의 반환 ★★★
+    * **IXMLDOMNodeList** 형식으로 반환
+  * **load***: 지정된 문자열을 XML 문서 내용으로 하여 DOM Tree 생성
+    * 파일에서 읽어오는 것
+  * **loadXML***: 지정된 문자열을 XML 문서내용으로 하여 DOM Tree 생성
+    * 문자열에서 읽어오는 것
+  * **save***: DOM Tree를 외부 파일로 저장
+    * 얘는 
+
+<br/>
+
+![image-20201111113254965](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111113254965.png)
+
+* getElementsByTagName("elementName")
+* selectNodes("//___") 
+* 위 두개를 정말 많이 쓴다~!
 
 <br/>
 
 #### IXMLDOMElement (IXMLDOMNode interface 상속)
 
 * properties
-  * tagName: 현재 element의 태그 이름을 반환
+  * **tagName**: 현재 element의 태그 이름을 반환 == IXMLDOMNode에서 **nodeName**이다.
 * methods
-  * getAttribute: 주어진 이름의 attribute값 반환
-  * setAttribute: attribute의 값을 지정
-  * getAttributeNode: 주어진 이름의 attribute node 반환
-  * setAttributeNode: 현재 요소에 새로운 attribute를 추가하거나 변경
-  * getElementsByTagName: 지정된 이름의 element 집합들을 반환
+  * element에서는 attribute에 집중되어 있는 듯 하다. 하지만.. attributes를 통해 주로는 얻는다.
+  * **getAttribute**: 주어진 이름의 attribute값 반환
+  * **setAttribute**: attribute의 값을 지정
+  * **getAttributeNode**: 주어진 이름의 attribute node 반환
+  * **setAttributeNode**: 현재 요소에 새로운 attribute를 추가하거나 변경
+  * **getElementsByTagName**: 지정된 이름의 element 집합들을 반환 ★★★
   * normalize: 인접한 여러 개의 text 노드들을 하나로 합침
-  * removeAttribute: 주어진 이름의 attribute를 제거하거나 대체
-  * removeAttributeNode: 주어진 attribute node를 제거
+  * **removeAttribute**: 주어진 이름의 attribute를 제거하거나 대체
+  * **removeAttributeNode**: 주어진 attribute node를 제거
 
 <br/>
+
+![image-20201111113709002](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111113709002.png)
 
 #### IXMLDOMAttribute (IXMLDOMNode interface 상속)
 
-* properties
-  * name: attribute 이름을 반환
-  * value**+**: attribute 값을 반환
+* **properties**
+  * **name**: attribute 이름을 반환
+  * **value+**: attribute 값을 반환
+* ★ element의 경우에는 firstchild(text) 노드를 거쳐서 nodevalue를 얻어야 값을 얻을 수 있다.
+* ★ 하지만 attribute의 경우 그렇게 해도 되지만, 바로 attribute node에서 nodevalue를 해도 얻을 수 있다.
 
 <br/>
 
+
+
 #### IXMLDOMCharacterData
 
-* properrties
+* properties
   * data**+**: 현재 node의 type에 따른 데이터(문자열)를 반환
   * length: 현재 데이터의 character 개수를 반환
 * methods
-  * appendData: nText.appendData(".") → "welcome" 에서 "welcome." 으로
-  * deleteData: nText.deleteData(2, 4) → "welcome" 에서 "wee" 으로
-  * insertData: nText.insertData(2, "!!") → "welcome" 에서 "we!!lcome" 으로
-  * replaceData: nText.replaceData(2, 4, ".") → "welcome" 에서 "we.e" 으로..
-  * substringData: nText.substringData(2, 4)  → "welcome" 중 "lcom" 반환
+  * **appendData**: nText.appendData(".") → "welcome" 에서 "welcome." 으로
+  * **deleteData**: nText.deleteData(2, 4) → "welcome" 에서 "wee" 으로
+  * **insertData**: nText.insertData(2, "!!") → "welcome" 에서 "we!!lcome" 으로
+  * **replaceData**: nText.replaceData(2, 4, ".") → "welcome" 에서 "we.e" 으로..
+  * **substringData**: nText.substringData(2, 4)  → "welcome" 중 "lcom" 반환
     * 위의 매개변수들은 (start, length) 형식이라고 한다.
 
 <br/>
 
 ###  실습 7-2) DOM interface 이용하기
 
-
+![image-20201111114239798](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111114239798.png)
 
 * element와 attribute node들의 이름과 text값을 얻기 위한 코드를 작성하시오.
 
@@ -1477,30 +1640,173 @@
 
 ```javascript
 xmldoc.documentElement // root element
-xmldoc.documentElement.
+xmldoc.documentElement.childNodes[i] // root element의 자식 노드들 (element or text)
+xmldoc.
 ```
 
 <br/>
 
+![image-20201111121256051](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111121256051.png)
+
+1. DOMDocument객체 xmldoc 생성
+2. xmldoc에 XML 문서 내용 지정 (파일 or 문자열)
+   * 이렇게 하면 파싱 해서 DOM Tree를 만든다.
+3. xmldoc의 여러 properties나 methods를 이용해서 하위 요소들을 검색한다.
+   * documentElement
+   * childNodes
+   * attributes
+   * firstChild, lastChild
+   * getElementsByTagName()
+   * selectSingleNode(), selectNodes()
+
 <br/>
+
+![image-20201111121835784](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111121835784.png)
+
+* 기본적으론 DOM Tree 완성된 이후에 하는 것이 쉽다. 그래서 async = false 해줌.
+* load는 되는데, save는 안됄겨
+
+<br/>
+
+### 실습 7-3) DOM 코드 확인하기
+
+![image-20201111121939171](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111121939171.png)
+
+<br/>
+
+![image-20201111121950059](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111121950059.png)
 
 <br/>
 
 <br/>
 
+#### 하위 Element 접근하기
+
+![image-20201111124412785](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111124412785.png)
+
 <br/>
+
+
+
+![image-20201111124439286](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111124439286.png)
+
+<br/>
+
+#### 실습 7-4) 하위 Element 접근하기
+
+![image-20201111124622654](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111124622654.png)
 
 <br/>
 
 <br/>
 
+#### 특정 Element 찾기
+
+![image-20201111130043800](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111130043800.png)
+
+* () 든 []든 상관 없어요~
+* 찾게된 것을 복수개로 받아와서 찾는것!
+* getElementsByTagName() 은, tagName을 인자로 준다.
+* selectNodes()는, XPath 형태로 들어간다. 차이 기억!
+
 <br/>
+
+![image-20201111130125390](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111130125390.png)
+
+<br/>
+
+### 실습 7-5) 특정 Element 찾기
+
+![image-20201111130238391](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111130238391.png)
+
+* getElementsByTagName() 이용 김홍신장
+* selectNodes() 이용 김홍신장 출력
+
+<br/>
+
+![image-20201118104512157](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118104512157.png)
+
+* attibute는 text를 거치지 않아도 nodeValue 가능!
+* 찾고자 할 때는 getNamedItem() 이 편함.
+* 하나만 있을 때는 firstChild로 해도 되고..
+
+<br/>
+
+![image-20201118104638092](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118104638092.png)
+
+* attribute는 그냥 .nodeValue 해도 된다~.
+* 먼저 element를 찾아라. 그 다음에 attributes를 찾아.
+
+<br/>
+
+### 실습 7-6) Attribute 접근하기
+
+![image-20201118104758520](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118104758520.png)
+
+<br/>
+
+### XML 문서 생성
+
+![image-20201118111059814](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118111059814.png)
+
+* **Document 객체만** 생성 가능!!
+  * Tree를 수정할 때 추가하려면 **create** 함수를 써줘야 한다.
+* **IXMLDOMNode 의 메소드인 appendChilde** 등으로 원하는 위치에 삽입 가능하다.
+* DOM tree를 save 하는건 보안 정책상 불가능하다.
+  * 우린 alert 창으로 확인만.
+
+<br/>
+
+![image-20201118111346961](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118111346961.png)
+
+<br/>
+
+![image-20201118111407027](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118111407027.png)
+
+* 우리가 해야할 게 DOMDocument가 있는데, 그 아래 root 노드 하나를 만든다.
+* 그 다음 create 함수로 TextNode를 값을 주어 만든다.
+* 만들기만 했지 아직 관계는 없었으니.., appendChild로 노드 관계를 만들어준다.
+* 주의!! DOMDocument에 root를 달 때는, 하나만 달아야 하기 때문에, append하지 않는다.
+* documentElement는 쓰기 가능. 따라서 documentElement property에 접근해서 준다.
+
+<br/>
+
+### 실습 7-7) Element 생성하기
+
+![image-20201118111659019](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118111659019.png)
+
+<br/>
+
+
+
+오우.. 사진좀..
+
+
+
+* attributes는 append로 붙이지 않는다!
+* node의 attributes.setNamedItem(attr) 형태로 붙인다.
+
+<br/>
+
+![image-20201118120701171](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118120701171.png)
+
+* 앞서 배운 내용들이 응용되어 사용된다.
+* attribute는 text 거치지 않고 nodeValue 로 바로 접근 가능!
+
+<br/>
+
+### 실습 7-8) Attribute 생성하기
+
+![image-20201118120717801](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118120717801.png)
 
 <br/>
 
 <br/>
 
-<br/>
+### 실습 7-9) XML 문서 생성
+
+![image-20201118120734105](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118120734105.png)
 
 <br/>
 
+<br/>

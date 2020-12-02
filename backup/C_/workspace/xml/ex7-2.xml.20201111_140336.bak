@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<order number="3123">
+	<date> 2002/1/1</date>
+	<customer id="216A"> Company A </customer>
+	<item>
+		<part-number warehouse="Warehouse 11"> E16-25A </part-number>
+		<quantity> 16 </quantity>
+	</item>
+</order>
+
+
+<!--
+0. document
+// DOMDocument xmldoc
+
+	1. Element ("order")
+	// 노드     : xmldoc.documentElement
+	// 노드 이름 : xmldoc.documentElement.nodeName
+
+		2. Attribute ("number")
+		// 노드     : xmldoc.documentElement.attributes[0]
+		// 노드     : xmldoc.documentElement.getAttributeNode("number")
+		// 노드 이름 : xmldoc.documentElement.attributes[0].nodeName
+		// 노드 이름 : xmldoc.documentElement.getAttributeNode("number").nodeName
+		
+			3. Text ("3123")
+			// 노드     : xmldoc.documentElement.attributes[0].firstChild
+			// text값  : xmldoc.documentElement.getAttribute("number")
+			// text값  : xmldoc.documentElement.attributes[0][.firstChild].nodeValue
+
+		2. Element ("date")
+		// 노드     : xmldoc.documentElement.firstChild //.childNodes[0]
+		// 노드 이름 : xmldoc.documentElement.firstChild.nodeName
+		
+			3. Text("2002/1/1")					
+			// 노드     : xmldoc.documentElement.firstChild.firstChild
+			// text값  : xmldoc.documentElement.firstChild.firstChild.nodeValue
+			// text값  : xmldoc.documentElement.firstChild.firstChild.data
+
+		2. Element ("customer")					
+		// 노드     : xmldoc.documentElement.childNodes[1]
+		// 노드	   : xmldoc.getElementsByTagName("customer")[0]
+		// 노드 이름 : xmldoc.documentElement.childNodes[1].nodeName
+
+			3. Attribute ("id")					
+			// 노드     : xmldoc.documentElement.childNodes[1].attributes[0]
+			// 노드 이름 : xmldoc.documentElement.childNodes[1].attributes[0].nodeName
+
+				4. Text("216A")					
+				// text값  : xmldoc.documentElement.childNodes[1].getAttribute("id")
+				// text값  : xmldoc.documentElement.childNodes[1].attributes[0][.firstChild].nodeValue
+
+			3. Text("Company A")				
+			// text값  : xmldoc.documentElement.childNodes[1].firstChild.nodeValue //.data
+
+		2. Element ("item")						
+		// 노드     : xmldoc.documentElement.lastChild //.childNodes[0]
+		// 노드     : xmldoc.documentElement.childNodes[2]
+		// 노드	   : xmldoc.getElementsByTagName("item")[0]
+		// 노드 이름 : xmldoc.documentElement.childNodes[2].nodeName
+
+			3. Element ("part-number")			
+				4. Attribute ("warehouse")		
+					5. Text ("Warehouse 11")	
+				4. Text ("E16-25A")				
+				// xmldoc.getElementsByTagName("part-number")[0].firstChild.nodeValue
+			3. Element ("quantity")				
+				4. Text ("16")					
+-->		

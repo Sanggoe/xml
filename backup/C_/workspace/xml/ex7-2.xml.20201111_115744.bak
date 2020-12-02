@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<order number="3123">
+	<date> 2002/1/1</date>
+	<customer id="216A"> Company A </customer>
+	<item>
+		<part-number warehouse="Warehouse 11"> E16-25A </part-number>
+		<quantity> 16 </quantity>
+	</item>
+</order>
+
+
+0. document
+// DOMDocument xmldoc
+	1. Element ("order")
+	// 노드     : xmldoc.documentElement
+	// 노드 이름 : xmldoc.documentElement.nodeName 
+	// text값  : xmldoc.documentElement.firstChild.nodeValue //.tagName
+		2. Attribute ("number")
+		// 노드     : xmldoc.documentElement.attributes[0] //.getAttribute
+		// 노드 이름 : xmldoc.documentElement.attributes[0].nodeName
+		// text값  : xmldoc.documentElement.attributes[0].
+
+			3. Text ("3123")					// xmldoc.documentElement.
+		2. Element ("date")						// xmldoc.documentElement.
+			3. Text("2002/1/1")					// xmldoc.documentElement.
+		2. Element ("customer")					// xmldoc.documentElement.
+			3. Attribute ("id")					// xmldoc.documentElement.
+				4. Text("216A")					// xmldoc.documentElement.
+			3. Text("Company A")				// xmldoc.documentElement.
+		2. Element ("item")						// xmldoc.documentElement.
+			3. Element ("part-number")			// xmldoc.documentElement.
+				4. Attribute ("warehouse")		// xmldoc.documentElement.
+					5. Text ("Warehouse 11")	// xmldoc.documentElement.
+				4. Text ("E16-25A")				// xmldoc.documentElement.
+			3. Element ("quantity")				// xmldoc.documentElement.
+				4. Text ("16")					// xmldoc.documentElement.

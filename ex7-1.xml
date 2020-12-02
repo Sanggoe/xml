@@ -8,7 +8,7 @@
 	</item>
 </order>
 
-
+<!--
 0. document										(document root)
 	1. Element ("order")						(root element, documentElement)
 		2. Attribute ("number")
@@ -26,3 +26,4 @@
 				4. Text ("E16-25A")
 			3. Element ("quantity")
 				4. Text ("16")
+-->

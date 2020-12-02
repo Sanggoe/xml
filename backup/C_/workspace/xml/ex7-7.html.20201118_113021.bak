@@ -1,0 +1,45 @@
+<html>
+<head>
+	<title></title>
+<script language="JavaScript">
+	var xmldoc = new ActiveXObject("MSXML.DOMDocument");
+	
+/*	var root = xmldoc.createElement("simple");
+	var name = xmldoc.createElement("name");
+	var text = xmldoc.createTextNode("김기수");
+	name.appendChild(text);
+	root.appendChild(name);
+
+	var name = xmldoc.createElement("name");
+	var text = xmldoc.createTextNode("홍길동");
+	name.appendChild(text);
+	root.appendChild(name);
+
+	var name = xmldoc.createElement("name");
+	var text = xmldoc.createTextNode("신현아");
+	name.appendChild(text);
+	root.appendChild(name);
+
+	var name = xmldoc.createElement("name");
+	var text = xmldoc.createTextNode("장나라");
+	name.appendChild(text);
+	root.appendChild(name);
+
+	xmldoc.documentElement = root;
+	alert(xmldoc.xml);	
+*/
+	var root = xmldoc.createElement("simple")
+	var text = ["김기수", "홍길동", "신현아", "장나라"];
+	for (i=0; i<4; i++)	{
+		var name = xmldoc.createElement("name").xmldoc.createTextNode(text[i]);		
+		root.appendChild(name);	
+	}
+	
+	xmldoc.documentElement = root;
+	alert(xmldoc.xml);	
+
+</script>
+</head>
+<body>
+</body>
+</html>
