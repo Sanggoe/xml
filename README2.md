@@ -742,7 +742,7 @@
 
 * 실행 결과!
 
-![image-20201104132235444](C:\workspace\xml\images\image-20201104132235444.png)
+![image-20201104132235444](./images/image-20201104132235444.png)
 
 <br/>
 
@@ -899,7 +899,7 @@
 
 * 실행 결과
 
-![image-20201104132415465](C:\workspace\xml\images\image-20201104132415465.png)
+![image-20201104132415465](./images/image-20201104132415465.png)
 
 <br/>
 
@@ -1076,7 +1076,7 @@
 
 * 실행 결과
 
-![image-20201104132512828](C:\workspace\xml\images\image-20201104132512828.png)
+![image-20201104132512828](./images/image-20201104132512828.png)
 
 <br/>
 
@@ -1329,7 +1329,7 @@
 
 * IXMLDOM___~ 형태로 만들어진다.
 
-![image-20201111103842290](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111103842290.png)
+![image-20201111103842290](./images/image-20201111103842290.png)
 
 #### 핵심 object / interface ★ 다 외워야해
 
@@ -1368,7 +1368,7 @@
 
 <br/>
 
-![image-20201111105103681](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111105103681.png)
+![image-20201111105103681](./images/image-20201111105103681.png)
 
 * 앞에 DOM이나 IXMLDOM 은 생략되어있다.
 * 각자 상속받는다는 것은, 하위 노드가 상위 노드를 지원한다는 의미이다.
@@ -1390,17 +1390,17 @@
 
 <br/>
 
-![image-20201111105138963](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111105138963.png)
+![image-20201111105138963](./images/image-20201111105138963.png)
 
 * 위의 것들은 다 외워야 해..
 
 
 
-![image-20201111105534696](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111105534696.png)
+![image-20201111105534696](./images/image-20201111105534696.png)
 
 
 
-![image-20201111105800256](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111105800256.png)
+![image-20201111105800256](./images/image-20201111105800256.png)
 
 
 
@@ -1502,7 +1502,7 @@ IXMLDOMNode
 
 * 앞서 property는 정보를 읽는것에 집중해 있다면, Method는 구조를 바꾸고 내용을 바꾸는데 집중되어 있다.
 
-![image-20201111111131546](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111111131546.png)
+![image-20201111111131546](./images/image-20201111111131546.png)
 
 * **methods** (함수)
   * **appendChild**: 현재 node의 자식 node 목록에 새 node를 끝에 추가
@@ -1519,7 +1519,7 @@ IXMLDOMNode
 
 <br/>
 
-![image-20201111111740854](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111111740854.png)
+![image-20201111111740854](./images/image-20201111111740854.png)
 
 #### IXMLDOMNodeList
 
@@ -1540,7 +1540,7 @@ IXMLDOMNode
 
 <br/>
 
-![image-20201111112108499](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111112108499.png)
+![image-20201111112108499](./images/image-20201111112108499.png)
 
 #### DOMDocument (IXMLDOMNode interface 상속)
 
@@ -1574,7 +1574,7 @@ IXMLDOMNode
 
 <br/>
 
-![image-20201111113254965](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111113254965.png)
+![image-20201111113254965](./images/image-20201111113254965.png)
 
 * getElementsByTagName("elementName")
 * selectNodes("//___") 
@@ -1599,7 +1599,7 @@ IXMLDOMNode
 
 <br/>
 
-![image-20201111113709002](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111113709002.png)
+![image-20201111113709002](./images/image-20201111113709002.png)
 
 #### IXMLDOMAttribute (IXMLDOMNode interface 상속)
 
@@ -1630,7 +1630,7 @@ IXMLDOMNode
 
 ###  실습 7-2) DOM interface 이용하기
 
-![image-20201111114239798](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111114239798.png)
+![image-20201111114239798](./images/image-20201111114239798.png)
 
 * element와 attribute node들의 이름과 text값을 얻기 위한 코드를 작성하시오.
 
@@ -1646,7 +1646,7 @@ xmldoc.
 
 <br/>
 
-![image-20201111121256051](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111121256051.png)
+![image-20201111121256051](./images/image-20201111121256051.png)
 
 1. DOMDocument객체 xmldoc 생성
 2. xmldoc에 XML 문서 내용 지정 (파일 or 문자열)
@@ -1661,7 +1661,7 @@ xmldoc.
 
 <br/>
 
-![image-20201111121835784](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111121835784.png)
+![image-20201111121835784](./images/image-20201111121835784.png)
 
 * 기본적으론 DOM Tree 완성된 이후에 하는 것이 쉽다. 그래서 async = false 해줌.
 * load는 되는데, save는 안됄겨
@@ -1670,11 +1670,11 @@ xmldoc.
 
 ### 실습 7-3) DOM 코드 확인하기
 
-![image-20201111121939171](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111121939171.png)
+![image-20201111121939171](./images/image-20201111121939171.png)
 
 <br/>
 
-![image-20201111121950059](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111121950059.png)
+![image-20201111121950059](./images/image-20201111121950059.png)
 
 <br/>
 
@@ -1682,19 +1682,19 @@ xmldoc.
 
 #### 하위 Element 접근하기
 
-![image-20201111124412785](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111124412785.png)
+![image-20201111124412785](./images/image-20201111124412785.png)
 
 <br/>
 
 
 
-![image-20201111124439286](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111124439286.png)
+![image-20201111124439286](./images/image-20201111124439286.png)
 
 <br/>
 
 #### 실습 7-4) 하위 Element 접근하기
 
-![image-20201111124622654](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111124622654.png)
+![image-20201111124622654](./images/image-20201111124622654.png)
 
 <br/>
 
@@ -1702,7 +1702,7 @@ xmldoc.
 
 #### 특정 Element 찾기
 
-![image-20201111130043800](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111130043800.png)
+![image-20201111130043800](./images/image-20201111130043800.png)
 
 * () 든 []든 상관 없어요~
 * 찾게된 것을 복수개로 받아와서 찾는것!
@@ -1711,20 +1711,20 @@ xmldoc.
 
 <br/>
 
-![image-20201111130125390](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111130125390.png)
+![image-20201111130125390](./images/image-20201111130125390.png)
 
 <br/>
 
 ### 실습 7-5) 특정 Element 찾기
 
-![image-20201111130238391](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201111130238391.png)
+![image-20201111130238391](./images/image-20201111130238391.png)
 
 * getElementsByTagName() 이용 김홍신장
 * selectNodes() 이용 김홍신장 출력
 
 <br/>
 
-![image-20201118104512157](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118104512157.png)
+![image-20201118104512157](./images/image-20201118104512157.png)
 
 * attibute는 text를 거치지 않아도 nodeValue 가능!
 * 찾고자 할 때는 getNamedItem() 이 편함.
@@ -1732,7 +1732,7 @@ xmldoc.
 
 <br/>
 
-![image-20201118104638092](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118104638092.png)
+![image-20201118104638092](./images/image-20201118104638092.png)
 
 * attribute는 그냥 .nodeValue 해도 된다~.
 * 먼저 element를 찾아라. 그 다음에 attributes를 찾아.
@@ -1741,13 +1741,13 @@ xmldoc.
 
 ### 실습 7-6) Attribute 접근하기
 
-![image-20201118104758520](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118104758520.png)
+![image-20201118104758520](./images/image-20201118104758520.png)
 
 <br/>
 
 ### XML 문서 생성
 
-![image-20201118111059814](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118111059814.png)
+![image-20201118111059814](./images/image-20201118111059814.png)
 
 * **Document 객체만** 생성 가능!!
   * Tree를 수정할 때 추가하려면 **create** 함수를 써줘야 한다.
@@ -1757,11 +1757,11 @@ xmldoc.
 
 <br/>
 
-![image-20201118111346961](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118111346961.png)
+![image-20201118111346961](./images/image-20201118111346961.png)
 
 <br/>
 
-![image-20201118111407027](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118111407027.png)
+![image-20201118111407027](./images/image-20201118111407027.png)
 
 * 우리가 해야할 게 DOMDocument가 있는데, 그 아래 root 노드 하나를 만든다.
 * 그 다음 create 함수로 TextNode를 값을 주어 만든다.
@@ -1773,7 +1773,7 @@ xmldoc.
 
 ### 실습 7-7) Element 생성하기
 
-![image-20201118111659019](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118111659019.png)
+![image-20201118111659019](./images/image-20201118111659019.png)
 
 <br/>
 
@@ -1788,7 +1788,7 @@ xmldoc.
 
 <br/>
 
-![image-20201118120701171](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118120701171.png)
+![image-20201118120701171](./images/image-20201118120701171.png)
 
 * 앞서 배운 내용들이 응용되어 사용된다.
 * attribute는 text 거치지 않고 nodeValue 로 바로 접근 가능!
@@ -1797,7 +1797,7 @@ xmldoc.
 
 ### 실습 7-8) Attribute 생성하기
 
-![image-20201118120717801](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118120717801.png)
+![image-20201118120717801](./images/image-20201118120717801.png)
 
 <br/>
 
@@ -1805,7 +1805,7 @@ xmldoc.
 
 ### 실습 7-9) XML 문서 생성
 
-![image-20201118120734105](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118120734105.png)
+![image-20201118120734105](./images/image-20201118120734105.png)
 
 <br/>
 
