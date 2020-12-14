@@ -1,12 +1,14 @@
+
+
 # Chapter 8. XML Programming API
 
-![image-20201118120759135](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118120759135.png)
+![image-20201118120759135](C:\workspace\xml\images\image-20201118120759135.png)
 
 * Simple API for XML (SAX)
 
 <br/>
 
-![image-20201118120836044](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118120836044.png)
+![image-20201118120836044](C:\workspace\xml\images\image-20201118120836044.png)
 
 * DOM과 SAX의 장단점이 명확하다.
 * DOM
@@ -20,7 +22,7 @@
 
 <br/>
 
-![image-20201118122016358](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118122016358.png)
+![image-20201118122016358](C:\workspace\xml\images\image-20201118122016358.png)
 
 * SAX도 라이브러리고, 누군가는 지원하는걸 만들어 줘야 한다.
 * 그래서 뭐.. XML 파서 제작자가 지원 한답디다.
@@ -28,7 +30,7 @@
 
 <br/>
 
-![image-20201118122316185](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118122316185.png)
+![image-20201118122316185](C:\workspace\xml\images\image-20201118122316185.png)
 
 * SAX는 시퀀스를 STREAM 형식으로 쭉 읽어버린다. 딱히 돔트리를 만들거나 하지 않는다.
 * 다만 이벤트가 발생하면 이벤트 핸들러가 작동한다.
@@ -43,7 +45,7 @@
 
 <br/>
 
-![image-20201118122610076](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118122610076.png)
+![image-20201118122610076](C:\workspace\xml\images\image-20201118122610076.png)
 
 * 클래스 선언 → 객체 생성 (saxhandler)
 * saxhandler를 XML parser에 등록한다.
@@ -51,7 +53,7 @@
 
 <br/>
 
-![image-20201118122741267](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118122741267.png)
+![image-20201118122741267](C:\workspace\xml\images\image-20201118122741267.png)
 
 
 
@@ -59,7 +61,7 @@
 
 ### SAX 를 사용하는 자바 프로그램의 예
 
-![image-20201118123127391](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118123127391.png)
+![image-20201118123127391](C:\workspace\xml\images\image-20201118123127391.png)
 
 * **원래는 contentHandler 인터페이스를 모두 구현(implements)해야 하지만**..
   * 11개의 메소드가 있어서 쓰든 안쓰든 다 구현해줘야 한다..
@@ -69,19 +71,19 @@
 
 <br/>
 
-![image-20201118123618966](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118123618966.png)
+![image-20201118123618966](C:\workspace\xml\images\image-20201118123618966.png)
 
 * 파서가 xml을 읽어 오면 
 
 <br/>
 
-![image-20201125104925806](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201125104925806.png)
+![image-20201125104925806](C:\workspace\xml\images\image-20201125104925806.png)
 
 <br/>
 
 ### 실습 8-1) SAX 맛보기
 
-![image-20201118123743578](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201118123743578.png)
+![image-20201118123743578](C:\workspace\xml\images\image-20201118123743578.png)
 
 <br/>
 
@@ -147,7 +149,7 @@ public class SaxHandlerClass extends DefaultHandler {
 
 <br/>
 
-![image-20201125105232611](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201125105232611.png)
+![image-20201125105232611](C:\workspace\xml\images\image-20201125105232611.png)
 
 * ContentHandler를 implements 받아서 다 구현하는 방법
   * 귀찮다.
@@ -165,7 +167,7 @@ public class SaxHandlerClass extends DefaultHandler {
 
 <br/>
 
-![image-20201125105836968](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201125105836968.png)
+![image-20201125105836968](C:\workspace\xml\images\image-20201125105836968.png)
 
 * 주의할 점!! 다 읽은 다음에 characters가 한 번 호출 되는 것이 아니다.
   * 그 안에 들어갈 내용이 길어질 수도 있다.
@@ -180,7 +182,7 @@ public class SaxHandlerClass extends DefaultHandler {
 
 ### 실습 8-2) 문자열 추출하기
 
-![image-20201125110341107](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201125110341107.png)
+![image-20201125110341107](C:\workspace\xml\images\image-20201125110341107.png)
 
 <br/>
 
@@ -268,7 +270,7 @@ public class SaxHandlerClass2 extends DefaultHandler {
 
 <br/>
 
-![image-20201125112345360](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201125112345360.png)
+![image-20201125112345360](C:\workspace\xml\images\image-20201125112345360.png)
 
 * getLength()
 * getQName()
@@ -282,7 +284,7 @@ public class SaxHandlerClass2 extends DefaultHandler {
 
 ### 실습 8-3) Attribute 추출하기
 
-![image-20201125115729974](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201125115729974.png)
+![image-20201125115729974](C:\workspace\xml\images\image-20201125115729974.png)
 
 <br/>
 
@@ -362,19 +364,19 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 # Chapter 9. Web Services
 
-![image-20201125120633493](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201125120633493.png)
+![image-20201125120633493](C:\workspace\xml\images\image-20201125120633493.png)
 
 <br/>
 
 ### Integration
 
-![image-20201125121425641](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201125121425641.png)
+![image-20201125121425641](C:\workspace\xml\images\image-20201125121425641.png)
 
 * 다른 컴퓨터끼리 정보를 교환하는 것을 정보시스템 통합이라고 합니다.
 
 <br/>
 
-![image-20201125121711002](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201125121711002.png)
+![image-20201125121711002](C:\workspace\xml\images\image-20201125121711002.png)
 
 * ERP : 전사적 자원 관리라고 해서, SAP이라고 아직도 많이 쓰이는 시스템이 있대.
   * MS나, Oracle... 등..
@@ -384,11 +386,11 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 <br/>
 
-![image-20201125123122852](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201125123122852.png)
+![image-20201125123122852](C:\workspace\xml\images\image-20201125123122852.png)
 
 <br/>
 
-![image-20201125123512327](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201125123512327.png)
+![image-20201125123512327](C:\workspace\xml\images\image-20201125123512327.png)
 
 * 조금 오래된 이야기긴 하지만 아직도 유효한... 시스템 통합의 기능에 관련된 내용이다.
 * Client 진영 즉, 일반적으로 PC쪽에서 힘을 얻고있는 기술
@@ -405,7 +407,7 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 ### RPC 메커니즘
 
-![image-20201125124437227](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201125124437227.png)
+![image-20201125124437227](C:\workspace\xml\images\image-20201125124437227.png)
 
 * **좁은 의미**에서는 UNIX에서 외부 컴퓨터의 C함수 호출하는 것
 * **넓은 의미**에서는 원격으로 함수 기능을 호출하는 기술을 통칭
@@ -418,7 +420,7 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 ### DCOM
 
-![image-20201125124626437](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201125124626437.png)
+![image-20201125124626437](C:\workspace\xml\images\image-20201125124626437.png)
 
 * 예시로 word 프로그램 내에서 excel 컴포넌트 사용이 가능하다!
 * 이걸 분산환경에서 쓸 수 있도록 한 것이 DCOM 이라고 하는데 이해가 잘 안간다!
@@ -427,7 +429,7 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 ### CORBA
 
-![image-20201125124826694](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201125124826694.png)
+![image-20201125124826694](C:\workspace\xml\images\image-20201125124826694.png)
 
 * DCOM vs JAVA 각 진영이 붙었다. 이 기술이 트렌드지! 하고 서로 미는것.
 * 근데 CORBA 라는게 혜성처럼 나왔대. 물론 사그라들었지만...
@@ -444,13 +446,13 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 ### Java RMI
 
-![image-20201125124727452](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201125124727452.png)
+![image-20201125124727452](C:\workspace\xml\images\image-20201125124727452.png)
 
 * 플랫폼에 독립적, But 언어는 Java를 써야함
 
 <br/>
 
-![image-20201125125235306](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201125125235306.png)
+![image-20201125125235306](C:\workspace\xml\images\image-20201125125235306.png)
 
 * DCOM과 Java RMI의 문제점 등
 
@@ -458,7 +460,7 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 ### Firewall 문제
 
-![image-20201125125328859](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201125125328859.png)
+![image-20201125125328859](C:\workspace\xml\images\image-20201125125328859.png)
 
 * 미리 열려져있는 port, 80이나 8080를 사용하는 방법으로 방화벽 문제를 해결하긴 하는데.. 아니면 관리자에게 열어달라고 요청!
 
@@ -466,7 +468,7 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 ### 새로운 스타, Web Service!!
 
-![image-20201125130124953](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201125130124953.png)
+![image-20201125130124953](C:\workspace\xml\images\image-20201125130124953.png)
 
 * Web Services (이것도 기술 이름이야!)
 * 시스템을 통합하기 위한 기술이다.
@@ -501,9 +503,9 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 ### Web Services 란 무엇이냐?
 
-![image-20201202105730223](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202105730223.png)
+![image-20201202105730223](C:\workspace\xml\images\image-20201202105730223.png)
 
-![image-20201202110100614](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202110100614.png)
+![image-20201202110100614](C:\workspace\xml\images\image-20201202110100614.png)
 
 * IBM의 정의
   * **웹서비스**는 operation들의 집합을 기술해 놓은 **인터페이스**이다!
@@ -514,7 +516,7 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 <br/>
 
-![image-20201202110126446](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202110126446.png)
+![image-20201202110126446](C:\workspace\xml\images\image-20201202110126446.png)
 
 * 프로그램이 요청하고, 프로그램이 들어주는 것. 근데 서로서로는 잘 모르는. RPC 매커니즘. 그거에대한 표준이 웹 서비스고...
 * 세 개의 참여하는 **주체**가 (**외우세요★★★)** - 사람이 아니고 다 소프트웨어에요.
@@ -533,7 +535,7 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 <br/>
 
-![image-20201202111034242](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202111034242.png)
+![image-20201202111034242](C:\workspace\xml\images\image-20201202111034242.png)
 
 * **외우세요 ★★★**
   * 서비스 공표 및 찾기에 관련된것이 UDDI : Universal Discovery, Discription, and Integration
@@ -543,7 +545,7 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 <br/>
 
-![image-20201202111435073](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202111435073.png)
+![image-20201202111435073](C:\workspace\xml\images\image-20201202111435073.png)
 
 * 여행사 컴퓨터 시스템이 있다. 이게 어떤식으로 동작을 하느냐면..
 * 항공사, 호텔사, 렌트카, 날씨 기상청 등에서 서비스 해주는 인터페이스를 제공한다. (역할로서의 Object)
@@ -555,7 +557,7 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 <br/>
 
-![image-20201202112016124](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202112016124.png)
+![image-20201202112016124](C:\workspace\xml\images\image-20201202112016124.png)
 
 * open되어 있다. Text 기반의..
 * CORBA와 다르게, 다국적 기업들이 웹 서비스를 지원한다!
@@ -565,7 +567,7 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 ### SOAP
 
-![image-20201202112248696](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202112248696.png)
+![image-20201202112248696](C:\workspace\xml\images\image-20201202112248696.png)
 
 * SOAP : 분산된 환경 하에서 구조화된 정보(xml)를 주고받기 위한 목적으로 개발된 경량화된 프로토콜이다. ★
 * Simple Object Access Protocol 외우세요! ★★★
@@ -573,14 +575,14 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 <br/>
 
-![image-20201202112334077](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202112334077.png)
+![image-20201202112334077](C:\workspace\xml\images\image-20201202112334077.png)
 
 * 일반적으로는 클라이언트에서 서버쪽에 SOAP으로 request를 날리면 response를 SOAP으로 보낼 수 있다.
 * 웹 서버측에 SOAP Server를 등록해서 이용할 수 있다.
 
 <br/>
 
-![image-20201202112539870](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202112539870.png)
+![image-20201202112539870](C:\workspace\xml\images\image-20201202112539870.png)
 
 * 꼭 웹 브라우져일 필요는 없긴 함.
 * 클라이언트가 요청을 하면, 서버가 받아서 기능을 수행하는 처리를 한 다음 응답을 한다.
@@ -588,7 +590,7 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 <br/>
 
-![image-20201202112712671](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202112712671.png)
+![image-20201202112712671](C:\workspace\xml\images\image-20201202112712671.png)
 
 * SOAP Envelope이 있는데, 그 안에 **헤더**와 **바디**가 있다! ★★★ 외우세요
 * 근데 헤더는 생략 가능
@@ -597,7 +599,7 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 #### 예시
 
-![image-20201202113025230](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202113025230.png)
+![image-20201202113025230](C:\workspace\xml\images\image-20201202113025230.png)
 
 * soap request안에 soap 인벨롭 envelope이 들어간다.
 * Envelope 이것도 표준안.
@@ -608,7 +610,7 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 <br/>
 
-![image-20201202113353804](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202113353804.png)
+![image-20201202113353804](C:\workspace\xml\images\image-20201202113353804.png)
 
 * 그럼 서버측에서 이런 soap response를 답변해온다.
 
@@ -616,15 +618,15 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 ### Request 예제
 
-![image-20201202113409949](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202113409949.png)
+![image-20201202113409949](C:\workspace\xml\images\image-20201202113409949.png)
 
 <br/>
 
 ### Response 예제
 
-![image-20201202114009813](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202114009813.png)
+![image-20201202114009813](C:\workspace\xml\images\image-20201202114009813.png)
 
-![image-20201202114220497](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202114220497.png)
+![image-20201202114220497](C:\workspace\xml\images\image-20201202114220497.png)
 
 * request로 XML이 날아온 것을
 * 클라이언트 코드와 서버 코드가 SOAP 형태로, xml 객체를 만들고 보내서 받고.. 그런 형태로 주고받는다.
@@ -635,7 +637,7 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 * WSDL
 
-![image-20201202114502230](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202114502230.png)
+![image-20201202114502230](C:\workspace\xml\images\image-20201202114502230.png)
 
 * 코드 자체를 알 필요는 없구..
 * WSDL을 사용해서 어떻게 사용되고 활용되고 동작하는 시스템을 만드는가? 그 매커니즘을 이해!!
@@ -657,7 +659,7 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 ### WSDL
 
-![image-20201202120537480](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202120537480.png)
+![image-20201202120537480](C:\workspace\xml\images\image-20201202120537480.png)
 
 * WSDL(Web Service Description Language) : 웹 서비스의 위치와 Interface에 대한 정보를 XML로 기술
 * Interface
@@ -680,7 +682,7 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 <br/>
 
-![image-20201202121020635](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202121020635.png)
+![image-20201202121020635](C:\workspace\xml\images\image-20201202121020635.png)
 
 * 전체 통틀어서 Web service라고 한다~
 * 웹 프로바이더는 자신이 제공하는 서비스를 WSDL형식으로 publish 할 것이다.
@@ -698,7 +700,7 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 <br/>
 
-![image-20201202121859726](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202121859726.png)
+![image-20201202121859726](C:\workspace\xml\images\image-20201202121859726.png)
 
 * 서비스는 서버!
 * 포트 타입
@@ -711,14 +713,14 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 ### 그에 대한 구현 예제
 
-![image-20201202121935075](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202121935075.png)
+![image-20201202121935075](C:\workspace\xml\images\image-20201202121935075.png)
 
 1. submitOrderRequest에 대한 타입을 선언하는 것!
 2. PortType을 선언하는 것!
 
 <br/>
 
-![image-20201202122324254](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202122324254.png)
+![image-20201202122324254](C:\workspace\xml\images\image-20201202122324254.png)
 
 * 바인딩!!
 * 통신 프로토콜은 http를 쓰겠다!
@@ -729,7 +731,7 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 ### 클라이언트측 코드
 
-![image-20201202122710147](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202122710147.png)
+![image-20201202122710147](C:\workspace\xml\images\image-20201202122710147.png)
 
 * 서버에서 제공하는 WSDL 파일을 가져와서 프로그램을 돌리면 자동으로 자바 파일들을 생성해준다.
 * 이렇게 자동으로 생성이 되고, 내부 동작들은 몰라도 된다. 그걸 활용하는 코드만 만들면 되는 것.
@@ -738,17 +740,17 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 ### 이런 코드들이 자동으로 만들어진다 볼필요는 없구..
 
-![image-20201202122733894](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202122733894.png)
+![image-20201202122733894](C:\workspace\xml\images\image-20201202122733894.png)
 
-![image-20201202122753434](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202122753434.png)
+![image-20201202122753434](C:\workspace\xml\images\image-20201202122753434.png)
 
-![image-20201202122924523](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202122924523.png)
+![image-20201202122924523](C:\workspace\xml\images\image-20201202122924523.png)
 
 <br/>
 
 ### 그걸 활용하는 코드, 클라이언트측
 
-![image-20201202123058142](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202123058142.png)
+![image-20201202123058142](C:\workspace\xml\images\image-20201202123058142.png)
 
 * 그냥.. 서비스 객체 받아와서 만들고, ...
 * 네트워크 관련, 통신 관련 SOAP 관련, HTTP 관련 코드 하나도 없다! 내가 신경 쓸 필요 없다는 거야. 이게 API?
@@ -758,7 +760,7 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 ### 서버측 코드
 
-![image-20201202123328044](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202123328044.png)
+![image-20201202123328044](C:\workspace\xml\images\image-20201202123328044.png)
 
 * 마찬가지로, 설계자가 WSDL을 만들어 놓으면 서버 개발자가 그걸 가지고 자동으로 생성된 것 중 Impl 만.
 * 서버 개발자가 볼 부분은 Impl. 가있는 서비스 구현 코드!! 만 보면 돼.
@@ -766,11 +768,11 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 <br/>
 
-![image-20201202123445643](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202123445643.png)
+![image-20201202123445643](C:\workspace\xml\images\image-20201202123445643.png)
 
 <br/>
 
-![image-20201202123656460](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202123656460.png)
+![image-20201202123656460](C:\workspace\xml\images\image-20201202123656460.png)
 
 <br/>
 
@@ -778,22 +780,22 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 간단하게 설명하고 넘어가요
 
-![image-20201202123809971](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202123809971.png)
+![image-20201202123809971](C:\workspace\xml\images\image-20201202123809971.png)
 
 * Service Provider 입장에서는 기능을 등록하는 역할
 * Request 입장에서는 기능을 찾는 역할
 
 <br/>
 
-![image-20201202123838425](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202123838425.png)
+![image-20201202123838425](C:\workspace\xml\images\image-20201202123838425.png)
 
 <br/>
 
-![image-20201202123943588](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202123943588.png)
+![image-20201202123943588](C:\workspace\xml\images\image-20201202123943588.png)
 
 <br/>
 
-![image-20201202124440747](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201202124440747.png)
+![image-20201202124440747](C:\workspace\xml\images\image-20201202124440747.png)
 
 <br/>
 
@@ -808,3 +810,164 @@ public class SaxHandlerClass3 extends DefaultHandler {
 * XML Training http://www.xmledu.net
 
 <br/>
+
+![image-20201209103757500](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209103757500.png)
+
+
+
+객관식, 주관식(단답형)
+
+<br/>
+
+<br/>
+
+![image-20201209104855921](C:\workspace\xml\images\image-20201209104855921.png)
+
+<br/>![image-20201209105241465](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209105241465.png)
+
+* 우리는 3번 괄호 서비스를 타겟으로 할거야!
+
+<br/>
+
+![image-20201209105559196](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209105559196.png)
+
+<br/>
+
+![image-20201209105810005](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209105810005.png)
+
+<br/>
+
+![image-20201209110323168](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209110323168.png)
+
+<br/>
+
+![image-20201209110405755](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209110405755.png)
+
+<br/>
+
+![image-20201209110532304](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209110532304.png)
+
+<br/>
+
+![image-20201209110551256](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209110551256.png)
+
+<br/>
+
+![image-20201209110709653](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209110709653.png)
+
+<br/>
+
+![image-20201209110919763](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209110919763.png)
+
+<br/>
+
+![image-20201209110934495](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209110934495.png)
+
+<br/>
+
+![image-20201209111702227](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209111702227.png)
+
+<br/>
+
+![image-20201209112440916](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209112440916.png)
+
+* ```
+  http://openapi.airkorea.or.kr/openapi/services/rest/서비스이름/
+  함수?stationName=종로구&dataTerm=month
+  &pageNo=1&numOfRows=10&ver=1.3&ServiceKey=서비스키
+  ```
+
+<br/>
+
+![image-20201209112542514](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209112542514.png)
+
+<br/>
+
+![image-20201209112617244](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209112617244.png)
+
+<br/>
+
+![image-20201209113504694](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209113504694.png)
+
+```javascript
+/* Javascript 샘플 코드 */
+
+
+var xhr = new XMLHttpRequest(); // 서버와 주고받을 객체. state는 0
+var url = 'http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty'; /*URL*/
+var queryParams = '?' + encodeURIComponent('ServiceKey') + '='+'서비스키'; /*Service Key*/
+queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); /**/
+queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /**/
+queryParams += '&' + encodeURIComponent('stationName') + '=' + encodeURIComponent('종로구'); /**/
+queryParams += '&' + encodeURIComponent('dataTerm') + '=' + encodeURIComponent('DAILY'); /**/
+queryParams += '&' + encodeURIComponent('ver') + '=' + encodeURIComponent('1.3'); /**/
+xhr.open('GET', url + queryParams); // 통로 역할. state는 1
+xhr.onreadystatechange = function () { // 주고받는 객체가 상태가 바뀔 때 받을 녀석 지정
+    if (this.readyState == 4) { // 다 받은 경우 state는 4
+        alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
+    }
+}; // send 할 때도, receive 시작할 때도, receive 다 받은 후에도 자동 호출. 하지만 다 받은 경우(4)에만 수행된다!
+
+xhr.send(''); // request 보낸것. xhr이 유지된 상태다. state는 2
+// 
+```
+
+<br/>
+
+![image-20201209114612743](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209114612743.png)
+
+<br/>
+
+![image-20201209114626412](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209114626412.png)
+
+<br/>
+
+![image-20201209114658033](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209114658033.png)
+
+<br/>
+
+![image-20201209114706117](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209114706117.png)
+
+<br/>
+
+![image-20201209114713968](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209114713968.png)
+
+<br/>
+
+![image-20201209114824245](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209114824245.png)
+
+<br/>
+
+```
+
+```
+
+<br/>
+
+<br/>
+
+
+
+
+
+
+
+
+
+![image-20201209120021292](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209120021292.png)
+
+
+
+
+
+![image-20201209122950368](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209122950368.png)
+
+
+
+
+
+
+
+
+
+![image-20201214000029351](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201214000029351.png)

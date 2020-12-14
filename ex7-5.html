@@ -9,14 +9,15 @@
 	xmldoc.async = false;
 	xmldoc.load("ex7-5_names.xml");
 
-	var root = xmldoc.documentElement;
-	for (var i=0; i<root.getElementsByTagName("last").length; i++) {
-		alert(root.getElementsByTagName("last")[i].firstChild.nodeValue);
+	var lastList = xmldoc.getElementsByTagName("last");
+	for (var i=0; i<lastList.length; i++) {
+		alert(lastList[i].firstChild.nodeValue);
 	}
 	// 수정할 수 있을 것 같은데.. nodeList로.
 	
-	for (var i=0; i<root.selectNodes("//last").length; i++) {
-		alert(root.selectNodes("//last")[i].firstChild.nodeValue);
+	var selectNodesList = xmldoc.selectNodes("//last");
+	for (var i=0; i<selectNodesList.length; i++) {
+		alert(selectNodesList[i].firstChild.nodeValue);
 	}
 </script>
 </body>

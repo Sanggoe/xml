@@ -1,43 +1,3 @@
-### 여러 개의 Schema 사용하기
-
-![image-20201028104013821](./images/image-20201028104013821.png)
-
-* import 는 다른 스키마의 전역 선언만을 참조해서 '사용' 할 수 있도록 하는것
-* include는 다른 스키마를 '포함' 하도록 하는 것 // namespace가 동일해야 한다!? 
-
-* redefine는 미리 선언된 것을 '**재정의**'하도록 하는 것
-
-<br/>
-
-![image-20201028104111145](./images/image-20201028104111145.png)
-
-* 자바 패키지 import 하는 것과 같다고 생각하면 된다~
-* 해당 패키지의 클래스를 '쓰는' 거지 바뀌지 않잖아.
-* 그대로 **가져와서 사용하는 것**
-
-<br/>
-
-![image-20201028104408764](./images/image-20201028104408764.png)
-
-* 동일한 targetNamespace나, targetNamespace가 없는 문서만 사용 가능하다!
-* 양자로 들인다고 생각하면 될 듯. 부모가 없거나, 나랑 같아야 데려올 수 있죠.
-* 가져와서 **내 namespace로 포함시키는 것**.
-
-<br/>
-
-![image-20201028105019254](./images/image-20201028105019254.png)
-
-* 이미 선언되어 있는 target:songType 을 재정의 하는 것!
-* 자바에서 상속을 받은 다음에 멤버변수를 추가하듯이.
-* 그래서 사용할때는 target:SongType으로 하고, 정의할때는 name="SongType" 이렇게 써야 한다.
-* **질문! redefine으로 가져와서 재정의 할 때, 그대로 가져와서 재정의하는 부분이  "추가"가 되는 건가요? 아니면 아예 "구현 자체를 새로" 하는건가요??** 
-
-<br/>
-
-![image-20201028104741708](./images/image-20201028104741708.png)
-
-<br/>
-
 ## Chapter 6. XML Translation - XSLT
 
 ![image-20201028105345686](./images/image-20201028105345686.png)
@@ -271,7 +231,7 @@
 ![image-20201028121234920](./images/image-20201028121234920.png)
 
 * **적용 순서!!** ★
-  * 좀 더 정확하게 지정된 tamplate을 적용
+  * 좀 더 정확하게 지정된 template을 적용
     * "**/***" 보다 "**/제품**" 이 더 정확한 지정이다.
   * priority 순위가 더 큰 template을 적용
     * priority 옵션을 주었다면, 해당 속성이 높은 것이 수행된다.
@@ -450,7 +410,8 @@
 		</TR>
 		</THEAD>
 		<TBODY>
-				<xsl:apply-templates select = "/제품/핸드폰[구입형태='신규가입']"/> <!-- 신규 가입인 핸드폰들 -->
+            	<!-- 신규 가입인 핸드폰들 -->
+				<xsl:apply-templates select = "/제품/핸드폰[구입형태='신규가입']"/>
 		</TBODY>
 		</TABLE>
 
@@ -469,7 +430,8 @@
 		</TR>
 		</THEAD>
 		<TBODY>
-				<xsl:apply-templates select = "/제품/핸드폰[가격 &lt; 260000]"/> <!-- 가격이 26만원 이하인 핸드폰들 -->
+	            <!-- 가격이 26만원 이하인 핸드폰들 -->
+				<xsl:apply-templates select = "/제품/핸드폰[가격 &lt; 260000]"/>
 		</TBODY>
 		</TABLE>
 
@@ -1196,7 +1158,7 @@
 
 <br/>
 
-### 복사하기 
+### 복사하기
 
 ![image-20201104123409698](./images/image-20201104123409698.png)
 
@@ -1338,7 +1300,7 @@
   * 다른건 다 인터페이슨데, 얘만 인터페이스가 아닌 객체이다. object.
   * 인터페이스는 구현을 해야하는건데, 얘는 하나를 만들어야 한다.
   * 따라서 얘는 클래스이자 객체이다. 얘를 가지고 다른것들을 만들거나 할 수 있다.
-* **XMLDOMNode**
+* **IXMLDOMNode**
   * tree 내의 독립적인 node를 나타냄. 가장 기본적인 Interface
   * 가장 **property**(마치 **member value처럼 '보인다'**)가 많고,  method가 많다.
     * setter, getter로 접근 가능하면 **property**라고 한다. (일종의 가상의 멤버변수)
@@ -1373,7 +1335,7 @@
 * 앞에 DOM이나 IXMLDOM 은 생략되어있다.
 * 각자 상속받는다는 것은, 하위 노드가 상위 노드를 지원한다는 의미이다.
 * NodeList의 경우는 상속관계랑은 상관 없다.
-* IXMLNode가 가장 중요하다. 다 외워야해
+* IXMLDOMNode가 가장 중요하다. 다 외워야해
 
 <br/>
 
@@ -1641,7 +1603,8 @@ IXMLDOMNode
 ```javascript
 xmldoc.documentElement // root element
 xmldoc.documentElement.childNodes[i] // root element의 자식 노드들 (element or text)
-xmldoc.
+xmldoc.getElementsByTagName("date")[i]
+xmldoc.getElementsByTagName("customer").getAttribute("id")
 ```
 
 <br/>
@@ -1751,7 +1714,7 @@ xmldoc.
 
 * **Document 객체만** 생성 가능!!
   * Tree를 수정할 때 추가하려면 **create** 함수를 써줘야 한다.
-* **IXMLDOMNode 의 메소드인 appendChilde** 등으로 원하는 위치에 삽입 가능하다.
+* **IXMLDOMNode 의 메소드인 appendChild** 등으로 원하는 위치에 삽입 가능하다.
 * DOM tree를 save 하는건 보안 정책상 불가능하다.
   * 우린 alert 창으로 확인만.
 
