@@ -13,7 +13,7 @@
 	for (var i=0; i<nameNodes.length; i++) {
 		// 찾은 녀석들 중에서 attributes 를 찾는다.
 		var attr = nameNodes[i].attributes.getNamedItem("first");
-		alert(attr.value);
+		alert(attr.nodeValue);
 	}
 
 

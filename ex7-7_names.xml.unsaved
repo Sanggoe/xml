@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<simple>
+	<name>김기수</name>
+	<name>홍길동</name>
+	<name>신현아</name>
+	<name>장나라</name>
+</simple>
+
+<!-- 다음과 같은 element들 만들기  실습 : ex7-7.html -->

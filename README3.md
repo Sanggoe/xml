@@ -380,7 +380,7 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 * ERP : 전사적 자원 관리라고 해서, SAP이라고 아직도 많이 쓰이는 시스템이 있대.
   * MS나, Oracle... 등..
-  * SAP이 정말 많이 쓰인대. IT 컨설팅??
+  * SOAP이 정말 많이 쓰인대. IT 컨설팅??
 * Intranet은 내부망
 * Extranet은 외부망. 회사와 회사 등
 
@@ -520,9 +520,9 @@ public class SaxHandlerClass3 extends DefaultHandler {
 
 * 프로그램이 요청하고, 프로그램이 들어주는 것. 근데 서로서로는 잘 모르는. RPC 매커니즘. 그거에대한 표준이 웹 서비스고...
 * 세 개의 참여하는 **주체**가 (**외우세요★★★)** - 사람이 아니고 다 소프트웨어에요.
-  * 기능 제공자(server)
-  * 기능 요청자(client)
-  * 서비스 중재자(broker?)
+  * **기능 제공자(server)**
+  * **기능 요청자(client)**
+  * **서비스 중재자(broker?)**
     * CORBAL에 보면 IIOP 프로토콜이 있고, ORB가 중재자가 있다라고 했는데...
     * 이 ORB역할이 서비스 중재자!
     * 예를 들어, 날씨 앱이라고 가정 한다면 날씨 정보를 누가 알려주는지 요청한다.
@@ -961,10 +961,6 @@ xhr.send(''); // request 보낸것. xhr이 유지된 상태다. state는 2
 
 
 ![image-20201209122950368](C:\Users\smpsm\AppData\Roaming\Typora\typora-user-images\image-20201209122950368.png)
-
-
-
-
 
 
 
